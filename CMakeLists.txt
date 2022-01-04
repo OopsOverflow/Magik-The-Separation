@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22)
+project(magik)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(magik src/backend/App.cpp src/backend/components/card/Card.cpp src/backend/components/card/Card.h src/backend/components/deck/Deck.cpp src/backend/components/deck/Deck.h src/backend/components/type/Type.cpp src/backend/components/type/Type.h src/backend/components/type/Land.cpp src/backend/components/type/Land.h src/backend/components/type/Creature.cpp src/backend/components/type/Creature.h src/backend/components/type/Artifact.cpp src/backend/components/type/Artifact.h src/backend/components/type/Enchantement.cpp src/backend/components/type/Enchantement.h src/backend/components/type/Sorcery.cpp src/backend/components/type/Sorcery.h src/backend/components/type/Instant.cpp src/backend/components/type/Instant.h src/backend/components/ability/Ability.cpp src/backend/components/ability/Ability.h src/backend/game/GameAction.cpp src/backend/game/GameAction.h src/backend/components/deck/Library.cpp src/backend/components/deck/Library.h src/backend/components/deck/Hand.cpp src/backend/components/deck/Hand.h src/backend/components/deck/Battlefield.cpp src/backend/components/deck/Battlefield.h src/backend/components/deck/Graveyard.cpp src/backend/components/deck/Graveyard.h src/backend/components/deck/Exile.cpp src/backend/components/deck/Exile.h)
