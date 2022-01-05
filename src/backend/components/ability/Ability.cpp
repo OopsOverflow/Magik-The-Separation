@@ -9,14 +9,14 @@ Ability::Ability(std::string name, std::string reminderText, std::string flavorT
 
 }
 
-std::string Ability::getName() {
+std::string Ability::getName() const {
     return name;
 }
 
-std::string Ability::getReminderText() {
+std::string Ability::getReminderText() const {
     return reminderText;
 }
 
-std::string Ability::getFlavorText() {
+std::string Ability::getFlavorText() const {
     return flavorText;
 }

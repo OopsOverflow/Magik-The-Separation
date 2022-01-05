@@ -9,9 +9,9 @@
 class Ability {
 public :
     Ability(std::string name, std::string reminderText = "", std::string flavorText = "");
-    std::string getName();
-    std::string getReminderText();
-    std::string getFlavorText();
+    std::string getName() const;
+    std::string getReminderText() const;
+    std::string getFlavorText() const;
 
 private :
     std::string name;
