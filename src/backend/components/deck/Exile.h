@@ -5,8 +5,8 @@
 #ifndef MAGIK_EXILE_H
 #define MAGIK_EXILE_H
 
-
-class Exile {
+#include "Deck.h"
+class Exile : public Deck {
 
 };
 

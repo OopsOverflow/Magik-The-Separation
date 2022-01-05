@@ -5,8 +5,8 @@
 #ifndef MAGIK_GRAVEYARD_H
 #define MAGIK_GRAVEYARD_H
 
-
-class Graveyard {
+#include "Deck.h"
+class Graveyard : public Deck {
 
 };
 

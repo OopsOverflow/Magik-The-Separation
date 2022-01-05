@@ -5,8 +5,8 @@
 #ifndef MAGIK_HAND_H
 #define MAGIK_HAND_H
 
-
-class Hand {
+#include "Deck.h"
+class Hand : public Deck {
 
 };
 

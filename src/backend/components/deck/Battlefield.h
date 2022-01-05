@@ -5,8 +5,8 @@
 #ifndef MAGIK_BATTLEFIELD_H
 #define MAGIK_BATTLEFIELD_H
 
-
-class Battlefield {
+#include "Deck.h"
+class Battlefield : public Deck{
 
 };
 

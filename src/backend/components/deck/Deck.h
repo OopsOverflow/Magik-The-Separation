@@ -5,9 +5,10 @@
 #ifndef MAGIK_DECK_H
 #define MAGIK_DECK_H
 
-
+#include "../card/Card.h"
 class Deck {
-
+public : 
+    virtual uint8_t getLenght() const;
 };
 
 

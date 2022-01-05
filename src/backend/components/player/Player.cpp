@@ -7,7 +7,7 @@
 uint64_t Player::newId = 0;
 
 Player::Player(std::string name) 
-: name(name), id(newId) {
+: name(name), id(newId), hp(20) {
     newId += 1;
 }
 
@@ -22,4 +22,8 @@ std::string Player::getName() const {
 
 uint64_t Player::getId() const {
     return id;
+}
+
+int8_t Player::getHp() const {
+    return hp;
 }

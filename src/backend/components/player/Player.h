@@ -15,18 +15,24 @@ class Player {
 public :
     Player(std::string name);
     ~Player();
+
     std::string getName() const;
     uint64_t getId() const;
+    int8_t getHp() const;
+
 
 private :
     std::string name;
     uint64_t id;
-    
+    int8_t hp;
+
     Battlefield battlefield;
     Hand hand;
     Graveyard graveyard;
     Library library;
     Exile exile;
+
+    
 
     static uint64_t newId;
 };
