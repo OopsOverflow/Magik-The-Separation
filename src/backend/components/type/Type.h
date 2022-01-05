@@ -5,9 +5,12 @@
 #ifndef MAGIK_TYPE_H
 #define MAGIK_TYPE_H
 
-
+enum class COLOR {};
 class Type {
+public:
+    Type();
 
+    virtual ~Type();
 };
 
 
