@@ -15,6 +15,7 @@ public :
     Library(std::vector<std::unique_ptr<Card> >cards);
     ~Library();
 
+    void shuffle();
     std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
     uint8_t getLenght() const;
 
