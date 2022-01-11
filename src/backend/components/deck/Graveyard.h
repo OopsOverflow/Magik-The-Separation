@@ -13,6 +13,8 @@ public :
     Graveyard();
     ~Graveyard();
 
+    void add(std::unique_ptr<Card> card);
+
     std::unique_ptr<Card> getCard(uint8_t cardNum);
     uint8_t getLenght() const;
 private : 

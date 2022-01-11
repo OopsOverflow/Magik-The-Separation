@@ -24,3 +24,7 @@ std::unique_ptr<Card> Graveyard::getCard(uint8_t cardNum) {
 uint8_t Graveyard::getLenght() const {
     return (uint8_t)cards.size();
 }
+
+void Graveyard::add(std::unique_ptr<Card> card) {
+    cards.push_back(std::move(card));
+}

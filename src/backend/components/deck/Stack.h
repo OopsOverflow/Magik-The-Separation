@@ -17,6 +17,7 @@ public :
     uint8_t getLenght() const;
     void add(std::unique_ptr<Card> card);
 
+    void solve();
 private :
     std::stack<std::unique_ptr<Card> > stack;
 

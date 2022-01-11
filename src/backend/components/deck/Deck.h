@@ -10,7 +10,7 @@
 #include <memory>
 class Deck {
 public : 
-    virtual void add();
+    virtual void add(std::unique_ptr<Card> card);
     virtual uint8_t getLenght() const;
     virtual std::unique_ptr<Card> getCard(uint8_t cardNum);
 };

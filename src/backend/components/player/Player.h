@@ -20,7 +20,14 @@ public :
     std::string getName() const;
     uint64_t getId() const;
     int8_t getHp() const;
+    void setOpponent(Player* player);    
+    
+    //actions
     void draw(uint8_t numberOfCards = 1);
+    void summonCard(uint8_t cardNumber);
+    void unTapAll();
+
+    void castSpellOrAbility(bool hasCasted);
 
     Battlefield getBattlefield() const;
     Hand getHand() const;
@@ -28,15 +35,14 @@ public :
     Library getLibrary() const;
     Exile getExile() const;
 
-    void allowCastInstant();
-    bool wantCastInstant() const;
 
-    void summonCard(uint8_t cardNumber);
 
 private :
     std::string name;
     uint64_t id;
     int8_t hp;
+
+    Player* opponent;
 
     Battlefield battlefield;
     Hand hand;

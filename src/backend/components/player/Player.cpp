@@ -29,6 +29,10 @@ int8_t Player::getHp() const {
     return hp;
 }
 
+void Player::setOpponent(Player* player){
+    opponent = player;
+}
+
 Battlefield Player::getBattlefield() const {
     return battlefield;
 }
@@ -45,14 +49,6 @@ Exile Player::getExile() const {
     return exile;
 }
 
-void Player::allowCastInstant() {
-    canCastInstant = true;
-}
-
-bool Player::wantCastInstant() const {
-    return canCastInstant;
-}
-
 void Player::draw(uint8_t numberOfCards) {
     if(library.getLenght() <= 1){
         hp = 0;
@@ -62,5 +58,26 @@ void Player::draw(uint8_t numberOfCards) {
 }
 
 void Player::summonCard(uint8_t cardNumber) {
-    hand.getCard(cardNumber);
+    std::unique_ptr<Card> card = std::move(hand.getCard(cardNumber));
+    if(false) {//TODO if is a land
+        battlefield.add(std::move(card));
+    }else{
+        stack->add(std::move(card));
+        opponent->castSpellOrAbility(true);
+    }
+
+}
+
+
+void Player::unTapAll() {
+    for(int i = 0; i < battlefield.getLenght(); i += 1) {
+        battlefield.unTap(i); //TODO only cards that can be tapped
+    }
+}
+
+void Player::castSpellOrAbility(bool hasCasted) {
+    //TODO (Player can play cards)
+    bool hasCastedNow = false;
+    if (hasCasted || hasCastedNow) opponent->castSpellOrAbility(hasCastedNow);
+
 }
