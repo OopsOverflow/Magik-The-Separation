@@ -6,8 +6,6 @@
 #define MAGIK_HAND_H
 
 #include "Deck.h"
-#include <vector>
-#include <memory>
 
 class Hand : public Deck {
 public : 

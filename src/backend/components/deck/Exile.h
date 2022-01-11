@@ -6,8 +6,6 @@
 #define MAGIK_EXILE_H
 
 #include "Deck.h"
-#include <vector>
-#include <memory>
 
 class Exile : public Deck {
 public : 

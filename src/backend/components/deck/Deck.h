@@ -6,10 +6,13 @@
 #define MAGIK_DECK_H
 
 #include "../card/Card.h"
+#include <vector>
+#include <memory>
 class Deck {
 public : 
     virtual void add();
     virtual uint8_t getLenght() const;
+    virtual std::unique_ptr<Card> getCard(uint8_t cardNum);
 };
 
 

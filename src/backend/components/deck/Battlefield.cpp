@@ -17,6 +17,7 @@ Battlefield::~Battlefield() {
 
 std::unique_ptr<Card> Battlefield::getCard(uint8_t cardNum) {
     std::unique_ptr<Card> ptr = std::move(cards.at((int)cardNum));
+    cards.erase(cards.begin() + cardNum);
     return ptr;  
 }
 
@@ -24,8 +25,13 @@ uint8_t Battlefield::getLenght() const {
     return (uint8_t)cards.size();
 }
 
+
+void Battlefield::add(std::unique_ptr<Card> card) {
+    cards.push_back(std::move(card));
+}
+
 void Battlefield::unTap(uint8_t cardNum){
     std::unique_ptr<Card> card = getCard(cardNum);
     card->unTap();
-    cards.at((int)cardNum) = std::move(card);
+    add(std::move(card));
 }    

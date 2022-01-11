@@ -16,6 +16,7 @@ Exile::~Exile() {
 
 std::unique_ptr<Card> Exile::getCard(uint8_t cardNum) {
     std::unique_ptr<Card> ptr = std::move(cards.at((int)cardNum));
+    cards.erase(cards.begin() + cardNum);
     return ptr;  
 }
 

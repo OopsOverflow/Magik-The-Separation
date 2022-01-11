@@ -6,8 +6,6 @@
 #define MAGIK_LIBRARY_H
 
 #include <stack>
-#include <vector>
-#include <memory>
 
 #include "Deck.h"
 class Library : public Deck {

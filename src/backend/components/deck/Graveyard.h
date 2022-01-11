@@ -6,8 +6,6 @@
 #define MAGIK_GRAVEYARD_H
 
 #include "Deck.h"
-#include <vector>
-#include <memory>
 
 class Graveyard : public Deck {
 public : 

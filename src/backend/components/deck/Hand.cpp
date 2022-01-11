@@ -17,6 +17,7 @@ Hand::~Hand() {
 
 std::unique_ptr<Card> Hand::getCard(uint8_t cardNum) {
     std::unique_ptr<Card> ptr = std::move(cards.at((int)cardNum));
+    cards.erase(cards.begin() + cardNum);
     return ptr;    
 }
 uint8_t Hand::getLenght() const {

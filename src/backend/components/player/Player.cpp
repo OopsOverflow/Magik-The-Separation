@@ -6,9 +6,9 @@
 
 uint64_t Player::newId = 0;
 
-Player::Player(std::string name, std::vector<std::unique_ptr<Card> >deck) 
+Player::Player(std::string name, std::vector<std::unique_ptr<Card> >deck, std::shared_ptr<Stack> stack) 
 : name(name), id(newId), hp(20), canCastInstant(false),
-library(deck), graveyard(), exile(), hand(), battlefield() {
+library(deck), graveyard(), exile(), hand(), battlefield(), stack(stack) {
     newId += 1;
 }
 
@@ -41,10 +41,6 @@ Graveyard Player::getGraveyard() const {
     return graveyard;
 }
 
-Library Player::getLibrary() const {
-    return library;
-}
-
 Exile Player::getExile() const {
     return exile;
 }
@@ -63,4 +59,8 @@ void Player::draw(uint8_t numberOfCards) {
     }else {
         hand.add(library.getTopCard());
     }    
+}
+
+void Player::summonCard(uint8_t cardNumber) {
+    hand.getCard(cardNumber);
 }

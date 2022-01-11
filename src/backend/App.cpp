@@ -25,8 +25,10 @@ int main(){
     srand(time(NULL));
     std::vector<std::unique_ptr<Card> >deckPlayer1;
     std::vector<std::unique_ptr<Card> >deckPlayer2;
-    Player player1("Bob", deckPlayer1);
-    Player player2("Henri", deckPlayer2);
+    Stack stack;
+
+    Player player1("Bob", deckPlayer1, std::make_shared<Stack>(stack));
+    Player player2("Henri", deckPlayer2, std::make_shared<Stack>(stack));
 
     Player* playerToPlay = &player1;
     int turn = 0;
@@ -51,8 +53,14 @@ int main(){
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
 
+        /* FIRST MAIN PHASE */
 
+        //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
+        bool hasPlayedLand = false;
+        while(playerToPlay->getHand().getLenght() > 0) {
+            playerToPlay->summonCard(0);
 
+        }
         
 
     }

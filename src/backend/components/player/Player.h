@@ -10,10 +10,11 @@
 #include "../deck/Graveyard.h"
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
+#include "../deck/Stack.h"
 
 class Player {
 public :
-    Player(std::string name, std::vector<std::unique_ptr<Card> >deck);
+    Player(std::string name, std::vector<std::unique_ptr<Card> >deck, std::shared_ptr<Stack> stack);
     ~Player();
 
     std::string getName() const;
@@ -30,6 +31,8 @@ public :
     void allowCastInstant();
     bool wantCastInstant() const;
 
+    void summonCard(uint8_t cardNumber);
+
 private :
     std::string name;
     uint64_t id;
@@ -44,6 +47,8 @@ private :
     bool canCastInstant;
 
     static uint64_t newId;
+
+    std::shared_ptr<Stack> stack;
 };
 
 
