@@ -6,8 +6,19 @@
 #define MAGIK_EXILE_H
 
 #include "Deck.h"
-class Exile : public Deck {
+#include <vector>
+#include <memory>
 
+class Exile : public Deck {
+public : 
+    Exile(std::vector<std::unique_ptr<Card> >cards);
+    Exile();
+    ~Exile();
+
+    std::unique_ptr<Card> getCard(uint8_t cardNum);
+    uint8_t getLenght() const;
+private : 
+    std::vector<std::unique_ptr<Card> > cards;
 };
 
 

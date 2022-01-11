@@ -31,10 +31,14 @@ public:
 
     virtual ~Card();
 
+    bool isTapped() const; //TODO (only permanent can be tapped)
+    void unTap();
 private:
     std::string name;
     Type type;
     std::unordered_map<std::string, int> cost;
+
+    bool tapped;
 
 };
 

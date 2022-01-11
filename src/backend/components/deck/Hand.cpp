@@ -22,3 +22,7 @@ std::unique_ptr<Card> Hand::getCard(uint8_t cardNum) {
 uint8_t Hand::getLenght() const {
     return (uint8_t)cards.size();
 }
+
+void Hand::add(std::unique_ptr<Card> card) {
+    cards.push_back(std::move(card));
+}

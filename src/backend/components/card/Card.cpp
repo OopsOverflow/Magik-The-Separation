@@ -6,7 +6,7 @@
 
 
 Card::Card(const std::string &name, const Type &type,
-           std::unordered_map<std::string, int> cost) : name(name), type(type), cost(std::move(cost)) {
+           std::unordered_map<std::string, int> cost) : name(name), type(type), cost(std::move(cost)), tapped(false) {
 
 }
 
@@ -36,4 +36,12 @@ const std::unordered_map<std::string, int> &Card::getCost() const {
 
 void Card::setCost(const std::unordered_map<std::string, int> &cost) {
     Card::cost = cost;
+}
+
+bool Card::isTapped() const {
+    return tapped;
+}
+
+void Card::unTap() {
+    tapped = false;
 }

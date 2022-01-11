@@ -6,8 +6,19 @@
 #define MAGIK_GRAVEYARD_H
 
 #include "Deck.h"
-class Graveyard : public Deck {
+#include <vector>
+#include <memory>
 
+class Graveyard : public Deck {
+public : 
+    Graveyard(std::vector<std::unique_ptr<Card> >cards);
+    Graveyard();
+    ~Graveyard();
+
+    std::unique_ptr<Card> getCard(uint8_t cardNum);
+    uint8_t getLenght() const;
+private : 
+    std::vector<std::unique_ptr<Card> > cards;
 };
 
 

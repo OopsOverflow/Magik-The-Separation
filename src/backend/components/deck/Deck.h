@@ -8,6 +8,7 @@
 #include "../card/Card.h"
 class Deck {
 public : 
+    virtual void add();
     virtual uint8_t getLenght() const;
 };
 
