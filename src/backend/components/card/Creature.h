@@ -11,7 +11,7 @@ enum class SUBTYPE{ANGEL};
 
 class Creature : Card {
 public :
-    Creature(const std::string &name, std::unordered_map<std::string, int> cost);
+    Creature(const std::string &name, std::unordered_map<std::string, int> cost, uint8_t power, uint8_t thougness);
     ~Creature();
 
     uint8_t getPower() const;

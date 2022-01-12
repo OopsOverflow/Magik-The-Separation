@@ -13,11 +13,11 @@ int main(){
     srand(time(NULL));
     std::vector<std::unique_ptr<Card> >deckPlayer1;
     std::vector<std::unique_ptr<Card> >deckPlayer2;
-    Stack stack;
 
+    std::shared_ptr<Stack> stack = std::make_shared<Stack>();
 
-    Player player1("Bob", deckPlayer1, std::make_shared<Stack>(stack));
-    Player player2("Henri", deckPlayer2, std::make_shared<Stack>(stack));
+    Player player1("Bob", deckPlayer1, stack);
+    Player player2("Henri", deckPlayer2, stack);
 
     player1.setOpponent(&player2);
     player2.setOpponent(&player1);
@@ -36,14 +36,14 @@ int main(){
 
         //Players can cast instants and activate abilities
         playerToPlay->castSpellOrAbility(true);
-        stack.solve();
+        stack.get()->solve();
         if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
         //Player must draw a card from his library 
         if(turn > 1) {
             playerToPlay->draw();
             playerToPlay->castSpellOrAbility(true);
-            stack.solve();
+            stack.get()->solve();
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
 
@@ -55,7 +55,7 @@ int main(){
             if(!hasPlayedLand){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
-                stack.solve();
+                stack.get()->solve();
                 if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
             }else{
 
@@ -65,7 +65,7 @@ int main(){
         /* COMBAT PHASE */
         //Beginning of combat step
         playerToPlay->castSpellOrAbility(true);
-        stack.solve();
+        stack.get()->solve();
 
         //Declare attackers step
         std::vector<Creature*> attackingCards;
@@ -75,7 +75,7 @@ int main(){
         }
         if(attackingCards.size() > 0) {
             playerToPlay->castSpellOrAbility(true);
-            stack.solve();
+            stack.get()->solve();
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Declare blockers step
@@ -86,7 +86,7 @@ int main(){
                 if(blockingCard)blockingCards.at(0).push_back(blockingCard); //TODO block Nth-card
             }     
             playerToPlay->castSpellOrAbility(true);
-            stack.solve();
+            stack.get()->solve();
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Combat damage step
@@ -109,7 +109,7 @@ int main(){
                 }
             }
             playerToPlay->castSpellOrAbility(true);
-            stack.solve();
+            stack.get()->solve();
             
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
@@ -122,7 +122,7 @@ int main(){
             if(!hasPlayedLand){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
-                stack.solve();
+                stack.get()->solve();
                 if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
             }else{
 
@@ -132,7 +132,7 @@ int main(){
         /* ENDING PHASE */
         //End step
         playerToPlay->castSpellOrAbility(true);
-        stack.solve();
+        stack.get()->solve();
         if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
         //Cleanup step
