@@ -14,8 +14,8 @@ public :
     ~Stack();
 
     std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    Card* getCard(uint8_t cardNum);
-    uint8_t getLenght() const;
+    Card* getCard(uint8_t cardNum) final;
+    uint8_t getLenght() const final;
     void add(std::unique_ptr<Card> card);
 
     void solve();

@@ -4,13 +4,14 @@
 #include <iostream>
 #include "components/player/Player.h"
 #include "game/GameAction.h"
-#include "card/Creature.h"
+#include "backend/components/card/Creature.h"
 
 #include <stdlib.h>
 #include <time.h>
 
 int main(){
-    srand(time(NULL));
+
+    srand(time(nullptr));
     std::vector<std::unique_ptr<Card> >deckPlayer1;
     std::vector<std::unique_ptr<Card> >deckPlayer2;
 
@@ -25,7 +26,7 @@ int main(){
     Player* playerToPlay = &player1;
     Player* opponent = &player2;
     int turn = 0;
-    
+
     while(player1.getHp() > 0 && player2.getHp() > 0){
         turn +=1 ;
         /* BEGINNING PHASE */
@@ -39,7 +40,7 @@ int main(){
         stack.get()->solve();
         if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
-        //Player must draw a card from his library 
+        //Player must draw a card from his library
         if(turn > 1) {
             playerToPlay->draw();
             playerToPlay->castSpellOrAbility(true);
@@ -51,7 +52,7 @@ int main(){
 
         //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
         bool hasPlayedLand = false;
-        while(playerToPlay->getHand().getLenght() > 0) {
+        while(playerToPlay->getHand()->getLenght() > 0) {
             if(!hasPlayedLand){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
@@ -61,7 +62,7 @@ int main(){
 
             }
         }
-        
+
         /* COMBAT PHASE */
         //Beginning of combat step
         playerToPlay->castSpellOrAbility(true);
@@ -69,8 +70,8 @@ int main(){
 
         //Declare attackers step
         std::vector<Creature*> attackingCards;
-        while(playerToPlay->getBattlefield().getLenght() > 0) {
-            Creature* attackingCard = dynamic_cast<Creature*>(playerToPlay->getBattlefield().getCard(0));//TODO choose cards to play
+        while(playerToPlay->getBattlefield()->getLenght() > 0) {
+            Creature* attackingCard = dynamic_cast<Creature*>(playerToPlay->getBattlefield()->getCard(0));//TODO choose cards to play
             if(attackingCard)attackingCards.push_back(attackingCard);
         }
         if(attackingCards.size() > 0) {
@@ -80,11 +81,11 @@ int main(){
 
             //Declare blockers step
             std::vector<std::vector<Creature*> > blockingCards(attackingCards.size());
-            while(opponent->getBattlefield().getLenght() > 0) {
+            while(opponent->getBattlefield()->getLenght() > 0) {
             //TODO choose cards which block
-                Creature* blockingCard = dynamic_cast<Creature*>(opponent->getBattlefield().getCard(0));
+                Creature* blockingCard = dynamic_cast<Creature*>(opponent->getBattlefield()->getCard(0));
                 if(blockingCard)blockingCards.at(0).push_back(blockingCard); //TODO block Nth-card
-            }     
+            }
             playerToPlay->castSpellOrAbility(true);
             stack.get()->solve();
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
@@ -97,9 +98,9 @@ int main(){
                         if(attackingCards.at(i)->getTempThougness() > 0) {
                             blockingCards.at(i).at(j)->block(attackingCards.at(i));
                             if(blockingCards.at(i).at(j)->getTempThougness() <= 0) {
-                                int8_t deleteIndex = opponent->getBattlefield().getCardIndex(dynamic_cast<Card*>(blockingCards.at(i).at(j)));//TODO high risk concerning pointer here
-                                std::unique_ptr<Card> card = opponent->getBattlefield().popCard(deleteIndex);
-                                opponent->getGraveyard().add(std::move(card));
+                                int8_t deleteIndex = opponent->getBattlefield()->getCardIndex(dynamic_cast<Card*>(blockingCards.at(i).at(j)));//TODO high risk concerning pointer here
+                                std::unique_ptr<Card> card = opponent->getBattlefield()->popCard(deleteIndex);
+                                opponent->getGraveyard()->add(std::move(card));
                             }
                         }
                     }
@@ -110,7 +111,7 @@ int main(){
             }
             playerToPlay->castSpellOrAbility(true);
             stack.get()->solve();
-            
+
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
 
@@ -118,7 +119,7 @@ int main(){
         playerToPlay->castSpellOrAbility(true);
 
         /* SECOND MAIN PHASE */
-        while(playerToPlay->getHand().getLenght() > 0) {
+        while(playerToPlay->getHand()->getLenght() > 0) {
             if(!hasPlayedLand){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
@@ -136,9 +137,9 @@ int main(){
         if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
         //Cleanup step
-        while(playerToPlay->getHand().getLenght() > 7) {
-            std::unique_ptr<Card> card = playerToPlay->getHand().popCard(0);//TODO choose cards to throw
-            playerToPlay->getGraveyard().add(std::move(card));
+        while(playerToPlay->getHand()->getLenght() > 7) {
+            std::unique_ptr<Card> card = playerToPlay->getHand()->popCard(0);//TODO choose cards to throw
+            playerToPlay->getGraveyard()->add(std::move(card));
         }
 
     }

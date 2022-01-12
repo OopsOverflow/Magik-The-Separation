@@ -5,7 +5,7 @@
 #include "Library.h"
 #include <stdlib.h>
 
-Library::Library(std::vector<std::unique_ptr<Card> > cards) {
+Library::Library(std::vector<std::unique_ptr<Card> > &cards) {
     for(int i = 0; i < cards.size(); i += 1){
         std::unique_ptr<Card> newCard = std::move(cards.at(i));
         stack.push(std::move(newCard));
@@ -16,11 +16,11 @@ Library::Library(std::vector<std::unique_ptr<Card> > cards) {
 
 void Library::shuffle(){
     std::unique_ptr<Card> ptr;
-    std::vector<std::unique_ptr<Card> > cards;
+    std::vector<std::unique_ptr<Card>> cards;
     do
     {
         ptr = std::move(getTopCard());
-        if(ptr != nullptr) cards.push_back(ptr);
+        if(ptr != nullptr) cards.push_back(std::move(ptr));
     } while (ptr != nullptr);
 
     while(cards.size() > 0){

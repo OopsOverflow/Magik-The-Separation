@@ -5,10 +5,7 @@
 #include "Hand.h"
 
 
-Hand::Hand(std::vector<std::unique_ptr<Card> >cards) {
-    for(int i = 0; i < cards.size(); i += 1){
-        cards.push_back(std::move(cards.at(i)));
-    }
+Hand::Hand() {
 }
 
 Hand::~Hand() {
@@ -27,6 +24,7 @@ Card* Hand::getCard(uint8_t cardNum) {
 uint8_t Hand::getLenght() const {
     return (uint8_t)cards.size();
 }
+
 
 void Hand::add(std::unique_ptr<Card> card) {
     cards.push_back(std::move(card));

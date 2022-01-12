@@ -5,11 +5,11 @@
 #ifndef MAGIK_GRAVEYARD_H
 #define MAGIK_GRAVEYARD_H
 
+#include <vector>
 #include "Deck.h"
 
 class Graveyard : public Deck {
 public : 
-    Graveyard(std::vector<std::unique_ptr<Card> >cards);
     Graveyard();
     ~Graveyard();
 

@@ -14,7 +14,7 @@
 
 class Player {
 public :
-    Player(std::string name, std::vector<std::unique_ptr<Card> > deck, std::shared_ptr<Stack> stack);
+    Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack);
     ~Player();
 
     std::string getName() const;
@@ -30,11 +30,11 @@ public :
 
     void castSpellOrAbility(bool hasCasted);
 
-    Battlefield getBattlefield() const;
-    Hand getHand() const;
-    Graveyard getGraveyard() const;
-    Library getLibrary() const;
-    Exile getExile() const;
+    Battlefield* getBattlefield();
+    Hand* getHand();
+    Graveyard* getGraveyard();
+    Library* getLibrary();
+    Exile* getExile();
 
 
 
@@ -51,11 +51,13 @@ private :
     Library library;
     Exile exile;
 
+
     bool canCastInstant;
 
     static uint64_t newId;
 
     std::shared_ptr<Stack> stack;
+
 };
 
 

@@ -5,10 +5,7 @@
 #include "Battlefield.h"
 
 
-Battlefield::Battlefield(std::vector<std::unique_ptr<Card> >cards) {
-    for(int i = 0; i < cards.size(); i += 1){
-        cards.push_back(std::move(cards.at(i)));
-    }
+Battlefield::Battlefield() : Deck() {
 }
 
 Battlefield::~Battlefield() {
