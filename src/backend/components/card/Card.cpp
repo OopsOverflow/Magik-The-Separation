@@ -5,7 +5,7 @@
 #include "Card.h"
 
 
-Card::Card(const std::string &name, std::unordered_map<std::string, int> cost) : name(name), type(type), cost(std::move(cost)), tapped(false) {
+Card::Card(const std::string &name, std::unordered_map<std::string, int> cost) : name(name), cost(std::move(cost)), tapped(false) {
 
 }
 
@@ -19,14 +19,6 @@ const std::string &Card::getName() const {
 
 void Card::setName(const std::string &name) {
     Card::name = name;
-}
-
-const Type &Card::getType() const {
-    return type;
-}
-
-void Card::setType(const Type &type) {
-    Card::type = type;
 }
 
 const std::unordered_map<std::string, int> &Card::getCost() const {

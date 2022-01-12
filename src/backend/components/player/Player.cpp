@@ -58,7 +58,7 @@ void Player::draw(uint8_t numberOfCards) {
 }
 
 void Player::summonCard(uint8_t cardNumber) {
-    std::unique_ptr<Card> card = std::move(hand.getCard(cardNumber));
+    std::unique_ptr<Card> card = std::move(hand.popCard(cardNumber));
     if(false) {//TODO if is a land
         battlefield.add(std::move(card));
     }else{
@@ -80,4 +80,8 @@ void Player::castSpellOrAbility(bool hasCasted) {
     bool hasCastedNow = false;
     if (hasCasted || hasCastedNow) opponent->castSpellOrAbility(hasCastedNow);
 
+}
+
+void Player::takeDamage(uint8_t amount) {
+    hp -= amount;
 }

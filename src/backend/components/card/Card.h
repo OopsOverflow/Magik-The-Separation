@@ -15,18 +15,18 @@ class Card {
 public:
     Card(const std::string &name, std::unordered_map<std::string, int> cost);
 
-    const std::string &getName() const;
+    virtual const std::string &getName() const;
 
-    void setName(const std::string &name);
+    virtual void setName(const std::string &name);
 
-    const std::unordered_map<std::string, int> &getCost() const;
+    virtual const std::unordered_map<std::string, int> &getCost() const;
 
-    void setCost(const std::unordered_map<std::string, int> &cost);
+    virtual void setCost(const std::unordered_map<std::string, int> &cost);
 
     virtual ~Card();
 
-    bool isTapped() const; //TODO (only permanent can be tapped)
-    void unTap();
+    virtual bool isTapped() const; //TODO (only permanent can be tapped)
+    virtual void unTap();
 private:
     std::string name;
     std::unordered_map<std::string, int> cost;

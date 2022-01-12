@@ -4,6 +4,7 @@
 #include <iostream>
 #include "components/player/Player.h"
 #include "game/GameAction.h"
+#include "card/Creature.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -67,10 +68,10 @@ int main(){
         stack.solve();
 
         //Declare attackers step
-        std::vector<std::unique_ptr<Card> > attackingCards;
+        std::vector<Creature*> attackingCards;
         while(playerToPlay->getBattlefield().getLenght() > 0) {
-            std::unique_ptr<Card> card = playerToPlay->getBattlefield().getCard(0);//TODO choose cards to play
-            attackingCards.push_back(std::move(card));
+            Creature* attackingCard = dynamic_cast<Creature*>(playerToPlay->getBattlefield().getCard(0));//TODO choose cards to play
+            if(attackingCard)attackingCards.push_back(attackingCard);
         }
         if(attackingCards.size() > 0) {
             playerToPlay->castSpellOrAbility(true);
@@ -78,19 +79,37 @@ int main(){
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Declare blockers step
-            std::vector<std::vector<std::unique_ptr<Card> > > blockingCards(attackingCards.size());
+            std::vector<std::vector<Creature*> > blockingCards(attackingCards.size());
             while(opponent->getBattlefield().getLenght() > 0) {
-                std::unique_ptr<Card> card = opponent->getBattlefield().getCard(0);//TODO choose cards which block
-                blockingCards.at(0).push_back(std::move(card)); //TODO block Nth-card
+            //TODO choose cards which block
+                Creature* blockingCard = dynamic_cast<Creature*>(opponent->getBattlefield().getCard(0));
+                if(blockingCard)blockingCards.at(0).push_back(blockingCard); //TODO block Nth-card
             }     
             playerToPlay->castSpellOrAbility(true);
             stack.solve();
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Combat damage step
-            //TODO solve combat
+            for(int i = 0; i < attackingCards.size(); i += 1) {
+                if(blockingCards.at(i).size() > 0) {
+                    for(int j = 0; i < blockingCards.at(i).size(); j += 1) {
+                        if(attackingCards.at(i)->getTempThougness() > 0) {
+                            blockingCards.at(i).at(j)->block(attackingCards.at(i));
+                            if(blockingCards.at(i).at(j)->getTempThougness() <= 0) {
+                                int8_t deleteIndex = opponent->getBattlefield().getCardIndex((Card*)blockingCards.at(i).at(j));//TODO high risk concerning pointer here
+                                std::unique_ptr<Card> card = opponent->getBattlefield().popCard(deleteIndex);
+                                opponent->getGraveyard().add(std::move(card));
+                            }
+                        }
+                    }
+                }else{
+                    opponent->takeDamage(attackingCards.at(i)->getPower());
+                    if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
+                }
+            }
             playerToPlay->castSpellOrAbility(true);
             stack.solve();
+            
             if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
 
@@ -117,7 +136,7 @@ int main(){
 
         //Cleanup step
         while(playerToPlay->getHand().getLenght() > 7) {
-            std::unique_ptr<Card> card = playerToPlay->getHand().getCard(0);//TODO choose cards to throw
+            std::unique_ptr<Card> card = playerToPlay->getHand().popCard(0);//TODO choose cards to throw
             playerToPlay->getGraveyard().add(std::move(card));
         }
 

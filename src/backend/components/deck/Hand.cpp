@@ -11,15 +11,19 @@ Hand::Hand(std::vector<std::unique_ptr<Card> >cards) {
     }
 }
 
-
 Hand::~Hand() {
 }
 
-std::unique_ptr<Card> Hand::getCard(uint8_t cardNum) {
+std::unique_ptr<Card> Hand::popCard(uint8_t cardNum) {
     std::unique_ptr<Card> ptr = std::move(cards.at((int)cardNum));
     cards.erase(cards.begin() + cardNum);
     return ptr;    
 }
+
+Card* Hand::getCard(uint8_t cardNum) {
+    return cards.at((int)cardNum).get();
+}
+
 uint8_t Hand::getLenght() const {
     return (uint8_t)cards.size();
 }

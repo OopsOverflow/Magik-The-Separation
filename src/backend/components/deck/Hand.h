@@ -13,7 +13,8 @@ public :
     Hand();
     ~Hand();
 
-    std::unique_ptr<Card> getCard(uint8_t cardNum);
+    std::unique_ptr<Card> popCard(uint8_t cardNum);
+    Card* getCard(uint8_t cardNum);
     uint8_t getLenght() const;
 
     void add(std::unique_ptr<Card> card);

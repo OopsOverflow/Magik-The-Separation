@@ -26,6 +26,7 @@ public :
     void draw(uint8_t numberOfCards = 1);
     void summonCard(uint8_t cardNumber);
     void unTapAll();
+    void takeDamage(uint8_t amount);
 
     void castSpellOrAbility(bool hasCasted);
 
