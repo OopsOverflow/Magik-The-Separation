@@ -9,7 +9,7 @@
 
 enum class SUBTYPE{ANGEL};
 
-class Creature : Card {
+class Creature : public Card {
 public :
     Creature(const std::string &name, std::unordered_map<std::string, int> cost, uint8_t power, uint8_t thougness);
     ~Creature();

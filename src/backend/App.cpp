@@ -97,7 +97,7 @@ int main(){
                         if(attackingCards.at(i)->getTempThougness() > 0) {
                             blockingCards.at(i).at(j)->block(attackingCards.at(i));
                             if(blockingCards.at(i).at(j)->getTempThougness() <= 0) {
-                                int8_t deleteIndex = opponent->getBattlefield().getCardIndex((Card*)blockingCards.at(i).at(j));//TODO high risk concerning pointer here
+                                int8_t deleteIndex = opponent->getBattlefield().getCardIndex(dynamic_cast<Card*>(blockingCards.at(i).at(j)));//TODO high risk concerning pointer here
                                 std::unique_ptr<Card> card = opponent->getBattlefield().popCard(deleteIndex);
                                 opponent->getGraveyard().add(std::move(card));
                             }
