@@ -14,7 +14,7 @@
 
 class Player {
 public :
-    Player(std::string name, std::vector<std::unique_ptr<Card> >deck, std::shared_ptr<Stack> stack);
+    Player(std::string name, std::vector<std::unique_ptr<Card> > deck, std::shared_ptr<Stack> stack);
     ~Player();
 
     std::string getName() const;

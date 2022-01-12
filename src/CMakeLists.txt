@@ -10,4 +10,4 @@ add_custom_command(TARGET ${BINARY}_run
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${BINARY}_run> ../../)
 
-add_library(${BINARY}_lib STATIC ${SOURCES} backend/components/type/Color.h)
+add_library(${BINARY}_lib STATIC ${SOURCES})

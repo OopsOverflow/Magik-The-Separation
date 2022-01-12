@@ -6,8 +6,8 @@
 #define MAGIK_LIBRARY_H
 
 #include <stack>
-
 #include "Deck.h"
+
 class Library : public Deck {
 public : 
     Library(std::vector<std::unique_ptr<Card> >cards);

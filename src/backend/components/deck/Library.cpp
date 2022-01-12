@@ -8,7 +8,7 @@
 Library::Library(std::vector<std::unique_ptr<Card> > cards) {
     for(int i = 0; i < cards.size(); i += 1){
         std::unique_ptr<Card> newCard = std::move(cards.at(i));
-        stack.push(newCard);
+        stack.push(std::move(newCard));
     }
     shuffle();
 }
@@ -27,7 +27,7 @@ void Library::shuffle(){
         int rand = std::rand()%cards.size();
         std::unique_ptr<Card> newCard = std::move(cards.at(rand));
         cards.erase(cards.begin() + rand);
-        stack.push(newCard);
+        stack.push(std::move(newCard));
     }    
     
 }

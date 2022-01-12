@@ -35,7 +35,7 @@ int8_t Battlefield::getCardIndex(Card* card) {
 }
 
 uint8_t Battlefield::getLenght() const {
-    return (uint8_t)cards.size();
+    return (uint8_t) cards.size();
 }
 
 
