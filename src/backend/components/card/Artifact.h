@@ -5,8 +5,9 @@
 #ifndef MAGIK_ARTIFACT_H
 #define MAGIK_ARTIFACT_H
 
+#include "Card.h"
 
-class Artifact {
+class Artifact : Card {
 
 };
 

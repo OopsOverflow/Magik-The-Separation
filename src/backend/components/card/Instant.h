@@ -5,8 +5,9 @@
 #ifndef MAGIK_INSTANT_H
 #define MAGIK_INSTANT_H
 
+#include "Card.h"
 
-class Instant {
+class Instant : Card {
 
 };
 

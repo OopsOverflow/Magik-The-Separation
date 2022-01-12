@@ -5,8 +5,9 @@
 #ifndef MAGIK_SORCERY_H
 #define MAGIK_SORCERY_H
 
+#include "Card.h"
 
-class Sorcery {
+class Sorcery : Card {
 
 };
 

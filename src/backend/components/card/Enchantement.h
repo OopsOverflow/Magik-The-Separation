@@ -5,8 +5,9 @@
 #ifndef MAGIK_ENCHANTEMENT_H
 #define MAGIK_ENCHANTEMENT_H
 
+#include "Card.h"
 
-class Enchantement {
+class Enchantement : Card {
 
 };
 

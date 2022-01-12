@@ -5,8 +5,11 @@
 #ifndef MAGIK_CREATURE_H
 #define MAGIK_CREATURE_H
 
+#include "Card.h"
 
-class Creature {
+enum class SUBTYPE{ANGEL};
+
+class Creature : Card {
 
 };
 

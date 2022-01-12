@@ -5,8 +5,9 @@
 #ifndef MAGIK_LAND_H
 #define MAGIK_LAND_H
 
+#include "Card.h"
 
-class Land {
+class Land : Card {
 
 };
 

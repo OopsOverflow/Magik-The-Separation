@@ -55,6 +55,7 @@ int main(){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
                 stack.solve();
+                if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
             }else{
 
             }
@@ -74,6 +75,7 @@ int main(){
         if(attackingCards.size() > 0) {
             playerToPlay->castSpellOrAbility(true);
             stack.solve();
+            if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Declare blockers step
             std::vector<std::vector<std::unique_ptr<Card> > > blockingCards(attackingCards.size());
@@ -83,11 +85,13 @@ int main(){
             }     
             playerToPlay->castSpellOrAbility(true);
             stack.solve();
+            if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
             //Combat damage step
             //TODO solve combat
             playerToPlay->castSpellOrAbility(true);
             stack.solve();
+            if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
         }
 
         //End of combat step
@@ -99,6 +103,7 @@ int main(){
                 playerToPlay->summonCard(0);//TODO choose card to play
                 opponent->castSpellOrAbility(true);
                 stack.solve();
+                if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
             }else{
 
             }
@@ -108,6 +113,7 @@ int main(){
         //End step
         playerToPlay->castSpellOrAbility(true);
         stack.solve();
+        if(player1.getHp() <= 0 && player2.getHp() <= 0) continue;
 
         //Cleanup step
         while(playerToPlay->getHand().getLenght() > 7) {
