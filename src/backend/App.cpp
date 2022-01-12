@@ -92,6 +92,7 @@ int main(){
             //Combat damage step
             for(int i = 0; i < attackingCards.size(); i += 1) {
                 if(blockingCards.at(i).size() > 0) {
+
                     for(int j = 0; i < blockingCards.at(i).size(); j += 1) {
                         if(attackingCards.at(i)->getTempThougness() > 0) {
                             blockingCards.at(i).at(j)->block(attackingCards.at(i));
@@ -142,6 +143,7 @@ int main(){
 
     }
 
+    //TODO reset all creatures thougness
     std::cout << "Hello Pignoul" << std::endl;
     return 0;
 }

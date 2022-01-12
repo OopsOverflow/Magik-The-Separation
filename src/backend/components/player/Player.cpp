@@ -53,7 +53,7 @@ void Player::draw(uint8_t numberOfCards) {
     if(library.getLenght() <= 1){
         hp = 0;
     }else {
-        hand.add(library.getTopCard());
+        hand.add(std::move(library.getTopCard()));
     }    
 }
 

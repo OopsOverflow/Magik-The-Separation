@@ -30,3 +30,7 @@ uint8_t Stack::getLenght() const {
 void Stack::add(std::unique_ptr<Card> card) {
     stack.push(std::move(card));
 }
+
+void Stack::solve() {
+    
+}
