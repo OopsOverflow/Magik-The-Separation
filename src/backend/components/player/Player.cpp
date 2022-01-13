@@ -29,10 +29,6 @@ int8_t Player::getHp() const {
     return hp;
 }
 
-void Player::setOpponent(Player* player){
-    opponent = player;
-}
-
 Battlefield* Player::getBattlefield() {
     return &battlefield;
 }
@@ -63,7 +59,6 @@ void Player::summonCard(uint8_t cardNumber) {
         battlefield.add(std::move(card));
     }else{
         stack->add(std::move(card));
-        opponent->castSpellOrAbility(true);
     }
 
 }
@@ -75,10 +70,10 @@ void Player::unTapAll() {
     }
 }
 
-void Player::castSpellOrAbility(bool hasCasted) {
-    //TODO (Player can play cards)
+bool Player::castSpellOrAbility() {
     bool hasCastedNow = false;
-    if (hasCasted || hasCastedNow) opponent->castSpellOrAbility(hasCastedNow);
+    //TODO (Player can play cards)
+    return hasCastedNow;
 
 }
 

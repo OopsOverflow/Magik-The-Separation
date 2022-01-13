@@ -11,6 +11,7 @@
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
 #include "../deck/Stack.h"
+#include "../card/Creature.h"
 
 class Player {
 public :
@@ -19,8 +20,7 @@ public :
 
     std::string getName() const;
     uint64_t getId() const;
-    int8_t getHp() const;
-    void setOpponent(Player* player);    
+    int8_t getHp() const;   
     
     //actions
     void draw(uint8_t numberOfCards = 1);
@@ -28,7 +28,7 @@ public :
     void unTapAll();
     void takeDamage(uint8_t amount);
 
-    void castSpellOrAbility(bool hasCasted);
+    bool castSpellOrAbility();
 
     Battlefield* getBattlefield();
     Hand* getHand();
@@ -36,14 +36,18 @@ public :
     Library* getLibrary();
     Exile* getExile();
 
+    void setAttackingCards();
+    std::vector<Creature*> getAttackingCards();
 
+    void setBlockingCards(std::vector<Creature*> attackingCards);
+    std::vector<std::vector<Creature*> > getBlockingCards();
+
+    void killCard(Card* cardToKill);
 
 private :
     std::string name;
     uint64_t id;
     int8_t hp;
-
-    Player* opponent;
 
     Battlefield battlefield;
     Hand hand;
@@ -57,6 +61,9 @@ private :
     static uint64_t newId;
 
     std::shared_ptr<Stack> stack;
+
+    std::vector<Creature*> attackingCards;
+    std::vector<std::vector<Creature*> > blockingCards;
 
 };
 
