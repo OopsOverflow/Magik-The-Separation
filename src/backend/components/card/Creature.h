@@ -6,6 +6,11 @@
 #define MAGIK_CREATURE_H
 
 #include "Card.h"
+#include "../ability/StaticAbility.h"
+#include "../ability/ActivatedAbility.h"
+#include "../ability/TriggeredAbility.h"
+
+#include <functional>
 
 enum class SUBTYPE{ANGEL};
 
@@ -23,12 +28,21 @@ public :
 
     int8_t getTempThougness() const;
 
+    void addStaticAbility(std::vector<std::function<void()> > ability);
+    void addActivatedAbility(std::vector<std::function<void()> > ability);
+    void addTriggeredAbility(std::vector<std::function<void(Event)> > ability);
+
+    std::vector<std::function<void(Event)> > getTriggerAbilities() const;
+
 private :
     uint8_t power;
     uint8_t thougness;
 
     int8_t tempThougness;
 
+    std::vector<std::function<void()> > staticAbilities;
+    std::vector<std::function<void()> > activatedAbilities;
+    std::vector<std::function<void(Event)> > triggeredAbilities;
 };
 
 

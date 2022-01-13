@@ -2,25 +2,28 @@
 // Created by pierre on 13/01/2022.
 //
 
-#ifndef MAGIK_SERVER_H
-#define MAGIK_SERVER_H
+#ifndef MAGIK_GAME_H
+#define MAGIK_GAME_H
 
 #include <vector>
 
-#include "../game/GameAction.h"
+#include "GameAction.h"
 #include "../components/player/Player.h"
 #include "../components/deck/Stack.h"
+#include "../components/card/Card.h"
 
-class Server{
+class Game{
 public : 
-    Server();
-    ~Server();
+    Game();
+    ~Game();
 
     Player* getPlayer1();
     Player* getPlayer2();
 
     void solvePhase();
     void endOfPhase();
+
+    void resolveEvent(Event event);
 
 private : 
     
@@ -38,4 +41,4 @@ private :
 };
 
 
-#endif //MAGIK_SERVER_H
+#endif //MAGIK_GAME_H

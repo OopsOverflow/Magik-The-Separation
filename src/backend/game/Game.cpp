@@ -2,17 +2,17 @@
 // Created by pierre on 13/01/2022.
 //
 
-#include "Server.h"
+#include "Game.h"
 
-Server::Server() : stack(std::make_shared<Stack>()), player1("Bob", deckPlayer1, stack), player2("Henri", deckPlayer2, stack){
-
-}
-
-Server::~Server() {
+Game::Game() : stack(std::make_shared<Stack>()), player1("Bob", deckPlayer1, stack), player2("Henri", deckPlayer2, stack){
 
 }
 
-void Server::solvePhase() {
+Game::~Game() {
+
+}
+
+void Game::solvePhase() {
     GameAction& action = GameAction::getInst();
     switch (action.getPhase())
     {
@@ -152,5 +152,18 @@ void Server::solvePhase() {
     }
 
     action.nextPhase();
+
+}
+
+void Game::resolveEvent(Event event) {
+    for(uint8_t i = 0; playerToPlay->getBattlefield()->getLenght(); i += 1) {
+        Creature* card =  dynamic_cast<Creature*> (playerToPlay->getBattlefield()->getCard(i));
+        if(card) {
+            std::vector<std::function<void(Event)> > abilities = card->getTriggerAbilities();
+            for(uint8_t j = 0; j < abilities.size(); j += 1) {
+                abilities.at(i)(event); //TODO abilities affect game
+            }
+        }
+    }
 
 }

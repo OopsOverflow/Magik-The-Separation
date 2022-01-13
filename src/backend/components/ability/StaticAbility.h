@@ -6,7 +6,7 @@
 #define MAGIK_STATIC_ABILITY_H
 #include "Ability.h"
 
-class StaticAbility : Ability {
+class StaticAbility : public Ability {
 public :
 
 private :

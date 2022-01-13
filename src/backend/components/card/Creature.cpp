@@ -34,3 +34,15 @@ void Creature::takeDamage(uint8_t damages) {
 int8_t Creature::getTempThougness() const {
     return tempThougness;
 }
+
+void Creature::addStaticAbility(std::_Mem_fn<StaticAbility*> ability) {
+    staticAbilities.push_back(ability);
+}
+
+void Creature::addActivatedAbility(std::_Mem_fn<ActivatedAbility*> ability) {
+    activatedAbilities.push_back(ability);
+}
+
+void Creature::addTriggeredAbility(std::_Mem_fn<TriggeredAbility*> ability) {
+    triggeredAbilities.push_back(ability);
+}

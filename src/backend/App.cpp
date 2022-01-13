@@ -4,18 +4,20 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <functional>
 
-#include "server/Server.h"
+#include "game/Game.h"
 
 //TODO remove sfml from cmake
 
 
 int main(){
     srand(time(nullptr));
-    Server server;    
+    Game game;    
 
-    while(server.getPlayer1()->getHp() > 0 && server.getPlayer2()->getHp() > 0){
-        server.solvePhase();
+    auto test = std::mem_fn(Game::getPlayer2);
+    while(game.getPlayer1()->getHp() > 0 && game.getPlayer2()->getHp() > 0){
+        game.solvePhase();
         
     }
         return 0;
