@@ -165,5 +165,4 @@ void Game::resolveEvent(Event event) {
             }
         }
     }
-
 }
