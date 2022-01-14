@@ -35,15 +35,15 @@ int8_t Creature::getTempThougness() const {
     return tempThougness;
 }
 
-void Creature::addStaticAbility(std::_Mem_fn<StaticAbility*> ability) {
+void Creature::addStaticAbility(std::function<void()> ability) {
     staticAbilities.push_back(ability);
 }
 
-void Creature::addActivatedAbility(std::_Mem_fn<ActivatedAbility*> ability) {
+void Creature::addActivatedAbility(std::function<void()> ability) {
     activatedAbilities.push_back(ability);
 }
 
-void Creature::addTriggeredAbility(std::_Mem_fn<TriggeredAbility*> ability) {
+void Creature::addTriggeredAbility(std::function<void(Event)> ability) {
     triggeredAbilities.push_back(ability);
 }
 

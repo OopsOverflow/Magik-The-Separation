@@ -9,6 +9,7 @@
 #include "../ability/StaticAbility.h"
 #include "../ability/ActivatedAbility.h"
 #include "../ability/TriggeredAbility.h"
+#include "Enchantement.h"
 
 #include <functional>
 #include <memory>
@@ -30,9 +31,9 @@ public :
 
     int8_t getTempThougness() const;
 
-    void addStaticAbility(std::vector<std::function<void()> > ability);
-    void addActivatedAbility(std::vector<std::function<void()> > ability);
-    void addTriggeredAbility(std::vector<std::function<void(Event)> > ability);
+    void addStaticAbility(std::function<void()> ability);
+    void addActivatedAbility(std::function<void()> ability);
+    void addTriggeredAbility(std::function<void(Event)> ability);
 
     std::vector<std::function<void(Event)> > getTriggerAbilities() const;
     std::vector<Enchantement*> getAttachedCards();
