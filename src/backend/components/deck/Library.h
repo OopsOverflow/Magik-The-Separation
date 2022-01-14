@@ -5,7 +5,6 @@
 #ifndef MAGIK_LIBRARY_H
 #define MAGIK_LIBRARY_H
 
-#include <stack>
 #include <vector>
 #include "Deck.h"
 
@@ -16,12 +15,12 @@ public :
 
     void shuffle();
     std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    Card* getCard(uint8_t cardNum) final;
-    uint8_t getLenght() const final;
+    //Card* getCard(uint8_t cardNum);
+    uint8_t getLenght() const;
 
 private :
-    std::stack<std::unique_ptr<Card> > stack;
 
+    std::vector<std::unique_ptr<Card> > stack;
 };
 
 

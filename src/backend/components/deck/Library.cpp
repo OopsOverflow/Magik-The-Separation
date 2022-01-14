@@ -8,7 +8,7 @@
 Library::Library(std::vector<std::unique_ptr<Card> > &cards) {
     for(int i = 0; i < cards.size(); i += 1){
         std::unique_ptr<Card> newCard = std::move(cards.at(i));
-        stack.push(std::move(newCard));
+        stack.push_back(std::move(newCard));
     }
     shuffle();
 }
@@ -27,7 +27,7 @@ void Library::shuffle(){
         int rand = std::rand()%cards.size();
         std::unique_ptr<Card> newCard = std::move(cards.at(rand));
         cards.erase(cards.begin() + rand);
-        stack.push(std::move(newCard));
+        stack.push_back(std::move(newCard));
     }    
     
 }
@@ -37,13 +37,9 @@ Library::~Library() {
 }
 
 std::unique_ptr<Card> Library::getTopCard() {
-    std::unique_ptr<Card> ptr = std::move(stack.top());
-    stack.pop();
+    std::unique_ptr<Card> ptr = std::move(stack.at(stack.size()-1)); //TODO verify if not empty
+    stack.pop_back();
     return ptr;
-}
-
-Card* Library::getCard(uint8_t cardNum) {
-    return stack.top().get();
 }
 
 uint8_t Library::getLenght() const {
