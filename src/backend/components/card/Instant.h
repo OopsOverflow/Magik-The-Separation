@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-class Instant : Card {
+class Instant : public Card {
 
 };
 

@@ -11,6 +11,8 @@
 #include "../ability/TriggeredAbility.h"
 
 #include <functional>
+#include <memory>
+#include <vector>
 
 enum class SUBTYPE{ANGEL};
 
@@ -33,6 +35,7 @@ public :
     void addTriggeredAbility(std::vector<std::function<void(Event)> > ability);
 
     std::vector<std::function<void(Event)> > getTriggerAbilities() const;
+    std::vector<Enchantement*> getAttachedCards();
 
 private :
     uint8_t power;
@@ -43,6 +46,8 @@ private :
     std::vector<std::function<void()> > staticAbilities;
     std::vector<std::function<void()> > activatedAbilities;
     std::vector<std::function<void(Event)> > triggeredAbilities;
+
+    std::vector<std::unique_ptr<Enchantement> > attachedEnchantments;
 };
 
 

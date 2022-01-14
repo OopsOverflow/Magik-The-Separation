@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-class Land : Card {
+class Land : public Card {
 
 };
 

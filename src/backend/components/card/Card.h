@@ -10,6 +10,7 @@
 
 // Suckless
 typedef uint8_t sint;
+enum class CardType {CREATURE, ENCHANTEMENT, INSTANT, LAND, SORCERY};
 
 class Card {
 public:
@@ -25,13 +26,18 @@ public:
 
     virtual ~Card();
 
+    uint8_t getCardId() const;
+
     virtual bool isTapped() const; //TODO (only permanent can be tapped)
-    virtual void unTap();
+    void unTap();
 private:
     std::string name;
     std::unordered_map<std::string, int> cost;
 
     bool tapped;
+    uint8_t uuid;
+
+    static uint8_t nextCardId;
 
 };
 

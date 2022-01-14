@@ -4,9 +4,10 @@
 
 #include "Card.h"
 
+uint8_t Card::nextCardId = 0;
 
-Card::Card(const std::string &name, std::unordered_map<std::string, int> cost) : name(name), cost(std::move(cost)), tapped(false) {
-
+Card::Card(const std::string &name, std::unordered_map<std::string, int> cost) : name(name), cost(std::move(cost)), tapped(false), uuid(nextCardId) {
+    nextCardId += 1;
 }
 
 Card::~Card() {
@@ -35,4 +36,8 @@ bool Card::isTapped() const {
 
 void Card::unTap() {
     tapped = false;
+}
+
+uint8_t Card::getCardId() const {
+    return uuid;
 }

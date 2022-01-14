@@ -46,3 +46,11 @@ void Creature::addActivatedAbility(std::_Mem_fn<ActivatedAbility*> ability) {
 void Creature::addTriggeredAbility(std::_Mem_fn<TriggeredAbility*> ability) {
     triggeredAbilities.push_back(ability);
 }
+
+std::vector<Enchantement*> Creature::getAttachedCards() {
+    std::vector<Enchantement*> result;
+    for(auto const& enchant: attachedEnchantments)
+        result.push_back(enchant.get());
+
+    return result;
+}

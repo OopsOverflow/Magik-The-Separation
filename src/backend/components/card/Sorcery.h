@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-class Sorcery : Card {
+class Sorcery : public Card {
 
 };
 

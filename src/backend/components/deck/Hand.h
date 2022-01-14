@@ -13,14 +13,19 @@ public :
     Hand();
     ~Hand();
 
-    std::unique_ptr<Card> popCard(uint8_t cardNum);
-    Card* getCard(uint8_t cardNum) final;
-    uint8_t getLenght() const final;
+    std::unique_ptr<Card> popCard(uint8_t cardId);
+    Card* getCard(uint8_t cardId);
+    uint8_t getLenght() const;
 
-    void add(std::unique_ptr<Card> card) final;
+    void add(std::unique_ptr<Card> card);
 
 private : 
-    std::vector<std::unique_ptr<Card> > cards;
+    std::vector<std::unique_ptr<Creature> > creatures;
+    std::vector<std::unique_ptr<Land> > lands;
+    std::vector<std::unique_ptr<Sorcery> > sorceries;
+    std::vector<std::unique_ptr<Enchantement> > enchantements;
+    std::vector<std::unique_ptr<Instant> > instants;
+
 };
 
 
