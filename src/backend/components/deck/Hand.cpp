@@ -14,7 +14,7 @@ Hand::~Hand() {
 std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
     for(int i = 0; i < creatures.size(); i += 1) {
         if(creatures.at(i).get()->getCardId() == cardId) {
-            std::unique_ptr<Card> ptr = std::move(creatures.at(cardId));
+            std::unique_ptr<Card> ptr = std::move(creatures.at(i));
             creatures.erase(creatures.begin() + i);
             return ptr;
         }
@@ -22,7 +22,7 @@ std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
         
     for(int i = 0; i < lands.size(); i += 1) {
         if(lands.at(i).get()->getCardId() == cardId) {
-            std::unique_ptr<Card> ptr = std::move(lands.at(cardId));
+            std::unique_ptr<Card> ptr = std::move(lands.at(i));
             lands.erase(lands.begin() + i);
             return ptr;
         }
@@ -30,7 +30,7 @@ std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
     
     for(int i = 0; i < enchantements.size(); i += 1) {
         if(enchantements.at(i).get()->getCardId() == cardId) {
-            std::unique_ptr<Card> ptr = std::move(enchantements.at(cardId));
+            std::unique_ptr<Card> ptr = std::move(enchantements.at(i));
             enchantements.erase(enchantements.begin() + i);
             return ptr;
         }
@@ -38,7 +38,7 @@ std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
 
     for(int i = 0; i < instants.size(); i += 1) {
         if(instants.at(i).get()->getCardId() == cardId) {
-            std::unique_ptr<Card> ptr = std::move(instants.at(cardId));
+            std::unique_ptr<Card> ptr = std::move(instants.at(i));
             instants.erase(instants.begin() + i);
             return ptr;
         }
@@ -46,7 +46,7 @@ std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
 
     for(int i = 0; i < sorceries.size(); i += 1) {
         if(sorceries.at(i).get()->getCardId() == cardId) {
-            std::unique_ptr<Card> ptr = std::move(sorceries.at(cardId));
+            std::unique_ptr<Card> ptr = std::move(sorceries.at(i));
             sorceries.erase(sorceries.begin() + i);
             return ptr;
         }
@@ -68,7 +68,7 @@ Card* Hand::getCard(uint8_t cardId) {
     for(auto const& card : sorceries)
         if(card.get()->getCardId() == cardId) return card.get();
     
-    std::cout<< "Error - no card was found"<< std::endl;
+    std::cout<< "Error - no card was found in Hand"<< std::endl;
     return nullptr;
 }
 

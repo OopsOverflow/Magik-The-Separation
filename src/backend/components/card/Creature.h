@@ -37,6 +37,7 @@ public :
 
     std::vector<std::function<void(Event)> > getTriggerAbilities() const;
     std::vector<Enchantement*> getAttachedCards();
+    void attachCard(std::unique_ptr<Enchantement> card);
 
 private :
     uint8_t power;

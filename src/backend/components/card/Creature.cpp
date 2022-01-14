@@ -54,3 +54,7 @@ std::vector<Enchantement*> Creature::getAttachedCards() {
 
     return result;
 }
+
+void Creature::attachCard(std::unique_ptr<Enchantement> card) {
+    attachedEnchantments.push_back(std::move(card));
+}
