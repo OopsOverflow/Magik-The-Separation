@@ -15,7 +15,6 @@ int main(){
     srand(time(nullptr));
     Game game;    
 
-    auto test = std::mem_fn(Game::getPlayer2);
     while(game.getPlayer1()->getHp() > 0 && game.getPlayer2()->getHp() > 0){
         game.solvePhase();
         

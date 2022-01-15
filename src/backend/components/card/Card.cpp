@@ -6,7 +6,7 @@
 
 uint8_t Card::nextCardId = 0;
 
-Card::Card(const std::string &name, std::unordered_map<std::string, int> cost) : name(name), cost(std::move(cost)), tapped(false), uuid(nextCardId) {
+Card::Card(const std::string &name, std::unordered_map<Color, int> cost) : name(name), cost(std::move(cost)), tapped(false), uuid(nextCardId) {
     nextCardId += 1;
 }
 
@@ -22,11 +22,11 @@ void Card::setName(const std::string &name) {
     Card::name = name;
 }
 
-const std::unordered_map<std::string, int> &Card::getCost() const {
+const std::unordered_map<Color, int> &Card::getCost() const {
     return cost;
 }
 
-void Card::setCost(const std::unordered_map<std::string, int> &cost) {
+void Card::setCost(const std::unordered_map<Color, int> &cost) {
     Card::cost = cost;
 }
 

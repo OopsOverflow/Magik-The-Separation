@@ -5,7 +5,7 @@
 #include "Creature.h"
 
 
-Creature::Creature(const std::string &name, std::unordered_map<std::string, int> cost, uint8_t power, uint8_t thougness) 
+Creature::Creature(const std::string &name, std::unordered_map<Color, int> cost, uint8_t power, uint8_t thougness) 
 : Card(name, cost), power(power), thougness(thougness) {
 
 }

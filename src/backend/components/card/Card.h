@@ -11,19 +11,20 @@
 // Suckless
 typedef uint8_t sint;
 enum class CardType {CREATURE, ENCHANTEMENT, INSTANT, LAND, SORCERY};
+enum class Color{WHITE, BLUE, BLACK, RED, GREEN, WBBRG};
 
 
 class Card {
 public:
-    Card(const std::string &name, std::unordered_map<std::string, int> cost);
+    Card(const std::string &name, std::unordered_map<Color, int> cost);
 
     virtual const std::string &getName() const;
 
     virtual void setName(const std::string &name);
 
-    virtual const std::unordered_map<std::string, int> &getCost() const;
+    virtual const std::unordered_map<Color, int> &getCost() const;
 
-    virtual void setCost(const std::unordered_map<std::string, int> &cost);
+    virtual void setCost(const std::unordered_map<Color, int> &cost);
 
     virtual ~Card();
 
@@ -33,7 +34,7 @@ public:
     void unTap();
 private:
     std::string name;
-    std::unordered_map<std::string, int> cost;
+    std::unordered_map<Color, int> cost;
 
     bool tapped;
     uint8_t uuid;

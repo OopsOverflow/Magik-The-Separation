@@ -6,7 +6,6 @@
 #define MAGIK_PLAYER_H
 #include "string"
 #include "../deck/Battlefield.h"
-#include "../deck/Exile.h"
 #include "../deck/Graveyard.h"
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
@@ -34,7 +33,6 @@ public :
     Hand* getHand();
     Graveyard* getGraveyard();
     Library* getLibrary();
-    Exile* getExile();
 
     void setAttackingCards();
     std::vector<Creature*> getAttackingCards();
@@ -53,7 +51,6 @@ private :
     Hand hand;
     Graveyard graveyard;
     Library library;
-    Exile exile;
 
 
     bool canCastInstant;

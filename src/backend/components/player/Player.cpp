@@ -8,7 +8,7 @@ uint64_t Player::newId = 0;
 
 Player::Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack)
 :   name(name), id(newId), hp(20), canCastInstant(false),
-    library(deck), graveyard(), exile(), hand(), battlefield(), stack(std::move(stack)) {
+    library(deck), graveyard(), hand(), battlefield(), stack(std::move(stack)) {
     newId += 1;
 }
 
@@ -39,10 +39,6 @@ Hand* Player::getHand() {
 
 Graveyard* Player::getGraveyard() {
     return &graveyard;
-}
-
-Exile* Player::getExile() {
-    return &exile;
 }
 
 void Player::draw(uint8_t numberOfCards) {
