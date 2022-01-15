@@ -12,6 +12,7 @@
 typedef uint8_t sint;
 enum class CardType {CREATURE, ENCHANTEMENT, INSTANT, LAND, SORCERY};
 
+
 class Card {
 public:
     Card(const std::string &name, std::unordered_map<std::string, int> cost);
