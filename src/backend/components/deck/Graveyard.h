@@ -17,7 +17,7 @@ public :
 
     std::unique_ptr<Card> popCard(uint8_t cardNum);
     Card* getCard(uint8_t cardNum);
-    uint8_t getLenght() const;
+    uint8_t getLength() const;
 
 private : 
     std::vector<std::unique_ptr<Card> > cards;

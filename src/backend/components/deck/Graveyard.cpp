@@ -22,7 +22,7 @@ Card* Graveyard::getCard(uint8_t cardNum) {
     return cards.at((int)cardNum).get();
 }
 
-uint8_t Graveyard::getLenght() const {
+uint8_t Graveyard::getLength() const {
     return (uint8_t)cards.size();
 }
 

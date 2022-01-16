@@ -13,9 +13,19 @@ public :
     Hand();
     ~Hand();
 
-    std::unique_ptr<Card> popCard(uint8_t cardId);
-    Card* getCard(uint8_t cardId);
-    uint8_t getLenght() const;
+    uint8_t getLength() const;
+
+    std::vector<Creature*> getCreatures();
+    std::vector<Land*> getLands();
+    std::vector<Sorcery*> getSorceries();
+    std::vector<Enchantement*> getEnchantements();
+    std::vector<Instant*> getInstants();
+
+    std::unique_ptr<Creature> summonCreature(uint8_t id);
+    std::unique_ptr<Land> summonLand(uint8_t id);
+    std::unique_ptr<Sorcery> summonSorcery(uint8_t id);
+    std::unique_ptr<Enchantement> summonEnchantement(uint8_t id);
+    std::unique_ptr<Instant> summonInstant(uint8_t id);
 
     void add(std::unique_ptr<Card> card);
 

@@ -3,3 +3,11 @@
 //
 
 #include "Sorcery.h"
+
+Sorcery::Sorcery(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost) : Card(id, name, cost) {
+
+}
+
+Sorcery::~Sorcery() {
+    
+}

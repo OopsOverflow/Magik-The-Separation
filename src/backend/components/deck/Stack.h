@@ -17,12 +17,13 @@ public :
     Stack& operator=(Stack const&) = delete;
 
     std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    uint8_t getLenght() const;
+    uint8_t getLength() const;
     void add(std::unique_ptr<Card> card);
 
+    void display();
     void solve();
 private :
-    std::stack<std::unique_ptr<Card> > stack;
+    std::vector<std::unique_ptr<Card> > stack;
 
 };
 

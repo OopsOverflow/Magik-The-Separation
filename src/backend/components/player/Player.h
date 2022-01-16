@@ -23,7 +23,6 @@ public :
     
     //actions
     void draw();
-    void summonCard(uint8_t cardNumber);
     void unTapAll();
     void takeDamage(uint8_t amount);
 

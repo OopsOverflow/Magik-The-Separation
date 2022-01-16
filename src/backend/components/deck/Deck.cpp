@@ -28,7 +28,7 @@ std::unique_ptr<Card> Deck::popCard(uint8_t cardId) {
     return nullptr;
 }
 
-uint8_t Deck::getLenght() const {
-    std::runtime_error("getLenght - virtual class was not override"); 
+uint8_t Deck::getLength() const {
+    std::runtime_error("getLength - virtual class was not override"); 
     return 0;
 }

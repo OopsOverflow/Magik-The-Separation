@@ -47,7 +47,7 @@ Library* Player::getLibrary() {
 }
 
 void Player::draw() {
-    if(library.getLenght() <= 1){
+    if(library.getLength() <= 1){
         hp = 0;
     }else {
         auto card = std::move(library.getTopCard());
@@ -56,25 +56,57 @@ void Player::draw() {
     }    
 }
 
-void Player::summonCard(uint8_t cardNumber) {
-    std::unique_ptr<Card> card = std::move(hand.popCard(cardNumber));
-    if(false) {//TODO if is a land
-        battlefield.add(std::move(card));
-    }else{
-        stack->add(std::move(card));
-    }
-
-}
-
 void Player::unTapAll() {
-    for(uint8_t i = 0; i < battlefield.getLenght(); i += 1) {
+    for(uint8_t i = 0; i < battlefield.getLength(); i += 1) {
         battlefield.unTap(i); //TODO only cards that can be tapped
     }
 }
 
 bool Player::castSpellOrAbility() {
     bool hasCastedNow = false;
-    //TODO (Player can play cards)
+    stack->display();
+    std::cout<<"Playable cards : "<<std::endl;
+    int idx = 0;
+    for(int i = 0 ; i < hand.getInstants().size(); i += 1) 
+        std::cout<< idx++ << " - " << hand.getInstants().at(i)->getName()<<std::endl;
+    for(int i = 0; i < battlefield.getCreatures().size(); i += 1) {
+        if(battlefield.getCreatures().at(i)->getActivatedAbilities().size() > 0) {
+            std::cout<< idx++ << " - " << battlefield.getCreatures().at(i)->getName() <<  " : " << battlefield.getCreatures().at(i)->getActivatedAbilities().size() <<std::endl;
+        }
+    }
+    //TODO enchantments
+    char response = 0;
+        while (response != 'y' && response != 'n')
+        {
+
+            std::cout<< name <<" - Do you want to play something ? (y/n) ";
+            std::string str;
+            std::cin>>str;
+            response = str[0];
+        }
+    if(response == 'y'){//wantToPlaySmth
+        int choice = -1;
+        while (choice < 0 || choice >= idx)
+        {
+            std::string str;
+            std::cout<<"Choose card to play : ";
+            std::cin>>str;
+            try {
+                choice = std::stoi(str);
+            }
+            catch (const std::exception & e) {
+                std::cout << "Invalid argument : " << str << std::endl;
+            }
+        }
+        if(choice < hand.getInstants().size()){
+            auto card = std::move(hand.summonInstant(choice));
+            stack->add(std::move(card));
+        }else{
+            //TODO play ability
+            //TODO play enchantment
+        }
+        hasCastedNow = true;
+    }
     return hasCastedNow;
 
 }

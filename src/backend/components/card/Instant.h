@@ -8,6 +8,12 @@
 #include "Card.h"
 
 class Instant : public Card {
+public : 
+    Instant(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
+    ~Instant();
+
+    Instant(Instant const&) = delete;
+    Instant& operator=(Instant const&) = delete;
 
 };
 

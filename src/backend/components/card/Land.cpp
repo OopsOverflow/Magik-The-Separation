@@ -3,3 +3,12 @@
 //
 
 #include "Land.h"
+
+
+Land::Land(uint8_t id, const std::string &name) : Card(id, name, {}) {
+
+}
+
+Land::~Land() {
+    
+}

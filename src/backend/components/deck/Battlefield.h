@@ -16,13 +16,14 @@ public :
 
     std::unique_ptr<Card> popCard(uint8_t cardId);
     Card* getCard(uint8_t cardId);
-    uint8_t getLenght() const;
+    uint8_t getLength() const;
 
     void unTap(uint8_t cardNum);  
 
-    void addCreature(std::unique_ptr<Creature> card);
-    void addLand(std::unique_ptr<Land> card);
-    void addEnchantement(std::unique_ptr<Enchantement> card, Creature* creature);
+    void add(std::unique_ptr<Card> card);
+
+    std::vector<Creature*> getCreatures();
+    std::vector<Land*> getLands();
 
 private : 
     std::vector<std::unique_ptr<Creature> > creatures;

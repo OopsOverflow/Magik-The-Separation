@@ -51,6 +51,10 @@ std::vector<std::function<void(Event)> > Creature::getTriggerAbilities() const {
     return triggeredAbilities;
 }
 
+std::vector<std::function<void()> > Creature::getActivatedAbilities() const {
+    return activatedAbilities;
+}
+
 std::vector<Enchantement*> Creature::getAttachedCards() {
     std::vector<Enchantement*> result;
     for(auto const& enchant: attachedEnchantments)

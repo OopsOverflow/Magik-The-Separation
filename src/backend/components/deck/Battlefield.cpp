@@ -38,7 +38,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
         }
     }
 
-    std::cout<< "Error - no card was found in Hand"<< std::endl;
+    std::cout<< "Error - no card was found in Battlefield"<< std::endl;
     return nullptr;  
 }
 
@@ -52,21 +52,8 @@ Card* Battlefield::getCard(uint8_t cardId) {
     return nullptr;
 }
 
-uint8_t Battlefield::getLenght() const {
+uint8_t Battlefield::getLength() const {
     return (uint8_t) creatures.size() + lands.size();
-}
-
-
-void Battlefield::addCreature(std::unique_ptr<Creature> card) {
-    creatures.push_back(std::move(card));
-}
-
-void Battlefield::addLand(std::unique_ptr<Land> card) {
-    lands.push_back(std::move(card));
-}
-
-void Battlefield::addEnchantement(std::unique_ptr<Enchantement> card, Creature* creature) {
-    creature->attachCard(std::move(card));
 }
 
 void Battlefield::unTap(uint8_t cardNum){
@@ -74,3 +61,59 @@ void Battlefield::unTap(uint8_t cardNum){
 }    
 
 
+void Battlefield::add(std::unique_ptr<Card> card) {
+    Card* cardToAdd = card.get();
+    CardType type = getCardType(cardToAdd);
+    switch (type)
+    {
+    case (CardType::CREATURE):
+        {
+            Creature *tmp = dynamic_cast<Creature*>(card.get());
+            std::unique_ptr<Creature> creature;
+            if(tmp != nullptr)
+            {
+                card.release();
+                creature.reset(tmp);
+                creatures.push_back(std::move(creature));
+
+            }else {
+                std::runtime_error("Error - cast into creature in Hand");  
+            }
+        }
+        break;
+
+    case (CardType::LAND):
+        {
+            Land *tmp = dynamic_cast<Land*>(card.get());
+            std::unique_ptr<Land> land;
+            if(tmp != nullptr)
+            {
+                card.release();
+                land.reset(tmp);
+                lands.push_back(std::move(land));
+
+            }else {
+                std::runtime_error("Error - cast into land in Hand");  
+            }
+        }
+        break;
+
+    default:
+        std::runtime_error("Error - cannot find cast in Hand");
+        break;
+    }
+}
+
+std::vector<Creature*> Battlefield::getCreatures() {
+    std::vector<Creature*> result;
+    for(auto& card : creatures)
+        result.push_back(card.get());
+    return result;
+}
+
+std::vector<Land*> Battlefield::getLands() {
+    std::vector<Land*> result;
+    for(int i = 0; i < lands.size(); i += 1)
+        result.push_back(lands.at(i).get());
+    return result;
+}

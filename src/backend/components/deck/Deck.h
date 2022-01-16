@@ -20,7 +20,7 @@ public :
     Deck();
 
     virtual void add(std::unique_ptr<Card> card);
-    virtual uint8_t getLenght() const;
+    virtual uint8_t getLength() const;
 
     static CardType getCardType(Card* card);
     virtual std::unique_ptr<Card> popCard(uint8_t cardId);

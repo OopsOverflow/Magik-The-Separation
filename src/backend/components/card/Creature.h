@@ -39,6 +39,8 @@ public :
     void addTriggeredAbility(std::function<void(Event)> ability);
 
     std::vector<std::function<void(Event)> > getTriggerAbilities() const;
+    std::vector<std::function<void()> > getActivatedAbilities() const;
+
     std::vector<Enchantement*> getAttachedCards();
     void attachCard(std::unique_ptr<Enchantement> card);
 
