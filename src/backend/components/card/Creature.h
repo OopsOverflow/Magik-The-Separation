@@ -22,6 +22,9 @@ public :
     Creature(const std::string &name, std::unordered_map<Color, int> cost, uint8_t power, uint8_t thougness);
     ~Creature();
 
+    Creature(Creature const&) = delete;
+    Creature& operator=(Creature const&) = delete;
+
     uint8_t getPower() const;
     uint8_t getThougness() const;
     

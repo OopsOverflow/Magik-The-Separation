@@ -13,13 +13,15 @@ BEGINNING_OF_COMBAT_STEP, DECLARE_ATTACKER_STEP, DECLARE_BLOCKER_STEP, COMBAT_DA
 SECOND_MAIN_PHASE, //SECOND MAIN PHASE
 END_STEP, CLEANUP_STEP}; //ENDING PHASE
 
+
+#include <cstdint>
 class GameAction {
 public:
     static GameAction& getInst();
     
     Phase getPhase() const;
     void nextPhase(); 
-    uint8_t getTurn() const;
+    std::uint8_t getTurn() const;
 
     bool hasPlayedLand;
 
@@ -28,7 +30,7 @@ private:
     ~GameAction();
 
     Phase phase;
-    uint8_t turn;
+    std::uint8_t turn;
     
 };
 

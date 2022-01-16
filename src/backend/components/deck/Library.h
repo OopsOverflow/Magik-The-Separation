@@ -10,7 +10,7 @@
 
 class Library : public Deck {
 public : 
-    Library(std::vector<std::unique_ptr<Card>> &cards);
+    Library();
     ~Library();
 
     void shuffle();

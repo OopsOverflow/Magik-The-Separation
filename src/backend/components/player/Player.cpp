@@ -6,9 +6,9 @@
 
 uint64_t Player::newId = 0;
 
-Player::Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack)
+Player::Player(std::string name, std::shared_ptr<Stack> stack)
 :   name(name), id(newId), hp(20), canCastInstant(false),
-    library(deck), graveyard(), hand(), battlefield(), stack(std::move(stack)) {
+    library(), graveyard(), hand(), battlefield(), stack(std::move(stack)) {
     newId += 1;
 }
 
@@ -41,7 +41,11 @@ Graveyard* Player::getGraveyard() {
     return &graveyard;
 }
 
-void Player::draw(uint8_t numberOfCards) {
+Library* Player::getLibrary() {
+    return &library;
+}
+
+void Player::draw() {
     if(library.getLenght() <= 1){
         hp = 0;
     }else {
@@ -59,9 +63,8 @@ void Player::summonCard(uint8_t cardNumber) {
 
 }
 
-
 void Player::unTapAll() {
-    for(int i = 0; i < battlefield.getLenght(); i += 1) {
+    for(uint8_t i = 0; i < battlefield.getLenght(); i += 1) {
         battlefield.unTap(i); //TODO only cards that can be tapped
     }
 }
@@ -75,4 +78,28 @@ bool Player::castSpellOrAbility() {
 
 void Player::takeDamage(uint8_t amount) {
     hp -= amount;
+}
+
+
+void Player::setAttackingCards() {
+
+}
+
+std::vector<Creature*> Player::getAttackingCards() {
+    std::vector<Creature*> cards;
+    return cards;
+}
+
+void Player::setBlockingCards(std::vector<Creature*> attackingCards) {
+
+}
+
+std::vector<std::vector<Creature*> > Player::getBlockingCards() {
+    std::vector<std::vector<Creature*> > cards;
+    return cards;
+}
+
+
+void Player::killCard(Card* cardToKill) {
+
 }

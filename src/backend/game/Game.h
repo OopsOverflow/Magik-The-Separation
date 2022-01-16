@@ -24,6 +24,8 @@ public :
     void endOfPhase();
 
     void resolveEvent(Event event);
+    void chooseCards();
+    void initGame();
 
 private : 
     
@@ -31,9 +33,6 @@ private :
     Player player2;
 
     std::shared_ptr<Stack> stack;
-
-    std::vector<std::unique_ptr<Card> >deckPlayer1;
-    std::vector<std::unique_ptr<Card> >deckPlayer2;
 
     Player* playerToPlay;
     Player* opponent;

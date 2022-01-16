@@ -15,6 +15,12 @@
 
 class Enchantement : public Card {
 public :
+    Enchantement(const std::string &name, std::unordered_map<Color, int> cost);
+    ~Enchantement();
+
+    Enchantement(Enchantement const&) = delete;
+    Enchantement& operator=(Enchantement const&) = delete;
+
     void addStaticAbility(std::function<void()> ability);
     void addActivatedAbility(std::function<void()> ability);
     void addTriggeredAbility(std::function<void(Event)> ability);

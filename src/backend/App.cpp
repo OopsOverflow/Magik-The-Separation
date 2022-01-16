@@ -12,9 +12,10 @@
 
 
 int main(){
-    srand(time(nullptr));
+    srand((unsigned int)time(nullptr));
     Game game;    
-
+    game.chooseCards();
+    game.initGame();
     while(game.getPlayer1()->getHp() > 0 && game.getPlayer2()->getHp() > 0){
         game.solvePhase();
         

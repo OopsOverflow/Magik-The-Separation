@@ -12,132 +12,23 @@ CardMaker& CardMaker::getInst() {
 
 int CardMaker::registerCard(Maker m) {
     factories.push_back(m);
-    return factories.size() - 1;
+    return (int)(factories.size() - 1);
 }
 
 std::unique_ptr<Card> CardMaker::create(int id) {
     return factories[id]();
 }
 
-CardMaker::CardMaker() {
-    //cards
-    registerCard(createCharmedStray);
-    registerCard(createSanctuaryCat);
-    registerCard(createSoulmender);
-    registerCard(createTacticalAdvantage);
-    registerCard(createFencingAce);
-    registerCard(createHallowedPriest);
-    registerCard(createImpassionedOrator);
-    registerCard(createKnightsPledge);
-    registerCard(createMoorlandInquisitor);
-    registerCard(createPacifism);
-    registerCard(createShrineKeeper);
-    registerCard(createAngelofVitality);
-    registerCard(createLoxodonLineBreaker);
-    registerCard(createLeoninWarleader);
-    registerCard(createAngelicReward);
-    registerCard(createBondofDiscipline);
-    registerCard(createConfronttheAssault);
-    registerCard(createSerraAngel);
-    registerCard(createSpiritualGuardian);
-    registerCard(createAngelicGuardian);
-    registerCard(createInspiringCommander);
-    registerCard(createGoringCeratops);
-    registerCard(createRiversFavor);
-    registerCard(createUnsummon);
-    registerCard(createWallofRunes);
-    registerCard(createZephyrGull);
-    registerCard(createCoralMerfolk);
-    registerCard(createGlint);
-    registerCard(createSwornGuardian);
-    registerCard(createWaterkinShaman);
-    registerCard(createArmoredWhirlTurtle);
-    registerCard(createCloudkinSeer);
-    registerCard(createWardenofEvosIsle);
-    registerCard(createWaterknot);
-    registerCard(createWingedWords);
-    registerCard(createOctoprophet);
-    registerCard(createSleep);
-    registerCard(createAirElemental);
-    registerCard(createSoulbladeDjinn);
-    registerCard(createWindstormDrake);
-    registerCard(createFrilledSeaSerpent);
-    registerCard(createRiddlemasterSphinx);
-    registerCard(createOverflowingInsight);
-    registerCard(createWindreaderSphinx);
-    registerCard(createCompoundFracture);
-    registerCard(createRaiseDead);
-    registerCard(createSanitariumSkeleton);
-    registerCard(createTyphoidRats);
-    registerCard(createCruelCut);
-    registerCard(createEternalThirst);
-    registerCard(createKrovikanScoundrel);
-    registerCard(createMalakirCullblade);
-    registerCard(createNimblePilferer);
-    registerCard(createUnlikelyAid);
-    registerCard(createVampireOpportunist);
-    registerCard(createMarduOutrider);
-    registerCard(createMurder);
-    registerCard(createSavageGorger);
-    registerCard(createScatheZombies);
-    registerCard(createWitchsFamiliar);
-    registerCard(createSkeletonArcher);
-    registerCard(createSengirVampire);
-    registerCard(createSoulhunterRakshasa);
-    registerCard(createBadDeal);
-    registerCard(createNightmare);
-    registerCard(createDemonofLoathing);
-    registerCard(createRagingGoblin);
-    registerCard(createShock);
-    registerCard(createStormStrike);
-    registerCard(createTinStreetCadet);
-    registerCard(createGoblinTunneler);
-    registerCard(createManiacalRage);
-    registerCard(createNestRobber);
-    registerCard(createBombard);
-    registerCard(createBurnBright);
-    registerCard(createFearlessHalberdier);
-    registerCard(createGoblinGathering);
-    registerCard(createHurloonMinotaur);
-    registerCard(createMoltenRavager);
-    registerCard(createRaidBombardment);
-    registerCard(createGoblinGangLeader);
-    registerCard(createGoblinTrashmaster);
-    registerCard(createOgreBattledriver);
-    registerCard(createImmortalPhoenix);
-    registerCard(createInescapableBlaze);
-    registerCard(createVolcanicDragon);
-    registerCard(createSiegeDragon);
-    registerCard(createChargingBadger);
-    registerCard(createJungleDelver);
-    registerCard(createStonyStrength);
-    registerCard(createFeralRoar);
-    registerCard(createGreenwoodSentinel);
-    registerCard(createIlysianCaryatid);
-    registerCard(createRabidBite);
-    registerCard(createTitanicGrowth);
-    registerCard(createTreetopWarden);
-    registerCard(createWoodlandMystic);
-    registerCard(createColossalMajesty);
-    registerCard(createGenerousStray);
-    registerCard(createWildwoodPatrol);
-    registerCard(createBalothPackhunter);
-    registerCard(createPrizedUnicorn);
-    registerCard(createRumblingBaloth);
-    registerCard(createWorldShaper);
-    registerCard(createGigantosaurus);
-    registerCard(createSentinelSpider);
-    registerCard(createEpicProportions);
-    registerCard(createRampagingBrontodon);
-    //lands
-}
+
+
 
 std::unique_ptr<Card> createCharmedStray() {
     std::unordered_map<Color, int> cost =  {{Color::WHITE, 1}};
-	auto card = std::make_unique<Creature>("CharmedStray", cost, 1, 1);
+	auto card = std::make_unique<Creature>("CharmedStray", cost, (uint8_t)1, (uint8_t)1);
 	return std::move(card);
 }
 
+/*
 std::unique_ptr<Card> createSanctuaryCat() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
@@ -711,4 +602,119 @@ std::unique_ptr<Card> createSpirit() {
 std::unique_ptr<Card> createGoblin() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
+}
+*/
+
+CardMaker::CardMaker() {
+    //cards
+    registerCard(createCharmedStray);
+    /*registerCard(createSanctuaryCat);
+    registerCard(createSoulmender);
+    registerCard(createTacticalAdvantage);
+    registerCard(createFencingAce);
+    registerCard(createHallowedPriest);
+    registerCard(createImpassionedOrator);
+    registerCard(createKnightsPledge);
+    registerCard(createMoorlandInquisitor);
+    registerCard(createPacifism);
+    registerCard(createShrineKeeper);
+    registerCard(createAngelofVitality);
+    registerCard(createLoxodonLineBreaker);
+    registerCard(createLeoninWarleader);
+    registerCard(createAngelicReward);
+    registerCard(createBondofDiscipline);
+    registerCard(createConfronttheAssault);
+    registerCard(createSerraAngel);
+    registerCard(createSpiritualGuardian);
+    registerCard(createAngelicGuardian);
+    registerCard(createInspiringCommander);
+    registerCard(createGoringCeratops);
+    registerCard(createRiversFavor);
+    registerCard(createUnsummon);
+    registerCard(createWallofRunes);
+    registerCard(createZephyrGull);
+    registerCard(createCoralMerfolk);
+    registerCard(createGlint);
+    registerCard(createSwornGuardian);
+    registerCard(createWaterkinShaman);
+    registerCard(createArmoredWhirlTurtle);
+    registerCard(createCloudkinSeer);
+    registerCard(createWardenofEvosIsle);
+    registerCard(createWaterknot);
+    registerCard(createWingedWords);
+    registerCard(createOctoprophet);
+    registerCard(createSleep);
+    registerCard(createAirElemental);
+    registerCard(createSoulbladeDjinn);
+    registerCard(createWindstormDrake);
+    registerCard(createFrilledSeaSerpent);
+    registerCard(createRiddlemasterSphinx);
+    registerCard(createOverflowingInsight);
+    registerCard(createWindreaderSphinx);
+    registerCard(createCompoundFracture);
+    registerCard(createRaiseDead);
+    registerCard(createSanitariumSkeleton);
+    registerCard(createTyphoidRats);
+    registerCard(createCruelCut);
+    registerCard(createEternalThirst);
+    registerCard(createKrovikanScoundrel);
+    registerCard(createMalakirCullblade);
+    registerCard(createNimblePilferer);
+    registerCard(createUnlikelyAid);
+    registerCard(createVampireOpportunist);
+    registerCard(createMarduOutrider);
+    registerCard(createMurder);
+    registerCard(createSavageGorger);
+    registerCard(createScatheZombies);
+    registerCard(createWitchsFamiliar);
+    registerCard(createSkeletonArcher);
+    registerCard(createSengirVampire);
+    registerCard(createSoulhunterRakshasa);
+    registerCard(createBadDeal);
+    registerCard(createNightmare);
+    registerCard(createDemonofLoathing);
+    registerCard(createRagingGoblin);
+    registerCard(createShock);
+    registerCard(createStormStrike);
+    registerCard(createTinStreetCadet);
+    registerCard(createGoblinTunneler);
+    registerCard(createManiacalRage);
+    registerCard(createNestRobber);
+    registerCard(createBombard);
+    registerCard(createBurnBright);
+    registerCard(createFearlessHalberdier);
+    registerCard(createGoblinGathering);
+    registerCard(createHurloonMinotaur);
+    registerCard(createMoltenRavager);
+    registerCard(createRaidBombardment);
+    registerCard(createGoblinGangLeader);
+    registerCard(createGoblinTrashmaster);
+    registerCard(createOgreBattledriver);
+    registerCard(createImmortalPhoenix);
+    registerCard(createInescapableBlaze);
+    registerCard(createVolcanicDragon);
+    registerCard(createSiegeDragon);
+    registerCard(createChargingBadger);
+    registerCard(createJungleDelver);
+    registerCard(createStonyStrength);
+    registerCard(createFeralRoar);
+    registerCard(createGreenwoodSentinel);
+    registerCard(createIlysianCaryatid);
+    registerCard(createRabidBite);
+    registerCard(createTitanicGrowth);
+    registerCard(createTreetopWarden);
+    registerCard(createWoodlandMystic);
+    registerCard(createColossalMajesty);
+    registerCard(createGenerousStray);
+    registerCard(createWildwoodPatrol);
+    registerCard(createBalothPackhunter);
+    registerCard(createPrizedUnicorn);
+    registerCard(createRumblingBaloth);
+    registerCard(createWorldShaper);
+    registerCard(createGigantosaurus);
+    registerCard(createSentinelSpider);
+    registerCard(createEpicProportions);
+    registerCard(createRampagingBrontodon);
+    //lands
+    */
 }

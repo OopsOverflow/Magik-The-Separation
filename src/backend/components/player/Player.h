@@ -14,7 +14,7 @@
 
 class Player {
 public :
-    Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack);
+    Player(std::string name, std::shared_ptr<Stack> stack);
     ~Player();
 
     std::string getName() const;
@@ -22,7 +22,7 @@ public :
     int8_t getHp() const;   
     
     //actions
-    void draw(uint8_t numberOfCards = 1);
+    void draw();
     void summonCard(uint8_t cardNumber);
     void unTapAll();
     void takeDamage(uint8_t amount);

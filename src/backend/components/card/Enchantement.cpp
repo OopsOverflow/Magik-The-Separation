@@ -4,6 +4,14 @@
 
 #include "Enchantement.h"
 
+Enchantement::Enchantement(const std::string &name, std::unordered_map<Color, int> cost) : Card(name, cost) {
+
+}
+
+Enchantement::~Enchantement() {
+    
+}
+
 
 void Enchantement::addStaticAbility(std::function<void()> ability) {
     staticAbilities.push_back(ability);

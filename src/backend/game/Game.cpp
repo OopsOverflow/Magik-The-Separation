@@ -3,8 +3,9 @@
 //
 
 #include "Game.h"
+#include "../components/card/CardMaker.h"
 
-Game::Game() : stack(std::make_shared<Stack>()), player1("Bob", deckPlayer1, stack), player2("Henri", deckPlayer2, stack){
+Game::Game() : stack(std::make_shared<Stack>()), player1("Bob", stack), player2("Henri", stack) {
 
 }
 
@@ -164,5 +165,30 @@ void Game::resolveEvent(Event event) {
                 abilities.at(i)(event); //TODO abilities affect game
             }
         }
+    }
+}
+
+void Game::chooseCards() {
+    auto& maker = CardMaker::getInst();
+    while(player1.getLibrary()->getLenght() < 60) {
+        auto newCard = std::move(maker.create(0));
+        std::cout<<"Added " <<newCard.get()->getName()<< " to player 1"<<std::endl;
+        player1.getLibrary()->add(std::move(newCard));
+
+    }
+    while(player2.getLibrary()->getLenght() < 60) {
+        auto newCard = std::move(maker.create(0));
+        std::cout<<"Added " <<newCard.get()->getName()<< " to player 2"<<std::endl;
+        player2.getLibrary()->add(std::move(newCard));
+
+    }
+}
+
+void Game::initGame() {
+    player1.getLibrary()->shuffle();
+    player2.getLibrary()->shuffle();
+    for(int i = 0; i < 7; i += 1) {
+        player1.draw();
+        player2.draw();
     }
 }
