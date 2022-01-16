@@ -13,6 +13,9 @@ public :
     Stack();
     ~Stack();
 
+    Stack(Stack const&) = delete;
+    Stack& operator=(Stack const&) = delete;
+
     std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
     uint8_t getLenght() const;
     void add(std::unique_ptr<Card> card);

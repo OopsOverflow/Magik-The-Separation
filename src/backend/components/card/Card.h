@@ -16,7 +16,7 @@ enum class Color{WHITE, BLUE, BLACK, RED, GREEN, WBBRG};
 
 class Card {
 public:
-    Card(const std::string &name, std::unordered_map<Color, int> cost);
+    Card(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
 
     virtual const std::string &getName() const;
 
@@ -28,6 +28,7 @@ public:
 
     virtual ~Card();
 
+    uint8_t getCardUuid() const;
     uint8_t getCardId() const;
 
     virtual bool isTapped() const; //TODO (only permanent can be tapped)
@@ -38,6 +39,7 @@ private:
 
     bool tapped;
     uint8_t uuid;
+    uint8_t id;
 
     static uint8_t nextCardId;
 

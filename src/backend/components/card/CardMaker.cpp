@@ -3,6 +3,7 @@
 //
 
 #include "CardMaker.h"
+#include <iostream>
 
 
 CardMaker& CardMaker::getInst() {
@@ -15,7 +16,11 @@ int CardMaker::registerCard(Maker m) {
     return (int)(factories.size() - 1);
 }
 
-std::unique_ptr<Card> CardMaker::create(int id) {
+std::unique_ptr<Card> CardMaker::create(uint8_t id) {
+	if(id >= factories.size()) {
+		std::cout<< "Error - card out of range : " << 0 << " to "<< factories.size() - 1 << std::endl;
+		return nullptr;	
+	} 
     return factories[id]();
 }
 
@@ -24,7 +29,7 @@ std::unique_ptr<Card> CardMaker::create(int id) {
 
 std::unique_ptr<Card> createCharmedStray() {
     std::unordered_map<Color, int> cost =  {{Color::WHITE, 1}};
-	auto card = std::make_unique<Creature>("CharmedStray", cost, (uint8_t)1, (uint8_t)1);
+	auto card = std::make_unique<Creature>(0, "CharmedStray", cost, (uint8_t)1, (uint8_t)1);
 	return std::move(card);
 }
 

@@ -15,7 +15,7 @@
 
 class Enchantement : public Card {
 public :
-    Enchantement(const std::string &name, std::unordered_map<Color, int> cost);
+    Enchantement(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
     ~Enchantement();
 
     Enchantement(Enchantement const&) = delete;

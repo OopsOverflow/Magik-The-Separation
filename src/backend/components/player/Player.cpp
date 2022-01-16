@@ -10,6 +10,7 @@ Player::Player(std::string name, std::shared_ptr<Stack> stack)
 :   name(name), id(newId), hp(20), canCastInstant(false),
     library(), graveyard(), hand(), battlefield(), stack(std::move(stack)) {
     newId += 1;
+    std::cout<<"Player "<<name<<" created"<<std::endl;
 }
 
 
@@ -49,7 +50,9 @@ void Player::draw() {
     if(library.getLenght() <= 1){
         hp = 0;
     }else {
-        hand.add(std::move(library.getTopCard()));
+        auto card = std::move(library.getTopCard());
+        std::cout<<"Drawed "<< card.get()->getName()<< std::endl;
+        hand.add(std::move(card));
     }    
 }
 

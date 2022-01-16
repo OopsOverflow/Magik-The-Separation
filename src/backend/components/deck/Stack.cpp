@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 Stack::Stack() {
-
+    std::cout<<"Stack created"<<std::endl;
 }
 
 Stack::~Stack() {

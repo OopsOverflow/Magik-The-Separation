@@ -41,3 +41,15 @@ std::unique_ptr<Card> Library::getTopCard() {
 uint8_t Library::getLenght() const {
     return (uint8_t)stack.size();
 }
+
+void Library::add(std::unique_ptr<Card> card) {
+    std::cout<<"Added " <<card.get()->getName()<< " to library"<<std::endl;
+    stack.push_back(std::move(card));
+}
+
+std::vector<Card*> Library::getCards() {
+    std::vector<Card*> result;
+    for(auto const& card : stack)
+        result.push_back(card.get());
+    return result;
+}

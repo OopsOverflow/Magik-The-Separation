@@ -22,7 +22,7 @@ public :
     virtual void add(std::unique_ptr<Card> card);
     virtual uint8_t getLenght() const;
 
-    CardType getCardType(Card* card);
+    static CardType getCardType(Card* card);
     virtual std::unique_ptr<Card> popCard(uint8_t cardId);
 
     virtual ~Deck() = default;

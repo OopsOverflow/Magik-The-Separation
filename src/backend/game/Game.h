@@ -28,11 +28,13 @@ public :
     void initGame();
 
 private : 
+    //Be careful ! Order is important for initialisation
+    std::shared_ptr<Stack> stack;
     
     Player player1;
     Player player2;
 
-    std::shared_ptr<Stack> stack;
+
 
     Player* playerToPlay;
     Player* opponent;

@@ -4,14 +4,38 @@
 #include <thread>
 #include <asio/io_service.hpp>
 
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <functional>
+
+#include "game/Game.h"
+
 //The port number the WebSocket server listens on
 #define PORT_NUMBER 3030
 
 int main(int argc, char* argv[])
 {
+    std::cout<<"---Launching"<<std::endl;
+    srand((unsigned int)time(nullptr));
+    Game game;
+
+    std::cout<<"---Choosing Cards"<<std::endl;    
+    game.chooseCards();
+    std::cout<<"---Initialising Game"<<std::endl;  
+    game.initGame();
+
+    std::cout<<"---Launching Battle"<<std::endl;  
+    while(true){
+        game.solvePhase();
+        
+    }
+        return 0;
     //Create the event loop for the main thread, and the WebSocket server
     asio::io_service mainEventLoop;
     WebsocketServer server;
+
+
 
     //Register our network callbacks, ensuring the logic is run on the main thread's event loop
     server.connect([&mainEventLoop, &server](ClientConnection conn){
@@ -23,6 +47,7 @@ int main(int argc, char* argv[])
           server.sendMessage(conn, "hello", Json::Value());
        });
     });
+    
     server.disconnect([&mainEventLoop, &server](ClientConnection conn){
       mainEventLoop.post([conn, &server](){
          std::clog << "Connection closed." << std::endl;
@@ -66,8 +91,14 @@ int main(int argc, char* argv[])
         }
     });
 
+
+
+
     //Start the event loop for the main thread
     asio::io_service::work work(mainEventLoop);
+    
+
+
     mainEventLoop.run();
 
     return 0;

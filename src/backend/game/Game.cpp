@@ -5,8 +5,10 @@
 #include "Game.h"
 #include "../components/card/CardMaker.h"
 
-Game::Game() : stack(std::make_shared<Stack>()), player1("Bob", stack), player2("Henri", stack) {
+#include <algorithm>
 
+Game::Game() : stack(std::make_shared<Stack>()), player1("Bob", stack), player2("Henri", stack) {
+    std::cout<<"Game instance created"<<std::endl;
 }
 
 Game::~Game() {
@@ -171,15 +173,55 @@ void Game::resolveEvent(Event event) {
 void Game::chooseCards() {
     auto& maker = CardMaker::getInst();
     while(player1.getLibrary()->getLenght() < 60) {
+
         auto newCard = std::move(maker.create(0));
-        std::cout<<"Added " <<newCard.get()->getName()<< " to player 1"<<std::endl;
+        std::cout<<"Player 1 - ";
         player1.getLibrary()->add(std::move(newCard));
+        
+        // std::unique_ptr<Card> newCard = nullptr;
+        // while(newCard == nullptr) {
+        //     int id;
+        //     std::cout<<"Enter card id to add : ";
+        //     std::cin>>id;
+        //     newCard = std::move(maker.create((uint8_t)id));
+        // } 
+        // auto cards = player1.getLibrary()->getCards();
+        // int freq = std::count_if(cards.begin(), cards.end(),
+        //     [&](Card* i) {
+        //         return (i->getCardId() == newCard.get()->getCardId());
+        //     });
+        
+        // if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
+        //     std::cout<< "Error - already 4 occurence of this card in your deck"<<std::endl;
+        // }else {
+        //     player1.getLibrary()->add(std::move(newCard));
+        // }
 
     }
     while(player2.getLibrary()->getLenght() < 60) {
         auto newCard = std::move(maker.create(0));
-        std::cout<<"Added " <<newCard.get()->getName()<< " to player 2"<<std::endl;
+        std::cout<<"Player 2 - ";
         player2.getLibrary()->add(std::move(newCard));
+        
+        // std::unique_ptr<Card> newCard = nullptr;
+        // while(newCard == nullptr) {
+        //     int id;
+        //     std::cout<<"Enter card id to add : ";
+        //     std::cin>>id;
+        //     newCard = std::move(maker.create((uint8_t)id));
+        // } 
+        // auto cards = player2.getLibrary()->getCards();
+        // int freq = std::count_if(cards.begin(), cards.end(),
+        //     [&](Card* i) {
+        //         return (i->getCardId() == newCard.get()->getCardId());
+        //     });
+        
+        // if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
+        //     std::cout<< "Error - already 4 occurence of this card in your deck"<<std::endl;
+        // }else {
+        //     std::cout<<"Added " <<newCard.get()->getName()<< " to player 2"<<std::endl;
+        //     player2.getLibrary()->add(std::move(newCard));
+        // }
 
     }
 }
@@ -188,7 +230,9 @@ void Game::initGame() {
     player1.getLibrary()->shuffle();
     player2.getLibrary()->shuffle();
     for(int i = 0; i < 7; i += 1) {
+        std::cout<<"Player 1 - ";
         player1.draw();
+        std::cout<<"Player 2 - ";
         player2.draw();
     }
 }

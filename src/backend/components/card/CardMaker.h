@@ -23,7 +23,7 @@ public:
     static CardMaker& getInst();
 
     int registerCard(Maker m);    
-    std::unique_ptr<Card> create(int id);
+    std::unique_ptr<Card> create(uint8_t id);
     
 private:
     CardMaker();
