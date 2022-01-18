@@ -45,3 +45,18 @@ uint8_t Card::getCardUuid() const {
 uint8_t Card::getCardId() const {
     return id;
 }
+
+bool Card::isAffordable(std::vector<Color> availableMana) {
+    bool isAffordable = true; //TODO allow WBBRG
+    for(auto colorCost : cost) {
+        for(int j = 0; j < colorCost.second; j += 1) {
+            auto it = std::find(availableMana.begin(), availableMana.end(), colorCost.first);
+            if (it != availableMana.end())
+                availableMana.erase(it);
+            else
+                isAffordable = false;
+        }
+    }
+    return isAffordable;
+
+}

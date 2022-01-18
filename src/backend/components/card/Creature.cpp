@@ -35,23 +35,23 @@ int8_t Creature::getTempThougness() const {
     return tempThougness;
 }
 
-void Creature::addStaticAbility(std::function<void()> ability) {
-    staticAbilities.push_back(ability);
-}
+// void Creature::addStaticAbility(std::function<void()> ability) {
+//     staticAbilities.push_back(ability);
+// }
 
-void Creature::addActivatedAbility(std::function<void()> ability) {
-    activatedAbilities.push_back(ability);
-}
+// void Creature::addActivatedAbility(std::function<void()> ability) {
+//     activatedAbilities.push_back(ability);
+// }
 
-void Creature::addTriggeredAbility(std::function<void(Event)> ability) {
-    triggeredAbilities.push_back(ability);
-}
+// void Creature::addTriggeredAbility(std::function<void(Event)> ability) {
+//     triggeredAbilities.push_back(ability);
+// }
 
-std::vector<std::function<void(Event)> > Creature::getTriggerAbilities() const {
+std::vector<TriggeredAbility > Creature::getTriggerAbilities() const {
     return triggeredAbilities;
 }
 
-std::vector<std::function<void()> > Creature::getActivatedAbilities() const {
+std::vector<ActivatedAbility > Creature::getActivatedAbilities() const {
     return activatedAbilities;
 }
 

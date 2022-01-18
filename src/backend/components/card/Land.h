@@ -9,11 +9,15 @@
 
 class Land : public Card {
 public : 
-    Land(uint8_t id, const std::string &name);
+    Land(uint8_t id, const std::string &name, Color color);
     ~Land();
 
     Land(Land const&) = delete;
     Land& operator=(Land const&) = delete;
+
+    Color getColor() const;
+private : 
+    Color color;
 };
 
 

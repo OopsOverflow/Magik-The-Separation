@@ -5,16 +5,14 @@
 #ifndef MAGIK_ABILITY_H
 #define MAGIK_ABILITY_H
 #include "string"
-
-class Ability {
+#include "../card/Card.h"
+class Ability : public Card {
 public :
-    Ability(std::string name, std::string reminderText = "", std::string flavorText = "");
-    std::string getName() const;
+    Ability(uint8_t id, std::string name, std::unordered_map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
     std::string getReminderText() const;
     std::string getFlavorText() const;
 
 private :
-    std::string name;
     std::string reminderText;
     std::string flavorText;
 };

@@ -25,13 +25,14 @@ public:
     virtual const std::unordered_map<Color, int> &getCost() const;
 
     virtual void setCost(const std::unordered_map<Color, int> &cost);
+    bool isAffordable(std::vector<Color> availableMana);
 
     virtual ~Card();
 
     uint8_t getCardUuid() const;
     uint8_t getCardId() const;
 
-    virtual bool isTapped() const; //TODO (only permanent can be tapped)
+    bool isTapped() const; //TODO (only permanent can be tapped)
     void unTap();
 private:
     std::string name;

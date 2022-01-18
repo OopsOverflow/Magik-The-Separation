@@ -5,6 +5,9 @@
 #include "CardMaker.h"
 #include <iostream>
 
+#include "Creature.h"
+#include "Land.h"
+
 
 CardMaker& CardMaker::getInst() {
     static CardMaker inst;
@@ -568,32 +571,33 @@ std::unique_ptr<Card> createRampagingBrontodon() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
 }
-
+*/
 std::unique_ptr<Card> createPlains() {
-	auto card = std::make_unique<Creature>();
+	auto card = std::make_unique<Land>(1, "Plains", Color::WHITE);
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createIsland() {
-	auto card = std::make_unique<Creature>();
+	auto card = std::make_unique<Land>(2, "Island", Color::BLUE);
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createSwamp() {
-	auto card = std::make_unique<Creature>();
+	auto card = std::make_unique<Land>(3, "Swamp", Color::BLACK);
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createMountain() {
-	auto card = std::make_unique<Creature>();
+	auto card = std::make_unique<Land>(4, "Mountain", Color::RED);
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createForest() {
-	auto card = std::make_unique<Creature>();
+	auto card = std::make_unique<Land>(5, "Forest", Color::GREEN);
 	return std::move(card);
 }
 
+/*
 std::unique_ptr<Card> createCat() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
@@ -719,7 +723,12 @@ CardMaker::CardMaker() {
     registerCard(createGigantosaurus);
     registerCard(createSentinelSpider);
     registerCard(createEpicProportions);
-    registerCard(createRampagingBrontodon);
+    registerCard(createRampagingBrontodon);*/
     //lands
-    */
+	registerCard(createPlains);
+    registerCard(createIsland);
+	registerCard(createSwamp);
+    registerCard(createMountain);
+	registerCard(createForest);
+
 }

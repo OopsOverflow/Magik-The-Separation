@@ -34,12 +34,12 @@ public :
 
     int8_t getTempThougness() const;
 
-    void addStaticAbility(std::function<void()> ability);
-    void addActivatedAbility(std::function<void()> ability);
-    void addTriggeredAbility(std::function<void(Event)> ability);
+    // void addStaticAbility(std::function<void()> ability);
+    // void addActivatedAbility(std::function<void()> ability);
+    // void addTriggeredAbility(std::function<void(Event)> ability);
 
-    std::vector<std::function<void(Event)> > getTriggerAbilities() const;
-    std::vector<std::function<void()> > getActivatedAbilities() const;
+    std::vector<TriggeredAbility > getTriggerAbilities() const;
+    std::vector<ActivatedAbility > getActivatedAbilities() const;
 
     std::vector<Enchantement*> getAttachedCards();
     void attachCard(std::unique_ptr<Enchantement> card);
@@ -50,9 +50,9 @@ private :
 
     int8_t tempThougness;
 
-    std::vector<std::function<void()> > staticAbilities;
-    std::vector<std::function<void()> > activatedAbilities;
-    std::vector<std::function<void(Event)> > triggeredAbilities;
+    std::vector<StaticAbility > staticAbilities;//TODO uniqueptr
+    std::vector<ActivatedAbility > activatedAbilities;
+    std::vector<TriggeredAbility > triggeredAbilities;
 
     std::vector<std::unique_ptr<Enchantement> > attachedEnchantments;
 };

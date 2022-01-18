@@ -10,8 +10,8 @@
 #include <vector>
 #include <functional>
 
-#include "Creature.h"
 
+#include "Card.h"
 
 
 class CardMaker {

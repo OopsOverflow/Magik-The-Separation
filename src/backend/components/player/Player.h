@@ -25,8 +25,8 @@ public :
     void draw();
     void unTapAll();
     void takeDamage(uint8_t amount);
-
-    bool castSpellOrAbility();
+    std::string seekCardName(uint8_t id);
+    std::unique_ptr<Card> playCard(uint8_t id);
 
     Battlefield* getBattlefield();
     Hand* getHand();
@@ -40,6 +40,8 @@ public :
     std::vector<std::vector<Creature*> > getBlockingCards();
 
     void killCard(Card* cardToKill);
+    std::vector<uint8_t> getCastableInstantsOrAbilities();
+    std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
 
 private :
     std::string name;
@@ -56,10 +58,11 @@ private :
 
     static uint64_t newId;
 
-    std::shared_ptr<Stack> stack;
-
     std::vector<Creature*> attackingCards;
     std::vector<std::vector<Creature*> > blockingCards;
+
+    
+    
 
 };
 

@@ -9,7 +9,7 @@ GameAction& GameAction::getInst() {
     return gameAction;
 }
 
-GameAction::GameAction() : phase(Phase::UPKEEP_STEP), turn(1), hasPlayedLand(false) {
+GameAction::GameAction() : phase(Phase::UNTAP_STEP), turn(1), hasPlayedLand(false) {
 
 }
 

@@ -11,50 +11,45 @@ Hand::Hand() : lands(){
 Hand::~Hand() {
 }
 
-// std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
-//     for(int i = 0; i < creatures.size(); i += 1) {
-//         if(creatures.at(i).get()->getCardId() == cardId) {
-//             std::unique_ptr<Card> ptr = std::move(creatures.at(i));
-//             creatures.erase(creatures.begin() + i);
-//             return ptr;
-//         }
-//     }
+std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
+    for(int i = 0; i < creatures.size(); i += 1)
+        if(creatures.at(i)->getCardUuid() == cardId) {
+            std::unique_ptr<Card> card = std::move(creatures.at(i));
+            creatures.erase(creatures.begin() + i);
+            return std::move(card);
+        }
+            
+    for(int i = 0; i < lands.size(); i += 1)
+        if(lands.at(i)->getCardUuid() == cardId) {
+            std::unique_ptr<Card> card = std::move(lands.at(i));
+            lands.erase(lands.begin() + i);
+            return std::move(card);
+        }
+
+    for(int i = 0; i < instants.size(); i += 1)
+        if(instants.at(i)->getCardUuid() == cardId) {
+            std::unique_ptr<Card> card = std::move(instants.at(i));
+            instants.erase(instants.begin() + i);
+            return std::move(card);
+        }
         
-//     for(int i = 0; i < lands.size(); i += 1) {
-//         if(lands.at(i).get()->getCardId() == cardId) {
-//             std::unique_ptr<Card> ptr = std::move(lands.at(i));
-//             lands.erase(lands.begin() + i);
-//             return ptr;
-//         }
-//     }
+    for(int i = 0; i < enchantements.size(); i += 1)
+        if(enchantements.at(i)->getCardUuid() == cardId) {
+            std::unique_ptr<Card> card = std::move(enchantements.at(i));
+            enchantements.erase(enchantements.begin() + i);
+            return std::move(card);
+        }
     
-//     for(int i = 0; i < enchantements.size(); i += 1) {
-//         if(enchantements.at(i).get()->getCardId() == cardId) {
-//             std::unique_ptr<Card> ptr = std::move(enchantements.at(i));
-//             enchantements.erase(enchantements.begin() + i);
-//             return ptr;
-//         }
-//     }
+    for(int i = 0; i < sorceries.size(); i += 1)
+        if(sorceries.at(i)->getCardUuid() == cardId) {
+            std::unique_ptr<Card> card = std::move(sorceries.at(i));
+            sorceries.erase(sorceries.begin() + i);
+            return std::move(card);
+        }
 
-//     for(int i = 0; i < instants.size(); i += 1) {
-//         if(instants.at(i).get()->getCardId() == cardId) {
-//             std::unique_ptr<Card> ptr = std::move(instants.at(i));
-//             instants.erase(instants.begin() + i);
-//             return ptr;
-//         }
-//     }
+    return nullptr;
+}
 
-//     for(int i = 0; i < sorceries.size(); i += 1) {
-//         if(sorceries.at(i).get()->getCardId() == cardId) {
-//             std::unique_ptr<Card> ptr = std::move(sorceries.at(i));
-//             sorceries.erase(sorceries.begin() + i);
-//             return ptr;
-//         }
-//     }
-
-//     std::cout<< "Error - no card was found in Hand"<< std::endl;
-//     return nullptr;  
-// }
 
 uint8_t Hand::getLength() const {
     return (uint8_t)(creatures.size() + sorceries.size() 

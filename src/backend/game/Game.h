@@ -27,6 +27,7 @@ public :
     void chooseCards();
     void initGame();
 
+
 private : 
     //Be careful ! Order is important for initialisation
     std::shared_ptr<Stack> stack;

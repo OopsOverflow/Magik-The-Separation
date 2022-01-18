@@ -14,6 +14,7 @@ public :
     ~Hand();
 
     uint8_t getLength() const;
+    std::unique_ptr<Card> popCard(uint8_t cardId);
 
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();

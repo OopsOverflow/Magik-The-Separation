@@ -4,13 +4,9 @@
 
 #include "Ability.h"
 
-Ability::Ability(std::string name, std::string reminderText, std::string flavorText) : 
-    name(name), reminderText(reminderText), flavorText(flavorText) {
+Ability::Ability(uint8_t id, std::string name, std::unordered_map<Color, int> cost, std::string reminderText, std::string flavorText) : Card(id, name, cost), 
+     reminderText(reminderText), flavorText(flavorText) {
 
-}
-
-std::string Ability::getName() const {
-    return name;
 }
 
 std::string Ability::getReminderText() const {
