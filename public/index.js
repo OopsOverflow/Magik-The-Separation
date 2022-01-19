@@ -1,3 +1,4 @@
+
 function SocketWrapper(init)
 {
     this.socket = new SimpleWebsocket(init);
