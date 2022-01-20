@@ -27,6 +27,8 @@ public :
     void chooseCards();
     void initGame();
 
+    bool castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed = true);
+    void solveStack();
 
 private : 
     //Be careful ! Order is important for initialisation

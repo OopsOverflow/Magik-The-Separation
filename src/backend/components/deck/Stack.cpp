@@ -13,27 +13,23 @@ Stack::~Stack() {
 
 }
 
-std::unique_ptr<Card> Stack::getTopCard() {
-    std::unique_ptr<Card> ptr = std::move(stack.at(stack.size() - 1));
+std::pair<std::unique_ptr<Card>, Player*> Stack::getTopPair() {
+    std::pair<std::unique_ptr<Card>, Player*> result = {std::move(stack.at(stack.size() - 1).first), stack.at(stack.size() - 1).second};
     stack.pop_back();
-    return ptr;
+    return result;
 }
 
 uint8_t Stack::getLength() const {
     return (uint8_t)stack.size();
 }
 
-void Stack::add(std::unique_ptr<Card> card) {
-    stack.push_back(std::move(card));
-}
-
-void Stack::solve() {
-    
+void Stack::add(std::pair<std::unique_ptr<Card>, Player*> card) {
+    stack.push_back({std::move(card.first), card.second});
 }
 
 void Stack::display() {
     std::cout<<"---Stack "<<std::endl;
     for(int i = 0; i< getLength(); i += 1) {
-        std::cout<< i << " - " << stack.at(i).get()->getName()<< std::endl;
+        std::cout<< stack.at(i).second->getName() << " - " << stack.at(i).first.get()->getName()<< std::endl;
     }
 }

@@ -4,17 +4,16 @@
 
 #ifndef MAGIK_PLAYER_H
 #define MAGIK_PLAYER_H
-#include "string"
+#include <string>
 #include "../deck/Battlefield.h"
 #include "../deck/Graveyard.h"
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
-#include "../deck/Stack.h"
 #include "../card/Creature.h"
 
 class Player {
 public :
-    Player(std::string name, std::shared_ptr<Stack> stack);
+    Player(std::string name);
     ~Player();
 
     std::string getName() const;
@@ -25,7 +24,7 @@ public :
     void draw();
     void unTapAll();
     void takeDamage(uint8_t amount);
-    std::string seekCardName(uint8_t id);
+    Card* seekCard(uint8_t id);
     std::unique_ptr<Card> playCard(uint8_t id);
 
     Battlefield* getBattlefield();
@@ -33,15 +32,15 @@ public :
     Graveyard* getGraveyard();
     Library* getLibrary();
 
-    void setAttackingCards();
-    std::vector<Creature*> getAttackingCards();
-
-    void setBlockingCards(std::vector<Creature*> attackingCards);
-    std::vector<std::vector<Creature*> > getBlockingCards();
-
     void killCard(Card* cardToKill);
     std::vector<uint8_t> getCastableInstantsOrAbilities();
     std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
+
+    void setAttackingCreatures();
+    std::vector<uint8_t> getAttackingCreatures();
+
+    void setBlockingCreatures(std::vector<Creature *> attacking);
+    std::vector<std::vector<uint8_t> > getBlockingCreatures();
 
 private :
     std::string name;
@@ -58,8 +57,8 @@ private :
 
     static uint64_t newId;
 
-    std::vector<Creature*> attackingCards;
-    std::vector<std::vector<Creature*> > blockingCards;
+    std::vector<uint8_t> attackingCreatures;
+    std::vector<std::vector<uint8_t> > blockingCreatures;
 
     
     
