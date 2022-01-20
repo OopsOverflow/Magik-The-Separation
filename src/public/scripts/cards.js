@@ -3,7 +3,7 @@
 // Loading sets
 var _ = require('lodash'),
     fs = require('fs'),
-    sets = require('../database/mtg.json'),
+    sets = require('../database/sets.json'),
     numbers = require('../database/numbers.json');
 
 // Main Loop

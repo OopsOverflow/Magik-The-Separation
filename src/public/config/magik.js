@@ -4,7 +4,6 @@
 module.exports = {
 
   // Language
-  // WIP: does not work correctly
   lang: 'en',
 
   // Available drivers:

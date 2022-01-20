@@ -2,7 +2,7 @@
 
 // Loading sets
 var fs = require('fs'),
-    sets = require('../database/mtg.json');
+    sets = require('../database/sets.json');
 
 var blacklist = [
   'DKM',

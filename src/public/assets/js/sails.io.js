@@ -144,7 +144,6 @@
         }
       }
 
-      // TODO: Handle errors more effectively
       if (parsedResult === 404) throw new Error("404: Not found");
       if (parsedResult === 403) throw new Error("403: Forbidden");
       if (parsedResult === 500) throw new Error("500: Server error");

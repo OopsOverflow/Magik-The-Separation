@@ -19,6 +19,7 @@ std::unique_ptr<Card> Stack::getTopCard() {
     return ptr;
 }
 
+
 Card* Stack::getCard(uint8_t cardNum) {
     return stack.top().get();
 }
