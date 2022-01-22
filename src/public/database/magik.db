@@ -1,0 +1,161 @@
+{
+  "data": {
+    "deck": [
+      {
+        "user_id": 1,
+        "name": "ddd",
+        "cards": [
+          93,
+          276,
+          92,
+          47,
+          46,
+          275,
+          231,
+          181,
+          229,
+          180,
+          136,
+          287,
+          133,
+          228,
+          277,
+          271,
+          177,
+          285,
+          176,
+          132,
+          174,
+          277,
+          224,
+          284
+        ],
+        "createdAt": "2022-01-13T02:10:45.841Z",
+        "updatedAt": "2022-01-13T02:10:45.841Z",
+        "id": 1
+      },
+      {
+        "user_id": 2,
+        "name": "dda",
+        "cards": [
+          null,
+          null,
+          null,
+          null,
+          92,
+          276,
+          274,
+          182,
+          227,
+          287,
+          136,
+          230,
+          88,
+          228,
+          132,
+          176,
+          285,
+          130,
+          44,
+          285,
+          176,
+          277
+        ],
+        "createdAt": "2022-01-13T12:10:26.770Z",
+        "updatedAt": "2022-01-13T12:10:26.770Z",
+        "id": 2
+      },
+      {
+        "user_id": 1,
+        "name": "AAAA",
+        "cards": [
+          686,
+          779,
+          735,
+          685,
+          776,
+          870,
+          732,
+          773,
+          729,
+          886,
+          733,
+          827
+        ],
+        "createdAt": "2022-01-16T11:08:11.561Z",
+        "updatedAt": "2022-01-16T11:08:11.561Z",
+        "id": 3
+      }
+    ],
+    "user": [
+      {
+        "username": "hm",
+        "password": "test",
+        "createdAt": "2022-01-13T02:06:08.861Z",
+        "updatedAt": "2022-01-13T02:06:08.861Z",
+        "id": 1
+      },
+      {
+        "username": "marcel",
+        "password": "test",
+        "createdAt": "2022-01-13T11:58:26.375Z",
+        "updatedAt": "2022-01-13T11:58:26.375Z",
+        "id": 2
+      }
+    ]
+  },
+  "schema": {
+    "deck": {
+      "cards": {
+        "type": "array"
+      },
+      "name": {
+        "type": "string"
+      },
+      "user_id": {
+        "type": "integer"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "username": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string",
+        "defaultsTo": "test"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "deck": {
+      "id": 3
+    },
+    "user": {
+      "id": 2
+    }
+  }
+}
