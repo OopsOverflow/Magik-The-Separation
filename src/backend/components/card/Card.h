@@ -7,6 +7,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 // Suckless
 typedef uint8_t sint;
@@ -19,12 +20,8 @@ public:
     Card(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
 
     virtual const std::string &getName() const;
-
-    virtual void setName(const std::string &name);
-
     virtual const std::unordered_map<Color, int> &getCost() const;
 
-    virtual void setCost(const std::unordered_map<Color, int> &cost);
     bool isAffordable(std::vector<Color> availableMana);
 
     virtual ~Card();

@@ -32,7 +32,7 @@ public :
     void block(Creature* attacker);
     void takeDamage(uint8_t damages);
 
-    int8_t getTempThougness() const;
+    int8_t getTempDamages() const;
 
     // void addStaticAbility(std::function<void()> ability);
     // void addActivatedAbility(std::function<void()> ability);
@@ -48,7 +48,7 @@ private :
     uint8_t power;
     uint8_t thougness;
 
-    int8_t tempThougness;
+    int8_t tempDamages;
 
     std::vector<StaticAbility > staticAbilities;//TODO uniqueptr
     std::vector<ActivatedAbility > activatedAbilities;

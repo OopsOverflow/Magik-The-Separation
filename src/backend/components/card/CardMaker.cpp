@@ -32,7 +32,7 @@ std::unique_ptr<Card> CardMaker::create(uint8_t id) {
 
 std::unique_ptr<Card> createCharmedStray() {
     std::unordered_map<Color, int> cost =  {{Color::WHITE, 1}};
-	auto card = std::make_unique<Creature>(0, "CharmedStray", cost, (uint8_t)1, (uint8_t)1);
+	std::unique_ptr<Creature> card (new Creature(0, "CharmedStray", cost, 1, 1));
 	return std::move(card);
 }
 
@@ -573,27 +573,27 @@ std::unique_ptr<Card> createRampagingBrontodon() {
 }
 */
 std::unique_ptr<Card> createPlains() {
-	auto card = std::make_unique<Land>(1, "Plains", Color::WHITE);
+	std::unique_ptr<Land> card (new Land(1, "Plains", Color::WHITE));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createIsland() {
-	auto card = std::make_unique<Land>(2, "Island", Color::BLUE);
+	std::unique_ptr<Land> card (new Land(1, "Plains", Color::BLUE));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createSwamp() {
-	auto card = std::make_unique<Land>(3, "Swamp", Color::BLACK);
+	std::unique_ptr<Land> card (new Land(1, "Plains", Color::BLACK));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createMountain() {
-	auto card = std::make_unique<Land>(4, "Mountain", Color::RED);
+	std::unique_ptr<Land> card (new Land(1, "Plains", Color::RED));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createForest() {
-	auto card = std::make_unique<Land>(5, "Forest", Color::GREEN);
+	std::unique_ptr<Land> card (new Land(1, "Plains", Color::GREEN));
 	return std::move(card);
 }
 

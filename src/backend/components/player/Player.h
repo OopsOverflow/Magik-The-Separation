@@ -32,7 +32,7 @@ public :
     Graveyard* getGraveyard();
     Library* getLibrary();
 
-    void killCard(Card* cardToKill);
+    void killCard(int id);
     std::vector<uint8_t> getCastableInstantsOrAbilities();
     std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
 
@@ -40,7 +40,7 @@ public :
     std::vector<uint8_t> getAttackingCreatures();
 
     void setBlockingCreatures(std::vector<Creature *> attacking);
-    std::vector<std::vector<uint8_t> > getBlockingCreatures();
+    std::vector<std::vector<uint8_t> > getBlockingCreatures();//TODO go on battlefield
 
 private :
     std::string name;
@@ -51,9 +51,6 @@ private :
     Hand hand;
     Graveyard graveyard;
     Library library;
-
-
-    bool canCastInstant;
 
     static uint64_t newId;
 

@@ -14,7 +14,9 @@ public :
     ~Hand();
 
     uint8_t getLength() const;
+
     std::unique_ptr<Card> popCard(uint8_t cardId);
+    void add(std::unique_ptr<Card> card);
 
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();
@@ -27,8 +29,6 @@ public :
     std::unique_ptr<Sorcery> summonSorcery(uint8_t id);
     std::unique_ptr<Enchantement> summonEnchantement(uint8_t id);
     std::unique_ptr<Instant> summonInstant(uint8_t id);
-
-    void add(std::unique_ptr<Card> card);
 
 private : 
     std::vector<std::unique_ptr<Creature> > creatures;

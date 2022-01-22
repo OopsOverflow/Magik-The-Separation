@@ -9,10 +9,6 @@ Deck::Deck() {
 
 }
 
-void Deck::add(std::unique_ptr<Card> card) {
-    std::runtime_error("add - virtual class was not override"); 
-}
-
 CardType Deck::getCardType(Card* card) {
     if(dynamic_cast<Creature*> (card)) return CardType::CREATURE;
     if(dynamic_cast<Enchantement*> (card)) return CardType::ENCHANTEMENT;
@@ -21,14 +17,4 @@ CardType Deck::getCardType(Card* card) {
     if(dynamic_cast<Sorcery*> (card)) return CardType::SORCERY;
 
     std::runtime_error("no type was found");
-}
-
-std::unique_ptr<Card> Deck::popCard(uint8_t cardId) {
-    std::runtime_error("getCardType - virtual class was not override"); 
-    return nullptr;
-}
-
-uint8_t Deck::getLength() const {
-    std::runtime_error("getLength - virtual class was not override"); 
-    return 0;
 }

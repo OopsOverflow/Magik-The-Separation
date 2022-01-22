@@ -13,14 +13,14 @@ Battlefield::~Battlefield() {
 }
 
 std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
-    for(int i = 0; i < creatures.size(); i += 1) {
+    for(size_t i = 0; i < creatures.size(); i += 1) {
         if(creatures.at(i).get()->getCardId() == cardId) {
             std::unique_ptr<Card> ptr = std::move(creatures.at(i));
             creatures.erase(creatures.begin() + i);
             return ptr;
         }
 
-        for(int j = 0; i<creatures.at(i)->getAttachedCards().size(); j += 1) {
+        for(size_t j = 0; i<creatures.at(i)->getAttachedCards().size(); j += 1) {
             if(creatures.at(i).get()->getAttachedCards().at(j)->getCardId() == cardId) {
                 std::unique_ptr<Card> ptr(creatures.at(i)->getAttachedCards().at(j));        //TODO Wip DO NOT WORK
                 creatures.at(i)->getAttachedCards().erase(creatures.at(i)->getAttachedCards().begin() + i);
@@ -30,7 +30,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
         }
     }
         
-    for(int i = 0; i < lands.size(); i += 1) {
+    for(size_t i = 0; i < lands.size(); i += 1) {
         if(lands.at(i).get()->getCardId() == cardId) {
             std::unique_ptr<Card> ptr = std::move(lands.at(cardId));
             lands.erase(lands.begin() + i);
@@ -44,7 +44,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
 
 Card* Battlefield::getCard(uint8_t cardId) {
     for(auto const& card : creatures)
-        if(card.get()->getCardId() == cardId) return card.get();
+        if(card.get()->getCardId() == cardId) return card.get(); //TODO add enchants
     for(auto const& card : lands)
         if(card.get()->getCardId() == cardId) return card.get();
     
@@ -53,13 +53,8 @@ Card* Battlefield::getCard(uint8_t cardId) {
 }
 
 uint8_t Battlefield::getLength() const {
-    return (uint8_t) creatures.size() + lands.size();
+    return (uint8_t)(creatures.size() + lands.size());
 }
-
-void Battlefield::unTap(uint8_t cardNum){
-    getCard(cardNum)->unTap();
-}    
-
 
 void Battlefield::add(std::unique_ptr<Card> card) {
     Card* cardToAdd = card.get();
@@ -113,7 +108,7 @@ std::vector<Creature*> Battlefield::getCreatures() {
 
 std::vector<Land*> Battlefield::getLands() {
     std::vector<Land*> result;
-    for(int i = 0; i < lands.size(); i += 1)
+    for(size_t i = 0; i < lands.size(); i += 1)
         result.push_back(lands.at(i).get());
     return result;
 }

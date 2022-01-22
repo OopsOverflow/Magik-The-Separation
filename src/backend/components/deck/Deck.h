@@ -19,11 +19,8 @@ class Deck {
 public :
     Deck();
 
-    virtual void add(std::unique_ptr<Card> card);
-    virtual uint8_t getLength() const;
-
+    virtual uint8_t getLength() const=0;
     static CardType getCardType(Card* card);
-    virtual std::unique_ptr<Card> popCard(uint8_t cardId);
 
     virtual ~Deck() = default;
 };

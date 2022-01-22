@@ -21,16 +21,18 @@ public :
     Player* getPlayer2();
 
     void solvePhase();
+    void chooseCards();
+    void initGame();
+
+private : 
     void endOfPhase();
 
     void resolveEvent(Event event);
-    void chooseCards();
-    void initGame();
+
 
     bool castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed = true);
     void solveStack();
 
-private : 
     //Be careful ! Order is important for initialisation
     std::shared_ptr<Stack> stack;
     

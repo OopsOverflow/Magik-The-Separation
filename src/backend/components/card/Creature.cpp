@@ -23,16 +23,16 @@ uint8_t Creature::getThougness() const {
 }
 
 void Creature::block(Creature* attacker) { //TODO add more complex interractions
-    tempThougness -= attacker->getPower();
+    tempDamages -= attacker->getPower();
     attacker->takeDamage(power);
 }
 
 void Creature::takeDamage(uint8_t damages) {
-    tempThougness -= damages;
+    tempDamages -= damages;
 }
 
-int8_t Creature::getTempThougness() const {
-    return tempThougness;
+int8_t Creature::getTempDamages() const {
+    return tempDamages;
 }
 
 // void Creature::addStaticAbility(std::function<void()> ability) {

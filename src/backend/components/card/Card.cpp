@@ -18,16 +18,8 @@ const std::string &Card::getName() const {
     return name;
 }
 
-void Card::setName(const std::string &name) {
-    Card::name = name;
-}
-
 const std::unordered_map<Color, int> &Card::getCost() const {
     return cost;
-}
-
-void Card::setCost(const std::unordered_map<Color, int> &cost) {
-    Card::cost = cost;
 }
 
 bool Card::isTapped() const {

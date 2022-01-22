@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-Game::Game() : stack(std::make_shared<Stack>()), player1("Bob"), player2("Henri"), playerToPlay(&player1), opponent(&player2) {
+Game::Game() : stack(new Stack()), player1("Bob"), player2("Henri"), playerToPlay(&player1), opponent(&player2) {
     std::cout<<"Game instance created"<<std::endl;
 }
 
@@ -384,7 +384,7 @@ void Game::solvePhase() {
         std::cout<<"Cleanup Step"<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
             Card* chosenOne;
-            playerToPlay->killCard(chosenOne);
+            playerToPlay->killCard(chosenOne->getCardUuid());
         }
         action.nextPhase();
         break;

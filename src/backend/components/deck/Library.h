@@ -13,13 +13,14 @@ public :
     Library();
     ~Library();
 
-    void shuffle();
-    std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    //Card* getCard(uint8_t cardNum);
-    uint8_t getLength() const;
-    void add(std::unique_ptr<Card> card);
+    Library(Library const&) = delete;
+    Library& operator=(Library const&) = delete;
 
-    std::vector<Card*> getCards();
+    uint8_t getLength() const;
+
+    void shuffle();
+    std::unique_ptr<Card> getTopCard();
+    void add(std::unique_ptr<Card> card);
 
 private :
 
