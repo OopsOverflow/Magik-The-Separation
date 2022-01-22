@@ -4,6 +4,8 @@
 
 #include "Library.h"
 #include <stdlib.h>
+#include <random>
+#include <algorithm>
 
 Library::Library() {
     
@@ -11,20 +13,9 @@ Library::Library() {
 
 
 void Library::shuffle(){
-    std::unique_ptr<Card> ptr;
-    std::vector<std::unique_ptr<Card>> cards;
-    do
-    {
-        ptr = std::move(getTopCard());
-        if(ptr != nullptr) cards.push_back(std::move(ptr));
-    } while (ptr != nullptr);
-
-    while(cards.size() > 0){
-        int rand = std::rand()%cards.size();
-        std::unique_ptr<Card> newCard = std::move(cards.at(rand));
-        cards.erase(cards.begin() + rand);
-        stack.push_back(std::move(newCard));
-    }    
+    std::random_device rd; 
+    auto rng = std::default_random_engine { rd() };
+    std::shuffle(std::begin(stack), std::end(stack), rng); 
     
 }
 

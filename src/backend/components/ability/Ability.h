@@ -8,7 +8,7 @@
 #include "../card/Card.h"
 class Ability : public Card {
 public :
-    Ability(uint8_t id, std::string name, std::unordered_map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
+    Ability(uint8_t id, std::string name, std::map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
     std::string getReminderText() const;
     std::string getFlavorText() const;
 

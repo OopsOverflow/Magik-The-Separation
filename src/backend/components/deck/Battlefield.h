@@ -23,9 +23,23 @@ public :
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();
 
+    void setAttackingCreatures();
+    std::vector<uint8_t> getAttackingCreatures();
+
+    void setBlockingCreatures(std::vector<Creature *> attacking);
+    std::vector<std::vector<uint8_t> > getBlockingCreatures();
+
+    void tapColors(std::map<Color, int> cost);
+
+
 private : 
     std::vector<std::unique_ptr<Creature> > creatures;
     std::vector<std::unique_ptr<Land> > lands;
+
+    
+    std::vector<uint8_t> attackingCreatures;
+    std::vector<std::vector<uint8_t> > blockingCreatures;
+
 };
 
 

@@ -156,7 +156,9 @@ bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
                     }
                 }
                 //TODO add abilities
-                stack->add({std::move(castingPlayer->getHand()->popCard(playables.at(choice))), castingPlayer});
+                auto newCard = std::move(castingPlayer->getHand()->popCard(playables.at(choice)));
+                castingPlayer->getBattlefield()->tapColors(newCard.get()->getCost());
+                stack->add({std::move(newCard), castingPlayer});
                 hasCasted = true;
             }
 
@@ -198,6 +200,7 @@ void Game::solvePhase() {
             playerToPlay = &player2;
             opponent = &player1;
         }
+        action.hasPlayedLand = false;
 
         //You untap all your tapped permanents
         playerToPlay->unTapAll();
@@ -233,7 +236,7 @@ void Game::solvePhase() {
     case Phase::FIRST_MAIN_PHASE:
         std::cout<<"///First Main Phase///"<<std::endl<<std::endl;
         {    
-            action.hasPlayedLand = false;
+            
             if(playerToPlay == &player1)
                 std::cout<<"Player 1 "<<std::endl;
             else
@@ -278,14 +281,16 @@ void Game::solvePhase() {
                 std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
                 std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
                 Land* landCard = dynamic_cast<Land*>(playedCard.get());
-                if(landCard != nullptr)//is a land
+                if(landCard != nullptr) { //is a land
                     playerToPlay->getBattlefield()->add(std::move(playedCard));
-                else {
+                    action.hasPlayedLand = true;
+                }else {
+                    playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
                     stack->add({std::move(playedCard), playerToPlay});
+                    castInstantsOrAbilities(opponent);
+                    solveStack();
                 }
             
-                castInstantsOrAbilities(opponent);
-                solveStack();
             }else{
                 action.nextPhase();
             }
@@ -304,7 +309,7 @@ void Game::solvePhase() {
 
     case Phase::DECLARE_ATTACKER_STEP:
         std::cout<<"Declare Attacker Step"<<std::endl;
-        playerToPlay->setAttackingCreatures();
+        playerToPlay->getBattlefield()->setAttackingCreatures();
 
         castInstantsOrAbilities(playerToPlay);
         solveStack();
@@ -316,9 +321,9 @@ void Game::solvePhase() {
         std::cout<<"Declare Blocker Step"<<std::endl;
         {
             std::vector<Creature*> attacking;
-            for(auto creature : playerToPlay->getAttackingCreatures())
+            for(auto creature : playerToPlay->getBattlefield()->getAttackingCreatures())
                 attacking.push_back(dynamic_cast<Creature*>(playerToPlay->seekCard(creature)));
-            opponent->setBlockingCreatures(attacking);
+            opponent->getBattlefield()->setBlockingCreatures(attacking);
         }
         
 //if(playerToPlay->getBattlefield().getAttackingCards().size() > 0)
@@ -383,8 +388,6 @@ void Game::solvePhase() {
     case Phase::CLEANUP_STEP:
         std::cout<<"Cleanup Step"<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
-            Card* chosenOne;
-            playerToPlay->killCard(chosenOne->getCardUuid());
         }
         action.nextPhase();
         break;

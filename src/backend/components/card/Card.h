@@ -6,7 +6,7 @@
 
 
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 // Suckless
@@ -15,12 +15,13 @@ enum class CardType {CREATURE, ENCHANTEMENT, INSTANT, LAND, SORCERY};
 enum class Color{WHITE, BLUE, BLACK, RED, GREEN, WBBRG};
 
 
+
 class Card {
 public:
-    Card(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
+    Card(uint8_t id, const std::string &name, std::map<Color, int> cost);
 
     virtual const std::string &getName() const;
-    virtual const std::unordered_map<Color, int> &getCost() const;
+    virtual const std::map<Color, int> &getCost() const;
 
     bool isAffordable(std::vector<Color> availableMana);
 
@@ -31,9 +32,10 @@ public:
 
     bool isTapped() const; //TODO (only permanent can be tapped)
     void unTap();
+    void tap();
 private:
     std::string name;
-    std::unordered_map<Color, int> cost;
+    std::map<Color, int> cost;
 
     bool tapped;
     uint8_t uuid;

@@ -31,7 +31,7 @@ std::unique_ptr<Card> CardMaker::create(uint8_t id) {
 
 
 std::unique_ptr<Card> createCharmedStray() {
-    std::unordered_map<Color, int> cost =  {{Color::WHITE, 1}};
+    std::map<Color, int> cost =  {{Color::WHITE, 1}};
 	std::unique_ptr<Creature> card (new Creature(0, "CharmedStray", cost, 1, 1));
 	return std::move(card);
 }

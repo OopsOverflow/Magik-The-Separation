@@ -36,11 +36,6 @@ public :
     std::vector<uint8_t> getCastableInstantsOrAbilities();
     std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
 
-    void setAttackingCreatures();
-    std::vector<uint8_t> getAttackingCreatures();
-
-    void setBlockingCreatures(std::vector<Creature *> attacking);
-    std::vector<std::vector<uint8_t> > getBlockingCreatures();//TODO go on battlefield
 
 private :
     std::string name;
@@ -53,11 +48,6 @@ private :
     Library library;
 
     static uint64_t newId;
-
-    std::vector<uint8_t> attackingCreatures;
-    std::vector<std::vector<uint8_t> > blockingCreatures;
-
-    
     
 
 };

@@ -9,7 +9,7 @@
 
 class Instant : public Card {
 public : 
-    Instant(uint8_t id, const std::string &name, std::unordered_map<Color, int> cost);
+    Instant(uint8_t id, const std::string &name, std::map<Color, int> cost);
     ~Instant();
 
     Instant(Instant const&) = delete;
