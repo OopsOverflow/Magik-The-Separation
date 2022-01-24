@@ -20,6 +20,7 @@ int CardMaker::registerCard(Maker m) {
 }
 
 std::unique_ptr<Card> CardMaker::create(uint8_t id) {
+	
 	if(id >= factories.size()) {
 		std::cout<< "Error - card out of range : " << 0 << " to "<< factories.size() - 1 << std::endl;
 		return nullptr;	
@@ -28,120 +29,185 @@ std::unique_ptr<Card> CardMaker::create(uint8_t id) {
 }
 
 
+std::unique_ptr<Card> createPlains() {
+	std::unique_ptr<Land> card (new Land(0, "Plains", Color::WHITE));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createIsland() {
+	std::unique_ptr<Land> card (new Land(1, "Island", Color::BLUE));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createSwamp() {
+	std::unique_ptr<Land> card (new Land(2, "Plains", Color::BLACK));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createMountain() {
+	std::unique_ptr<Land> card (new Land(3, "Plains", Color::RED));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createForest() {
+	std::unique_ptr<Land> card (new Land(4, "Plains", Color::GREEN));
+	return std::move(card);
+}
 
 
 std::unique_ptr<Card> createCharmedStray() {
     std::map<Color, int> cost =  {{Color::WHITE, 1}};
-	std::unique_ptr<Creature> card (new Creature(0, "CharmedStray", cost, 1, 1));
+	std::unique_ptr<Creature> card (new Creature(5, "Charmed Stray", cost, 1, 1));
+	//TODO event when enter the battlefield
 	return std::move(card);
 }
 
-/*
+
 std::unique_ptr<Card> createSanctuaryCat() {
-	auto card = std::make_unique<Creature>();
+    std::map<Color, int> cost =  {{Color::WHITE, 1}};
+	std::unique_ptr<Creature> card (new Creature(6, "Sanctuary Cat", cost, 1, 2));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createSoulmender() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
+	std::map<Color, int> cost =  {{Color::WHITE, 1}};
+	std::unique_ptr<Creature> card (new Creature(7, "Soulmender", cost, 1, 1));
+	//TODO event when tapped
+	return std::move(card);;
 }
 
-std::unique_ptr<Card> createTacticalAdvantage() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createTacticalAdvantage() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 1}};
+// 	std::unique_ptr<Instant> card (new Instant(8, "Sanctuary Cat", cost, 1, 1));
+// 	//TODO event when tapped
+// 	return std::move(card);
+// }
 
 std::unique_ptr<Card> createFencingAce() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(9, "Fencing Ace", cost, 1, 1));
+	//TODO Double strike
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createHallowedPriest() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(10, "Hallowed Priest", cost, 1, 1));
+	//TODO whenever you gain life
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createImpassionedOrator() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(11, "Impassioned Orator", cost, 2, 2));
+	//TODO whenever a creature enter the battlefield
 	return std::move(card);
 }
 
-std::unique_ptr<Card> createKnightsPledge() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createKnightsPledge() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(12, "Hallowed Priest", cost, 1, 1));
+// 	return std::move(card);
+// }
 
 std::unique_ptr<Card> createMoorlandInquisitor() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(13, "Moorland Inquisitor", cost, 2, 2));
+	//TODO ability
 	return std::move(card);
 }
 
-std::unique_ptr<Card> createPacifism() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createPacifism() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(14, "Pacifism", cost, 2, 2));
+// 	//TODO ability
+// 	return std::move(card);
+// }
+
 
 std::unique_ptr<Card> createShrineKeeper() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}};
+	std::unique_ptr<Creature> card (new Creature(15, "Shrine Keeper", cost, 2, 2));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createAngelofVitality() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(16, "Angel of Vitality", cost, 2, 2));
+	//TODO
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createLoxodonLineBreaker() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(17, "Loxodon Line Breaker", cost, 3, 2));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createLeoninWarleader() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(18, "Leonin Warleader", cost, 4, 4));
+	//TODO when attack
 	return std::move(card);
 }
 
-std::unique_ptr<Card> createAngelicReward() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createAngelicReward() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 3}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(19, "Leonin Warleader", cost, 4, 4));
+// 	//TODO when attack
+// 	return std::move(card);
+// }
 
-std::unique_ptr<Card> createBondofDiscipline() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createBondofDiscipline() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 2}};
+// 	std::unique_ptr<Creature> card (new Creature(20, "Leonin Warleader", cost, 4, 4));
+// 	//TODO when attack
+// 	return std::move(card);
+// }
 
-std::unique_ptr<Card> createConfronttheAssault() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
+// std::unique_ptr<Card> createConfronttheAssault() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 2}};
+// 	std::unique_ptr<Creature> card (new Creature(21, "Leonin Warleader", cost, 4, 4));
+// 	//TODO when attack
+// 	return std::move(card);
+// }
 
 std::unique_ptr<Card> createSerraAngel() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 3}};
+	std::unique_ptr<Creature> card (new Creature(22, "Serra Angel", cost, 4, 4));
+	//TODO static
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createSpiritualGuardian() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 3}};
+	std::unique_ptr<Creature> card (new Creature(23, "Spiritual Guardian", cost, 3, 4));
+	//TODO when enter the battlefield
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createAngelicGuardian() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 4}};
+	std::unique_ptr<Creature> card (new Creature(24, "Angelic Guardian", cost, 5, 5));
+	//TODO
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createInspiringCommander() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 4}};
+	std::unique_ptr<Creature> card (new Creature(25, "Inspiring Commander", cost, 1, 4));
+	//TODO when enter battlefield
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createGoringCeratops() {
-	auto card = std::make_unique<Creature>();
+	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 5}};
+	std::unique_ptr<Creature> card (new Creature(26, "Goring Ceratops", cost, 3, 3));
+	//TODO 
 	return std::move(card);
 }
 
+/*
 std::unique_ptr<Card> createRiversFavor() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
@@ -572,30 +638,6 @@ std::unique_ptr<Card> createRampagingBrontodon() {
 	return std::move(card);
 }
 */
-std::unique_ptr<Card> createPlains() {
-	std::unique_ptr<Land> card (new Land(1, "Plains", Color::WHITE));
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createIsland() {
-	std::unique_ptr<Land> card (new Land(1, "Plains", Color::BLUE));
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createSwamp() {
-	std::unique_ptr<Land> card (new Land(1, "Plains", Color::BLACK));
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createMountain() {
-	std::unique_ptr<Land> card (new Land(1, "Plains", Color::RED));
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createForest() {
-	std::unique_ptr<Land> card (new Land(1, "Plains", Color::GREEN));
-	return std::move(card);
-}
 
 /*
 std::unique_ptr<Card> createCat() {
@@ -615,120 +657,122 @@ std::unique_ptr<Card> createGoblin() {
 */
 
 CardMaker::CardMaker() {
-    //cards
-    registerCard(createCharmedStray);
-    /*registerCard(createSanctuaryCat);
-    registerCard(createSoulmender);
-    registerCard(createTacticalAdvantage);
-    registerCard(createFencingAce);
-    registerCard(createHallowedPriest);
-    registerCard(createImpassionedOrator);
-    registerCard(createKnightsPledge);
-    registerCard(createMoorlandInquisitor);
-    registerCard(createPacifism);
-    registerCard(createShrineKeeper);
-    registerCard(createAngelofVitality);
-    registerCard(createLoxodonLineBreaker);
-    registerCard(createLeoninWarleader);
-    registerCard(createAngelicReward);
-    registerCard(createBondofDiscipline);
-    registerCard(createConfronttheAssault);
-    registerCard(createSerraAngel);
-    registerCard(createSpiritualGuardian);
-    registerCard(createAngelicGuardian);
-    registerCard(createInspiringCommander);
-    registerCard(createGoringCeratops);
-    registerCard(createRiversFavor);
-    registerCard(createUnsummon);
-    registerCard(createWallofRunes);
-    registerCard(createZephyrGull);
-    registerCard(createCoralMerfolk);
-    registerCard(createGlint);
-    registerCard(createSwornGuardian);
-    registerCard(createWaterkinShaman);
-    registerCard(createArmoredWhirlTurtle);
-    registerCard(createCloudkinSeer);
-    registerCard(createWardenofEvosIsle);
-    registerCard(createWaterknot);
-    registerCard(createWingedWords);
-    registerCard(createOctoprophet);
-    registerCard(createSleep);
-    registerCard(createAirElemental);
-    registerCard(createSoulbladeDjinn);
-    registerCard(createWindstormDrake);
-    registerCard(createFrilledSeaSerpent);
-    registerCard(createRiddlemasterSphinx);
-    registerCard(createOverflowingInsight);
-    registerCard(createWindreaderSphinx);
-    registerCard(createCompoundFracture);
-    registerCard(createRaiseDead);
-    registerCard(createSanitariumSkeleton);
-    registerCard(createTyphoidRats);
-    registerCard(createCruelCut);
-    registerCard(createEternalThirst);
-    registerCard(createKrovikanScoundrel);
-    registerCard(createMalakirCullblade);
-    registerCard(createNimblePilferer);
-    registerCard(createUnlikelyAid);
-    registerCard(createVampireOpportunist);
-    registerCard(createMarduOutrider);
-    registerCard(createMurder);
-    registerCard(createSavageGorger);
-    registerCard(createScatheZombies);
-    registerCard(createWitchsFamiliar);
-    registerCard(createSkeletonArcher);
-    registerCard(createSengirVampire);
-    registerCard(createSoulhunterRakshasa);
-    registerCard(createBadDeal);
-    registerCard(createNightmare);
-    registerCard(createDemonofLoathing);
-    registerCard(createRagingGoblin);
-    registerCard(createShock);
-    registerCard(createStormStrike);
-    registerCard(createTinStreetCadet);
-    registerCard(createGoblinTunneler);
-    registerCard(createManiacalRage);
-    registerCard(createNestRobber);
-    registerCard(createBombard);
-    registerCard(createBurnBright);
-    registerCard(createFearlessHalberdier);
-    registerCard(createGoblinGathering);
-    registerCard(createHurloonMinotaur);
-    registerCard(createMoltenRavager);
-    registerCard(createRaidBombardment);
-    registerCard(createGoblinGangLeader);
-    registerCard(createGoblinTrashmaster);
-    registerCard(createOgreBattledriver);
-    registerCard(createImmortalPhoenix);
-    registerCard(createInescapableBlaze);
-    registerCard(createVolcanicDragon);
-    registerCard(createSiegeDragon);
-    registerCard(createChargingBadger);
-    registerCard(createJungleDelver);
-    registerCard(createStonyStrength);
-    registerCard(createFeralRoar);
-    registerCard(createGreenwoodSentinel);
-    registerCard(createIlysianCaryatid);
-    registerCard(createRabidBite);
-    registerCard(createTitanicGrowth);
-    registerCard(createTreetopWarden);
-    registerCard(createWoodlandMystic);
-    registerCard(createColossalMajesty);
-    registerCard(createGenerousStray);
-    registerCard(createWildwoodPatrol);
-    registerCard(createBalothPackhunter);
-    registerCard(createPrizedUnicorn);
-    registerCard(createRumblingBaloth);
-    registerCard(createWorldShaper);
-    registerCard(createGigantosaurus);
-    registerCard(createSentinelSpider);
-    registerCard(createEpicProportions);
-    registerCard(createRampagingBrontodon);*/
-    //lands
+	//lands
 	registerCard(createPlains);
     registerCard(createIsland);
 	registerCard(createSwamp);
     registerCard(createMountain);
 	registerCard(createForest);
+	
+    //cards
+    registerCard(createCharmedStray);
+    registerCard(createSanctuaryCat);
+    registerCard(createSoulmender);
+    // registerCard(createTacticalAdvantage);
+    registerCard(createFencingAce);
+    registerCard(createHallowedPriest);
+    registerCard(createImpassionedOrator);
+    // registerCard(createKnightsPledge);
+    registerCard(createMoorlandInquisitor);
+    // registerCard(createPacifism);
+    registerCard(createShrineKeeper);
+    registerCard(createAngelofVitality);
+    registerCard(createLoxodonLineBreaker);
+    registerCard(createLeoninWarleader);
+    // registerCard(createAngelicReward);
+    // registerCard(createBondofDiscipline);
+    // registerCard(createConfronttheAssault);
+    registerCard(createSerraAngel);
+    registerCard(createSpiritualGuardian);
+    registerCard(createAngelicGuardian);
+    registerCard(createInspiringCommander);
+    registerCard(createGoringCeratops);
+    // registerCard(createRiversFavor);
+    // registerCard(createUnsummon);
+    // registerCard(createWallofRunes);
+    // registerCard(createZephyrGull);
+    // registerCard(createCoralMerfolk);
+    // registerCard(createGlint);
+    // registerCard(createSwornGuardian);
+    // registerCard(createWaterkinShaman);
+    // registerCard(createArmoredWhirlTurtle);
+    // registerCard(createCloudkinSeer);
+    // registerCard(createWardenofEvosIsle);
+    // registerCard(createWaterknot);
+    // registerCard(createWingedWords);
+    // registerCard(createOctoprophet);
+    // registerCard(createSleep);
+    // registerCard(createAirElemental);
+    // registerCard(createSoulbladeDjinn);
+    // registerCard(createWindstormDrake);
+    // registerCard(createFrilledSeaSerpent);
+    // registerCard(createRiddlemasterSphinx);
+    // registerCard(createOverflowingInsight);
+    // registerCard(createWindreaderSphinx);
+    // registerCard(createCompoundFracture);
+    // registerCard(createRaiseDead);
+    // registerCard(createSanitariumSkeleton);
+    // registerCard(createTyphoidRats);
+    // registerCard(createCruelCut);
+    // registerCard(createEternalThirst);
+    // registerCard(createKrovikanScoundrel);
+    // registerCard(createMalakirCullblade);
+    // registerCard(createNimblePilferer);
+    // registerCard(createUnlikelyAid);
+    // registerCard(createVampireOpportunist);
+    // registerCard(createMarduOutrider);
+    // registerCard(createMurder);
+    // registerCard(createSavageGorger);
+    // registerCard(createScatheZombies);
+    // registerCard(createWitchsFamiliar);
+    // registerCard(createSkeletonArcher);
+    // registerCard(createSengirVampire);
+    // registerCard(createSoulhunterRakshasa);
+    // registerCard(createBadDeal);
+    // registerCard(createNightmare);
+    // registerCard(createDemonofLoathing);
+    // registerCard(createRagingGoblin);
+    // registerCard(createShock);
+    // registerCard(createStormStrike);
+    // registerCard(createTinStreetCadet);
+    // registerCard(createGoblinTunneler);
+    // registerCard(createManiacalRage);
+    // registerCard(createNestRobber);
+    // registerCard(createBombard);
+    // registerCard(createBurnBright);
+    // registerCard(createFearlessHalberdier);
+    // registerCard(createGoblinGathering);
+    // registerCard(createHurloonMinotaur);
+    // registerCard(createMoltenRavager);
+    // registerCard(createRaidBombardment);
+    // registerCard(createGoblinGangLeader);
+    // registerCard(createGoblinTrashmaster);
+    // registerCard(createOgreBattledriver);
+    // registerCard(createImmortalPhoenix);
+    // registerCard(createInescapableBlaze);
+    // registerCard(createVolcanicDragon);
+    // registerCard(createSiegeDragon);
+    // registerCard(createChargingBadger);
+    // registerCard(createJungleDelver);
+    // registerCard(createStonyStrength);
+    // registerCard(createFeralRoar);
+    // registerCard(createGreenwoodSentinel);
+    // registerCard(createIlysianCaryatid);
+    // registerCard(createRabidBite);
+    // registerCard(createTitanicGrowth);
+    // registerCard(createTreetopWarden);
+    // registerCard(createWoodlandMystic);
+    // registerCard(createColossalMajesty);
+    // registerCard(createGenerousStray);
+    // registerCard(createWildwoodPatrol);
+    // registerCard(createBalothPackhunter);
+    // registerCard(createPrizedUnicorn);
+    // registerCard(createRumblingBaloth);
+    // registerCard(createWorldShaper);
+    // registerCard(createGigantosaurus);
+    // registerCard(createSentinelSpider);
+    // registerCard(createEpicProportions);
+    // registerCard(createRampagingBrontodon);
+
 
 }

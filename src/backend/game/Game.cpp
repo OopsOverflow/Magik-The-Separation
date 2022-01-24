@@ -19,22 +19,27 @@ void Game::initGame() {
     player1.getLibrary()->shuffle();
     player2.getLibrary()->shuffle();
     for(int i = 0; i < 7; i += 1) {
-        std::cout<<"Player 1 - ";
+        std::cout<<player1.getName()<<" - ";
         player1.draw();
-        std::cout<<"Player 2 - ";
+        std::cout<<player2.getName()<<" - ";
         player2.draw();
     }
 }
 
+#include <random>
 void Game::chooseCards() {
     auto& maker = CardMaker::getInst();
     while(player1.getLibrary()->getLength() < 60) {
 
-        auto newCard = std::move(maker.create(0));
-        auto newPlain = std::move(maker.create(1));
-        std::cout<<"Player 1 - ";
+        std::random_device r;
+    
+        // Choose a random mean between 1 and 6
+        std::default_random_engine e1(r());
+        std::uniform_int_distribution<int> uniform_dist(0, 20);
+        int mean = uniform_dist(e1);
+        auto newCard = std::move(maker.create(mean));
+        std::cout<<player1.getName()<<" - ";
         player1.getLibrary()->add(std::move(newCard));
-        player1.getLibrary()->add(std::move(newPlain));
         
         // std::unique_ptr<Card> newCard = nullptr;
         // while(newCard == nullptr) {
@@ -66,11 +71,16 @@ void Game::chooseCards() {
 
     }
     while(player2.getLibrary()->getLength() < 60) {
-        auto newCard = std::move(maker.create(0));
-        auto newPlain = std::move(maker.create(1));
-        std::cout<<"Player 2 - ";
+
+        std::random_device r;
+    
+        // Choose a random mean between 1 and 6
+        std::default_random_engine e1(r());
+        std::uniform_int_distribution<int> uniform_dist(0, 20);
+        int mean = uniform_dist(e1);
+        auto newCard = std::move(maker.create(mean));
+        std::cout<<player2.getName()<<" - ";
         player2.getLibrary()->add(std::move(newCard));
-        player2.getLibrary()->add(std::move(newPlain));
         
         // std::unique_ptr<Card> newCard = nullptr;
         // while(newCard == nullptr) {
@@ -237,10 +247,9 @@ void Game::solvePhase() {
         std::cout<<"///First Main Phase///"<<std::endl<<std::endl;
         {    
             
-            if(playerToPlay == &player1)
-                std::cout<<"Player 1 "<<std::endl;
-            else
-                std::cout<<"Player 2 "<<std::endl;
+
+            std::cout<<playerToPlay->getName()<<std::endl;
+ 
 
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
             std::cout<<"Playable cards : "<< playables.size() << std::endl;

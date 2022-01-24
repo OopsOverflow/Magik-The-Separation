@@ -13,7 +13,7 @@ Enchantement::~Enchantement() {
 }
 
 
-void Enchantement::addStaticAbility(std::function<void()> ability) {
+void Enchantement::addStaticAbility(StaticAbility ability) {
     staticAbilities.push_back(ability);
 }
 

@@ -6,7 +6,6 @@
 #define MAGIK_CREATURE_H
 
 #include "Card.h"
-#include "../ability/StaticAbility.h"
 #include "../ability/ActivatedAbility.h"
 #include "../ability/TriggeredAbility.h"
 #include "Enchantement.h"
@@ -34,7 +33,7 @@ public :
 
     int8_t getTempDamages() const;
 
-    // void addStaticAbility(std::function<void()> ability);
+    void addStaticAbility(StaticAbility ability);
     // void addActivatedAbility(std::function<void()> ability);
     // void addTriggeredAbility(std::function<void(Event)> ability);
 
@@ -44,13 +43,15 @@ public :
     std::vector<Enchantement*> getAttachedCards();
     void attachCard(std::unique_ptr<Enchantement> card);
 
+    bool hasStaticAbility(StaticAbility ability);
+
 private :
     uint8_t power;
     uint8_t thougness;
 
     int8_t tempDamages;
 
-    std::vector<StaticAbility > staticAbilities;//TODO uniqueptr
+    std::vector<StaticAbility> staticAbilities;
     std::vector<ActivatedAbility > activatedAbilities;
     std::vector<TriggeredAbility > triggeredAbilities;
 

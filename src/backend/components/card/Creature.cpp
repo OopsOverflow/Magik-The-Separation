@@ -35,9 +35,9 @@ int8_t Creature::getTempDamages() const {
     return tempDamages;
 }
 
-// void Creature::addStaticAbility(std::function<void()> ability) {
-//     staticAbilities.push_back(ability);
-// }
+void Creature::addStaticAbility(StaticAbility ability) {
+    staticAbilities.push_back(ability);
+}
 
 // void Creature::addActivatedAbility(std::function<void()> ability) {
 //     activatedAbilities.push_back(ability);
@@ -65,4 +65,9 @@ std::vector<Enchantement*> Creature::getAttachedCards() {
 
 void Creature::attachCard(std::unique_ptr<Enchantement> card) {
     attachedEnchantments.push_back(std::move(card));
+}
+
+bool Creature::hasStaticAbility(StaticAbility ability) {
+    auto it = std::find(staticAbilities.begin(), staticAbilities.end(), ability);
+    return it != staticAbilities.end();
 }

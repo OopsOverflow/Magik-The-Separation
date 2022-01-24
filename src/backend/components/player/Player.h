@@ -9,7 +9,6 @@
 #include "../deck/Graveyard.h"
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
-#include "../card/Creature.h"
 
 class Player {
 public :

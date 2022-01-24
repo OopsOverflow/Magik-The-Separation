@@ -6,6 +6,7 @@
 #define MAGIK_ABILITY_H
 #include "string"
 #include "../card/Card.h"
+
 class Ability : public Card {
 public :
     Ability(uint8_t id, std::string name, std::map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
