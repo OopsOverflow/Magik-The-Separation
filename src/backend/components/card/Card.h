@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 // Suckless
-typedef u_int8_t sint;
+typedef uint8_t sint;
 
 class Card {
 public:
