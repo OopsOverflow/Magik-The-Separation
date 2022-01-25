@@ -7,7 +7,9 @@
 
 #include "Creature.h"
 #include "Land.h"
-
+#include "Enchantement.h"
+#include "Instant.h"
+#include "Sorcery.h"
 
 CardMaker& CardMaker::getInst() {
     static CardMaker inst;
@@ -40,17 +42,17 @@ std::unique_ptr<Card> createIsland() {
 }
 
 std::unique_ptr<Card> createSwamp() {
-	std::unique_ptr<Land> card (new Land(2, "Plains", Color::BLACK));
+	std::unique_ptr<Land> card (new Land(2, "Swamp", Color::BLACK));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createMountain() {
-	std::unique_ptr<Land> card (new Land(3, "Plains", Color::RED));
+	std::unique_ptr<Land> card (new Land(3, "Mountain", Color::RED));
 	return std::move(card);
 }
 
 std::unique_ptr<Card> createForest() {
-	std::unique_ptr<Land> card (new Land(4, "Plains", Color::GREEN));
+	std::unique_ptr<Land> card (new Land(4, "Forest", Color::GREEN));
 	return std::move(card);
 }
 
@@ -58,6 +60,7 @@ std::unique_ptr<Card> createForest() {
 std::unique_ptr<Card> createCharmedStray() {
     std::map<Color, int> cost =  {{Color::WHITE, 1}};
 	std::unique_ptr<Creature> card (new Creature(5, "Charmed Stray", cost, 1, 1));
+	card.get()->addStaticAbility(StaticAbility::LIFELINK);
 	//TODO event when enter the battlefield
 	return std::move(card);
 }
@@ -86,7 +89,7 @@ std::unique_ptr<Card> createSoulmender() {
 std::unique_ptr<Card> createFencingAce() {
 	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 1}};
 	std::unique_ptr<Creature> card (new Creature(9, "Fencing Ace", cost, 1, 1));
-	//TODO Double strike
+	card.get()->addStaticAbility(StaticAbility::DOUBLE_STRIKE);
 	return std::move(card);
 }
 
@@ -134,7 +137,7 @@ std::unique_ptr<Card> createShrineKeeper() {
 std::unique_ptr<Card> createAngelofVitality() {
 	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 2}};
 	std::unique_ptr<Creature> card (new Creature(16, "Angel of Vitality", cost, 2, 2));
-	//TODO
+	card.get()->addStaticAbility(StaticAbility::FLY);
 	return std::move(card);
 }
 
@@ -175,7 +178,8 @@ std::unique_ptr<Card> createLeoninWarleader() {
 std::unique_ptr<Card> createSerraAngel() {
 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 3}};
 	std::unique_ptr<Creature> card (new Creature(22, "Serra Angel", cost, 4, 4));
-	//TODO static
+	card.get()->addStaticAbility(StaticAbility::FLY);
+	card.get()->addStaticAbility(StaticAbility::VIGILANCE);
 	return std::move(card);
 }
 
@@ -189,6 +193,7 @@ std::unique_ptr<Card> createSpiritualGuardian() {
 std::unique_ptr<Card> createAngelicGuardian() {
 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 4}};
 	std::unique_ptr<Creature> card (new Creature(24, "Angelic Guardian", cost, 5, 5));
+	card.get()->addStaticAbility(StaticAbility::FLY);
 	//TODO
 	return std::move(card);
 }
@@ -203,81 +208,116 @@ std::unique_ptr<Card> createInspiringCommander() {
 std::unique_ptr<Card> createGoringCeratops() {
 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 5}};
 	std::unique_ptr<Creature> card (new Creature(26, "Goring Ceratops", cost, 3, 3));
+	card.get()->addStaticAbility(StaticAbility::DOUBLE_STRIKE);
+	//TODO 
+	return std::move(card);
+}
+
+
+// std::unique_ptr<Card> createRiversFavor() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 5}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(27, "Goring Ceratops", cost, 3, 3));
+// 	card.get()->addStaticAbility(StaticAbility::DOUBLE_STRIKE);
+// 	//TODO 
+// 	return std::move(card);
+// }
+
+// std::unique_ptr<Card> createUnsummon() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 5}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(28, "Goring Ceratops", cost, 3, 3));
+// 	card.get()->addStaticAbility(StaticAbility::DOUBLE_STRIKE);
+// 	//TODO 
+// 	return std::move(card);
+// }
+
+std::unique_ptr<Card> createWallofRunes() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}};
+	std::unique_ptr<Creature> card (new Creature(29, "Wall of Runes", cost, 0, 4));
+	card.get()->addStaticAbility(StaticAbility::DEFENDER);
+	//TODO 
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createZephyrGull() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}};
+	std::unique_ptr<Creature> card (new Creature(30, "Zephyr Gull", cost, 1, 1));
+	card.get()->addStaticAbility(StaticAbility::FLY);
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createCoralMerfolk() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(31, "Coral Merfolk", cost, 2, 1));
+	return std::move(card);
+}
+
+// std::unique_ptr<Card> createGlint() {
+// 	std::map<Color, int> cost =  {{Color::WHITE, 2}, {Color::WBBRG, 5}};
+// 	std::unique_ptr<Instant> card (new Instant(32, "Goring Ceratops", cost, 3, 3));
+// 	card.get()->addStaticAbility(StaticAbility::DOUBLE_STRIKE);
+// 	//TODO 
+// 	return std::move(card);
+// }
+
+std::unique_ptr<Card> createSwornGuardian() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(33, "Sworn Guardian", cost, 1, 3));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createWaterkinShaman() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 1}};
+	std::unique_ptr<Creature> card (new Creature(34, "Waterkin Shaman", cost, 2, 1));
+	//TODO 
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createArmoredWhirlTurtle() {
+	std::map<Color, int> cost =  {{Color::WHITE, 1}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(35, "Armored Whirl Turtle", cost, 0, 5));
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createCloudkinSeer() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(36, "Cloudkin Seer", cost, 2, 1));
+	card.get()->addStaticAbility(StaticAbility::FLY);
+	//TODO 
+	return std::move(card);
+}
+
+std::unique_ptr<Card> createWardenofEvosIsle() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 2}};
+	std::unique_ptr<Creature> card (new Creature(37, "Warden of Evos Isle", cost, 2, 2));
+	card.get()->addStaticAbility(StaticAbility::FLY);
+	//TODO 
+	return std::move(card);
+}
+
+// std::unique_ptr<Card> createWaterknot() {
+// 	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 2}};
+// 	std::unique_ptr<Enchantement> card (new Enchantement(38, "Cloudkin Seer", cost, 2, 1));
+// 	card.get()->addStaticAbility(StaticAbility::FLY);
+// 	//TODO 
+// 	return std::move(card);
+// }
+
+// std::unique_ptr<Card> createWingedWords() {
+// 	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 2}};
+// 	std::unique_ptr<Sorcery> card (new Sorcery(39, "Cloudkin Seer", cost, 2, 1));
+// 	card.get()->addStaticAbility(StaticAbility::FLY);
+// 	//TODO 
+// 	return std::move(card);
+// }
+
+std::unique_ptr<Card> createOctoprophet() {
+	std::map<Color, int> cost =  {{Color::BLUE, 1}, {Color::WBBRG, 3}};
+	std::unique_ptr<Creature> card (new Creature(40, "Octoprophet", cost, 3, 3));
 	//TODO 
 	return std::move(card);
 }
 
 /*
-std::unique_ptr<Card> createRiversFavor() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createUnsummon() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createWallofRunes() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createZephyrGull() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createCoralMerfolk() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createGlint() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createSwornGuardian() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createWaterkinShaman() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createArmoredWhirlTurtle() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createCloudkinSeer() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createWardenofEvosIsle() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createWaterknot() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createWingedWords() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
-std::unique_ptr<Card> createOctoprophet() {
-	auto card = std::make_unique<Creature>();
-	return std::move(card);
-}
-
 std::unique_ptr<Card> createSleep() {
 	auto card = std::make_unique<Creature>();
 	return std::move(card);
@@ -689,18 +729,18 @@ CardMaker::CardMaker() {
     registerCard(createGoringCeratops);
     // registerCard(createRiversFavor);
     // registerCard(createUnsummon);
-    // registerCard(createWallofRunes);
-    // registerCard(createZephyrGull);
-    // registerCard(createCoralMerfolk);
+    registerCard(createWallofRunes);
+    registerCard(createZephyrGull);
+    registerCard(createCoralMerfolk);
     // registerCard(createGlint);
-    // registerCard(createSwornGuardian);
-    // registerCard(createWaterkinShaman);
-    // registerCard(createArmoredWhirlTurtle);
-    // registerCard(createCloudkinSeer);
-    // registerCard(createWardenofEvosIsle);
+    registerCard(createSwornGuardian);
+    registerCard(createWaterkinShaman);
+    registerCard(createArmoredWhirlTurtle);
+    registerCard(createCloudkinSeer);
+    registerCard(createWardenofEvosIsle);
     // registerCard(createWaterknot);
     // registerCard(createWingedWords);
-    // registerCard(createOctoprophet);
+    registerCard(createOctoprophet);
     // registerCard(createSleep);
     // registerCard(createAirElemental);
     // registerCard(createSoulbladeDjinn);
