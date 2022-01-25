@@ -20,6 +20,7 @@ public :
     uint8_t getLength() const;
 
     std::pair<std::unique_ptr<Card>, Player*> getTopPair();
+    Player* getTopPlayer();
     void add(std::pair<std::unique_ptr<Card>, Player*> card);
 
     void display();

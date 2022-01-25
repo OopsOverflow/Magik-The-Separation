@@ -17,21 +17,23 @@ public :
 
     std::string getName() const;
     uint64_t getId() const;
-    int8_t getHp() const;   
+    int getHp() const;   
     
     //actions
     void draw();
     void unTapAll();
-    void takeDamage(uint8_t amount);
-    Card* seekCard(uint8_t id);
-    std::unique_ptr<Card> playCard(uint8_t id);
+    void takeDamage(int amount);
+    void heal(int amount);
+
+    Card* seekCard(uint8_t cardId);
+    std::unique_ptr<Card> playCard(uint8_t cardId);
 
     Battlefield* getBattlefield();
     Hand* getHand();
     Graveyard* getGraveyard();
     Library* getLibrary();
 
-    void killCard(int id);
+    void killCard(int cardId);
     std::vector<uint8_t> getCastableInstantsOrAbilities();
     std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
 
@@ -39,7 +41,7 @@ public :
 private :
     std::string name;
     uint64_t id;
-    int8_t hp;
+    int hp;
 
     Battlefield battlefield;
     Hand hand;

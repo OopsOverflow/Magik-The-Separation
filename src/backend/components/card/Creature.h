@@ -24,14 +24,12 @@ public :
     Creature(Creature const&) = delete;
     Creature& operator=(Creature const&) = delete;
 
-    uint8_t getPower() const;
-    uint8_t getThougness() const;
-    
+    std::pair<int, int> getBaseStats() const;
+    std::pair<int, int> getTotalStats();
+    std::pair<int, int> getTmpStats();
 
-    void block(Creature* attacker);
-    void takeDamage(uint8_t damages);
-
-    int8_t getTempDamages() const;
+    void addTmpStat(std::pair<int,int> stat);
+    void block(Creature* attackingCard);
 
     void addStaticAbility(StaticAbility ability);
     // void addActivatedAbility(std::function<void()> ability);
@@ -45,11 +43,15 @@ public :
 
     bool hasStaticAbility(StaticAbility ability);
 
-private :
-    uint8_t power;
-    uint8_t thougness;
+    bool isSummoned();
+    void newTurn();
 
-    int8_t tempDamages;
+private :
+
+    bool summoningSickness;
+    std::pair<int, int> stats;
+    std::vector<std::pair<int, int> >modifiers;
+    std::vector<std::pair<int,int> > tmpModifiers;
 
     std::vector<StaticAbility> staticAbilities;
     std::vector<ActivatedAbility > activatedAbilities;

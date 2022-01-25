@@ -18,7 +18,7 @@ public :
 
     void add(std::unique_ptr<Card> card);
     std::unique_ptr<Card> popCard(uint8_t cardId);
-    Card* getCard(uint8_t cardId);
+    Card* seekCard(uint8_t cardId);
 
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();

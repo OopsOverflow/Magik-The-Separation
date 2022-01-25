@@ -56,6 +56,29 @@ uint8_t Hand::getLength() const {
     + lands.size() + instants.size() + enchantements.size());
 }
 
+Card* Hand::seekCard(uint8_t cardId) {
+    for(size_t i = 0; i < creatures.size(); i += 1)
+        if(creatures.at(i)->getCardUuid() == cardId)
+            return creatures.at(i).get();
+
+    for(size_t i = 0; i < lands.size(); i += 1)
+        if(lands.at(i)->getCardUuid() == cardId)
+            return lands.at(i).get();
+
+    for(size_t i = 0; i < instants.size(); i += 1)
+        if(instants.at(i)->getCardUuid() == cardId)
+            return instants.at(i).get();
+        
+    for(size_t i = 0; i < enchantements.size(); i += 1)
+        if(enchantements.at(i)->getCardUuid() == cardId)
+            return enchantements.at(i).get();
+    
+    for(size_t i = 0; i < sorceries.size(); i += 1)
+        if(sorceries.at(i)->getCardUuid() == cardId)
+            return sorceries.at(i).get();
+            
+    return nullptr;
+}
 
 void Hand::add(std::unique_ptr<Card> card) {
     Card* cardToAdd = card.get();

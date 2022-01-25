@@ -137,7 +137,7 @@ bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
             }
 
             char response = 0;//TODO autoscrool at this point
-            while (response != 'y' && response != 'n')
+            while (response != 'y' && response != 'n' && playables.size() > 0)
             {
 
                 std::cout<<"Do you want to play something ? (y/n) ";
@@ -151,7 +151,7 @@ bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
                     
             }
             
-            if(response == 'y' && playables.size() != 0) {//wantToPlaySmth
+            if(response == 'y' && playables.size() > 0) {//wantToPlaySmth
                 size_t choice = playables.size();
                 while (choice < 0 || choice >= playables.size())
                 {
@@ -223,9 +223,11 @@ void Game::solvePhase() {
         //TODO trigger beginnig of unkeep step
 
         //Players can cast instants and activate abilities
-
-        castInstantsOrAbilities(playerToPlay);
-        solveStack();
+        if(action.somethingPlayed) {
+            castInstantsOrAbilities(playerToPlay);
+            solveStack();
+            action.somethingPlayed = false;
+        }
         
         action.nextPhase();
         break;
@@ -237,6 +239,7 @@ void Game::solvePhase() {
         playerToPlay->draw();
         castInstantsOrAbilities(playerToPlay);
         solveStack();
+        action.somethingPlayed = false;
         
         action.nextPhase();
         break;
@@ -246,20 +249,18 @@ void Game::solvePhase() {
     case Phase::FIRST_MAIN_PHASE:
         std::cout<<"///First Main Phase///"<<std::endl<<std::endl;
         {    
-            
 
             std::cout<<playerToPlay->getName()<<std::endl;
  
-
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
             std::cout<<"Playable cards : "<< playables.size() << std::endl;
             for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
             }
 
             //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
-            char response = 0;//TODO autoscrool at this point
-            while (response != 'y' && response != 'n')
+            char response = 0;
+            while (response != 'y' && response != 'n' && playables.size() > 0)
             {
 
                 std::cout<<"Do you want to play something ? (y/n) ";
@@ -273,7 +274,7 @@ void Game::solvePhase() {
                     
             }
             
-            if(response == 'y' && playables.size() != 0) {//wantToPlaySmth
+            if(response == 'y' && playables.size() > 0) {//wantToPlaySmth
                 size_t choice = playables.size();
                 while (choice < 0 || choice >= playables.size())
                 {
@@ -283,7 +284,7 @@ void Game::solvePhase() {
                     try {
                         choice = std::stoi(str);
                     }
-                    catch (const std::exception & e) {
+                    catch (const std::exception) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -293,11 +294,13 @@ void Game::solvePhase() {
                 if(landCard != nullptr) { //is a land
                     playerToPlay->getBattlefield()->add(std::move(playedCard));
                     action.hasPlayedLand = true;
+                    action.somethingPlayed = true;
                 }else {
                     playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
                     stack->add({std::move(playedCard), playerToPlay});
                     castInstantsOrAbilities(opponent);
                     solveStack();
+                    action.somethingPlayed = false;
                 }
             
             }else{
@@ -310,18 +313,20 @@ void Game::solvePhase() {
     
     /* COMBAT PHASE */
     case Phase::BEGINNING_OF_COMBAT_STEP:
-        castInstantsOrAbilities(playerToPlay);
-        solveStack();
+        if(action.somethingPlayed) {
+            castInstantsOrAbilities(playerToPlay);
+            solveStack();
+            action.somethingPlayed = false;
+        }
         action.nextPhase();
-
         break;
 
     case Phase::DECLARE_ATTACKER_STEP:
         std::cout<<"Declare Attacker Step"<<std::endl;
         playerToPlay->getBattlefield()->setAttackingCreatures();
-
         castInstantsOrAbilities(playerToPlay);
         solveStack();
+        action.somethingPlayed = false;
         action.nextPhase();
         break;
 
@@ -329,74 +334,195 @@ void Game::solvePhase() {
     case Phase::DECLARE_BLOCKER_STEP:
         std::cout<<"Declare Blocker Step"<<std::endl;
         {
-            std::vector<Creature*> attacking;
-            for(auto creature : playerToPlay->getBattlefield()->getAttackingCreatures())
-                attacking.push_back(dynamic_cast<Creature*>(playerToPlay->seekCard(creature)));
-            opponent->getBattlefield()->setBlockingCreatures(attacking);
+            if(playerToPlay->getBattlefield()->getAttackingCreatures().size() > 0) {
+                std::vector<Creature*> attacking;
+                for(auto creature : playerToPlay->getBattlefield()->getAttackingCreatures()) {
+                    attacking.push_back(dynamic_cast<Creature*>(playerToPlay->seekCard(creature)));//Relatively safe as uuid comes from attacking creatures
+                }
+            
+                opponent->getBattlefield()->setBlockingCreatures(attacking);
+                castInstantsOrAbilities(playerToPlay);
+                solveStack();
+                action.somethingPlayed = false;
+            }
         }
-        
-//if(playerToPlay->getBattlefield().getAttackingCards().size() > 0)
-        castInstantsOrAbilities(playerToPlay);
-        solveStack();
         
         action.nextPhase();
         break;
 
     
     case Phase::COMBAT_DAMAGE_STEP:
-        // std::cout<<"Combat Damage Step"<<std::endl;
-        // for(size_t i = 0; i < playerToPlay->getAttackingCards().size(); i += 1) {
-        //     if(opponent->getBlockingCards().at(i).size() > 0) {
+        {
+            std::cout<<"Combat Damage Step"<<std::endl;
+            auto attacking = playerToPlay->getBattlefield()->getAttackingCreatures();
+            auto blocking = opponent->getBattlefield()->getBlockingCreatures();
+            for(size_t i = 0; i < attacking.size(); i += 1) {
+                Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
+                if(blocking.at(i).size() > 0) {
 
-        //         for(size_t j = 0; i < opponent->getBlockingCards().at(i).size(); j += 1) {
+                    for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
+                        Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
+                        blockingCard->block(attackingCard);
+                        if(j == opponent->getBattlefield()->getBlockingCreatures().at(i).size() - 1 &&
+                           attackingCard->getTmpStats().second > 0 && 
+                           attackingCard->hasStaticAbility(StaticAbility::TRAMPLE)) {
+                            opponent->takeDamage(attackingCard->getTmpStats().first);
+                            if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK))
+                                playerToPlay->heal(attackingCard->getTmpStats().first);
+                           }
+                           
+                    }
+                }else{
+                    opponent->takeDamage(attackingCard->getTmpStats().first);
+                    if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK))
+                        playerToPlay->heal(attackingCard->getTmpStats().first);
+                }
+            }
+            for(size_t i = 0; i < attacking.size(); i += 1) {
+                Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
+                    if(attackingCard->getTmpStats().second <= 0) playerToPlay->killCard(attacking.at(i));
+            }
+            for(size_t i = 0; i < attacking.size(); i += 1) {
+                for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
+                    Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
+                        if(blockingCard->getTmpStats().second <= 0) opponent->killCard(blocking.at(i).at(j));
+                }
+            }
 
-        //             if(playerToPlay->getAttackingCards().at(i)->getTempThougness() > 0) {
-
-        //                 opponent->getBlockingCards().at(i).at(j)->block(playerToPlay->getAttackingCards().at(i));
-        //                 if(opponent->getBlockingCards().at(i).at(j)->getTempThougness() <= 0) {
-        //                     opponent->killCard(opponent->getBlockingCards().at(i).at(j));
-        //                 }
-        //             }
-        //         }
-        //     }else{
-        //         opponent->takeDamage(playerToPlay->getAttackingCards().at(i)->getPower());
-        //     }
-        // }
-// while(playerToPlay->castSpellOrAbility() || opponent->castSpellOrAbility());
-// stack->solve();
+        }
+        if(playerToPlay->getBattlefield()->getAttackingCreatures().size() > 0) {
+            castInstantsOrAbilities(playerToPlay);
+            solveStack();
+            action.somethingPlayed = false;
+        }
         action.nextPhase();
         break;
     case Phase::END_OF_COMBAT_STEP:
         std::cout<<"End of Combat Step"<<std::endl;
-// while(playerToPlay->castSpellOrAbility() || opponent->castSpellOrAbility());
-// stack->solve();
+        if(action.somethingPlayed) {
+            castInstantsOrAbilities(playerToPlay);
+            solveStack();
+            action.somethingPlayed = false;
+        }
         action.nextPhase();
         break;
 
     /* SECOND MAIN PHASE */
     case Phase::SECOND_MAIN_PHASE:
         std::cout<<"Second Main Phase"<<std::endl;
-        if(true){//wantToPlaySmth
-            //playerToPlay->summonCard(0);//TODO choose card to play
-// if(stack->getLength()>0)//If it's a land, nothing will be on the stack
-//     while(opponent->castSpellOrAbility() || playerToPlay->castSpellOrAbility());
-// stack.get()->solve();
-        }else{
-        }
-        action.nextPhase();
+        {    
+
+            std::cout<<playerToPlay->getName()<<std::endl;
+ 
+            auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
+            std::cout<<"Playable cards : "<< playables.size() << std::endl;
+            for(size_t i = 0; i < playables.size(); i += 1) { 
+                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+            }
+
+            //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
+            char response = 0;
+            while (response != 'y' && response != 'n' && playables.size() > 0)
+            {
+
+                std::cout<<"Do you want to play something ? (y/n) ";
+                std::string str;
+                std::cin>>str;
+                response = str[0];
+                if(response == 'y' && playables.size() == 0) {
+                    std::cout<<"You can't play anything this turn, you should say \"no\""<<std::endl;
+                    response = 0;
+                }
+                    
+            }
+            
+            if(response == 'y' && playables.size() > 0) {//wantToPlaySmth
+                size_t choice = playables.size();
+                while (choice < 0 || choice >= playables.size())
+                {
+                    std::string str;
+                    std::cout<<"Choose card to play : ";
+                    std::cin>>str;
+                    try {
+                        choice = std::stoi(str);
+                    }
+                    catch (const std::exception) {
+                        std::cout << "Invalid argument : " << str << std::endl;
+                    }
+                }
+                std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
+                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
+                Land* landCard = dynamic_cast<Land*>(playedCard.get());
+                if(landCard != nullptr) { //is a land
+                    playerToPlay->getBattlefield()->add(std::move(playedCard));
+                    action.hasPlayedLand = true;
+                    action.somethingPlayed = true;
+                }else {
+                    playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
+                    stack->add({std::move(playedCard), playerToPlay});
+                    castInstantsOrAbilities(opponent);
+                    solveStack();
+                    action.somethingPlayed = false;
+                }
+            
+            }else{
+                action.nextPhase();
+            }
+        };
         break;
 
     /* ENDING PHASE */
     case Phase::END_STEP:
         std::cout<<"End Step"<<std::endl;
-// while(playerToPlay->castSpellOrAbility() || opponent->castSpellOrAbility());
-// stack->solve();
+        if(action.somethingPlayed) {
+            castInstantsOrAbilities(playerToPlay);
+            solveStack();
+            action.somethingPlayed = false;
+        }
         action.nextPhase();
         break;
     
     case Phase::CLEANUP_STEP:
         std::cout<<"Cleanup Step"<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
+            std::cout<<"You have to throw cards : " << playerToPlay->getHand()->getLength() - 7<<std::endl;
+            std::vector<uint8_t> cardsId;
+            int idx = 0;
+            for(size_t i = 0; i < playerToPlay->getHand()->getCreatures().size(); i +=1) {
+                cardsId.push_back(playerToPlay->getHand()->getCreatures().at(i)->getCardUuid());
+                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getLands().size(); i +=1) {
+                cardsId.push_back(playerToPlay->getHand()->getLands().at(i)->getCardUuid());
+                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getInstants().size(); i +=1) {
+                cardsId.push_back(playerToPlay->getHand()->getInstants().at(i)->getCardUuid());
+                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getEnchantements().size(); i +=1) {
+                cardsId.push_back(playerToPlay->getHand()->getEnchantements().at(i)->getCardUuid());
+                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getSorceries().size(); i +=1) {
+                cardsId.push_back(playerToPlay->getHand()->getSorceries().at(i)->getCardUuid());
+                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+            }
+            int choice = -1;
+            while (choice < 0 || choice >= cardsId.size())
+            {
+                std::string str;
+                std::cout<<"Choose card to throw : ";
+                std::cin>>str;
+                try {
+                    choice = std::stoi(str);
+                }
+                catch (const std::exception) {
+                    std::cout << "Invalid argument : " << str << std::endl;
+                }
+            }
+            playerToPlay->killCard(cardsId.at(choice));
+
         }
         action.nextPhase();
         break;

@@ -24,6 +24,7 @@ public:
     std::uint8_t getTurn() const;
 
     bool hasPlayedLand;
+    bool somethingPlayed;
 
 private:
     GameAction();

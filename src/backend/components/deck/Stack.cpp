@@ -33,3 +33,9 @@ void Stack::display() {
         std::cout<< stack.at(i).second->getName() << " - " << stack.at(i).first.get()->getName()<< std::endl;
     }
 }
+
+Player* Stack::getTopPlayer() {
+    if(stack.size() > 0)
+        return stack.at(stack.size() - 1).second;
+    return nullptr;
+}
