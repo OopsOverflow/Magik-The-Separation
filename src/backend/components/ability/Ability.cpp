@@ -4,19 +4,9 @@
 
 #include "Ability.h"
 
-Ability::Ability(std::string name, std::string reminderText, std::string flavorText) : 
-    name(name), reminderText(reminderText), flavorText(flavorText) {
+Ability::Ability(uint16_t id, std::string name,
+                 std::function<void(Player*, Card*, std::vector<std::pair<Player*, Card*> >) > fct) :
+                 Card(id, name, {}), fct(fct) {
 
 }
 
-std::string Ability::getName() const {
-    return name;
-}
-
-std::string Ability::getReminderText() const {
-    return reminderText;
-}
-
-std::string Ability::getFlavorText() const {
-    return flavorText;
-}

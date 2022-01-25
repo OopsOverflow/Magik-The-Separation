@@ -6,8 +6,30 @@
 #define MAGIK_ENCHANTEMENT_H
 
 #include "Card.h"
+#include "../ability/ActivatedAbility.h"
+#include "../ability/TriggeredAbility.h"
 
-class Enchantement : Card {
+#include <functional>
+#include <vector>
+
+class Enchantement : public Card {
+public :
+    Enchantement(uint16_t id, const std::string &name, std::map<Color, int> cost);
+    ~Enchantement();
+
+    Enchantement(Enchantement const&) = delete;
+    Enchantement& operator=(Enchantement const&) = delete;
+
+    void addStaticAbility(StaticAbility ability);
+    void addActivatedAbility(const std::function<void()>& ability);
+    void addTriggeredAbility(const std::function<void(Event)>& ability);
+
+    std::vector<std::function<void(Event)> > getTriggerAbilities() const;
+
+private:
+    std::vector<StaticAbility> staticAbilities;
+    std::vector<std::function<void()> > activatedAbilities;
+    std::vector<std::function<void(Event)> > triggeredAbilities;
 
 };
 

@@ -4,59 +4,52 @@
 
 #ifndef MAGIK_PLAYER_H
 #define MAGIK_PLAYER_H
-#include "string"
+#include <string>
 #include "../deck/Battlefield.h"
-#include "../deck/Exile.h"
 #include "../deck/Graveyard.h"
 #include "../deck/Hand.h"
 #include "../deck/Library.h"
-#include "../deck/Stack.h"
 
 class Player {
 public :
-    Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack);
+    Player(std::string name);
     ~Player();
 
     std::string getName() const;
     uint64_t getId() const;
-    int8_t getHp() const;
-    void setOpponent(Player* player);    
+    int getHp() const;   
     
     //actions
-    void draw(uint8_t numberOfCards = 1);
-    void summonCard(uint8_t cardNumber);
+    void draw();
     void unTapAll();
-    void takeDamage(uint8_t amount);
+    void takeDamage(int amount);
+    void heal(int amount);
 
-    void castSpellOrAbility(bool hasCasted);
+    Card* seekCard(uint16_t cardId);
+    std::unique_ptr<Card> playCard(uint16_t cardId);
 
     Battlefield* getBattlefield();
     Hand* getHand();
     Graveyard* getGraveyard();
     Library* getLibrary();
-    Exile* getExile();
 
+    void killCard(uint16_t cardId);
+    std::vector<uint16_t> getCastableInstantsOrAbilities();
+    std::vector<uint16_t> getPlayableCards(bool hasPlayedLand);
 
 
 private :
     std::string name;
     uint64_t id;
-    int8_t hp;
-
-    Player* opponent;
+    int hp;
 
     Battlefield battlefield;
     Hand hand;
     Graveyard graveyard;
     Library library;
-    Exile exile;
-
-
-    bool canCastInstant;
 
     static uint64_t newId;
-
-    std::shared_ptr<Stack> stack;
+    
 
 };
 

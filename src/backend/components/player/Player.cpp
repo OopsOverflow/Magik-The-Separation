@@ -6,10 +6,11 @@
 
 uint64_t Player::newId = 0;
 
-Player::Player(std::string name, std::vector<std::unique_ptr<Card>> &deck, std::shared_ptr<Stack> stack)
-:   name(name), id(newId), hp(20), canCastInstant(false),
-    library(deck), graveyard(), exile(), hand(), battlefield(), stack(std::move(stack)) {
+Player::Player(std::string name)
+:   name(name), id(newId), hp(20),
+    library(), graveyard(), hand(), battlefield() {
     newId += 1;
+    std::cout<<"Player "<<name<<" created"<<std::endl;
 }
 
 
@@ -18,19 +19,15 @@ Player::~Player() {
 }
 
 std::string Player::getName() const {
-    return name;
+    return name + "(" + std::to_string(hp) + ")";
 }
 
 uint64_t Player::getId() const {
     return id;
 }
 
-int8_t Player::getHp() const {
+int Player::getHp() const {
     return hp;
-}
-
-void Player::setOpponent(Player* player){
-    opponent = player;
 }
 
 Battlefield* Player::getBattlefield() {
@@ -45,43 +42,122 @@ Graveyard* Player::getGraveyard() {
     return &graveyard;
 }
 
-Exile* Player::getExile() {
-    return &exile;
+Library* Player::getLibrary() {
+    return &library;
 }
 
-void Player::draw(uint8_t numberOfCards) {
-    if(library.getLenght() <= 1){
+void Player::draw() {
+    if(library.getLength() <= 1){
         hp = 0;
     }else {
-        hand.add(std::move(library.getTopCard()));
+        auto card = std::move(library.getTopCard());
+        std::cout<<"Drawed "<< card.get()->getName()<< std::endl;
+        hand.add(std::move(card));
     }    
 }
 
-void Player::summonCard(uint8_t cardNumber) {
-    std::unique_ptr<Card> card = std::move(hand.popCard(cardNumber));
-    if(false) {//TODO if is a land
-        battlefield.add(std::move(card));
-    }else{
-        stack->add(std::move(card));
-        opponent->castSpellOrAbility(true);
-    }
-
-}
-
-
 void Player::unTapAll() {
-    for(int i = 0; i < battlefield.getLenght(); i += 1) {
-        battlefield.unTap(i); //TODO only cards that can be tapped
+    for(size_t i = 0; i < battlefield.getCreatures().size(); i += 1) {
+        battlefield.getCreatures().at(i)->unTap();
+        battlefield.getCreatures().at(i)->newTurn();
     }
+
+    
+    for(size_t i = 0; i < battlefield.getLands().size(); i += 1)
+        battlefield.getLands().at(i)->unTap();
 }
 
-void Player::castSpellOrAbility(bool hasCasted) {
-    //TODO (Player can play cards)
-    bool hasCastedNow = false;
-    if (hasCasted || hasCastedNow) opponent->castSpellOrAbility(hasCastedNow);
-
-}
-
-void Player::takeDamage(uint8_t amount) {
+void Player::takeDamage(int amount) {
     hp -= amount;
+}
+
+void Player::heal(int amount) {
+    hp += amount;
+}
+
+void Player::killCard(uint16_t cardId) {
+    std::unique_ptr<Card> card;
+    if(hand.seekCard(cardId) != nullptr)
+        card = std::move(hand.popCard(cardId));
+    else
+        card = std::move(battlefield.popCard(cardId));
+    graveyard.add(std::move(card));
+}
+
+std::vector<uint16_t> Player::getCastableInstantsOrAbilities() {
+    std::vector<uint16_t> result;
+    std::vector<Color> availableMana;
+    auto lands = battlefield.getLands();
+    for(size_t i = 0; i < lands.size(); i += 1) {
+        if(!lands.at(i)->isTapped())
+            availableMana.push_back(lands.at(i)->getColor());
+    }
+    
+    auto instants = hand.getInstants();
+    for(size_t i = 0 ; i < instants.size(); i += 1) {
+        if(instants.at(i)->isAffordable(availableMana))
+            result.push_back(instants.at(i)->getCardUuid());
+    }
+
+    auto creatures = battlefield.getCreatures();
+    for(size_t i = 0; i < creatures.size(); i += 1) {
+        for(size_t j = 0; j < creatures.at(i)->getActivatedAbilities().size(); j += 1) {
+            if(creatures.at(i)->getActivatedAbilities().at(j).isAffordable(availableMana) && !creatures.at(i)->isTapped() && !creatures.at(i)->isSummoned())
+                result.push_back(creatures.at(i)->getActivatedAbilities().at(j).getCardUuid());
+        }
+    }
+    //TODO enchantments
+    return result;
+}
+
+std::vector<uint16_t> Player::getPlayableCards(bool hasPlayedLand) {
+    std::vector<uint16_t> result;
+    std::vector<Color> availableMana;
+    auto lands = battlefield.getLands();
+    for(size_t i = 0; i < lands.size(); i += 1) {
+        if(!lands.at(i)->isTapped())
+            availableMana.push_back(lands.at(i)->getColor());
+    }
+
+    if(!hasPlayedLand) {
+        auto _lands = hand.getLands();
+        for(size_t i = 0; i < _lands.size(); i += 1)
+            result.push_back(_lands.at(i)->getCardUuid());
+    }
+
+    auto creatures = hand.getCreatures();
+    for(size_t i = 0; i < creatures.size(); i += 1)
+        if(creatures.at(i)->isAffordable(availableMana))
+            result.push_back(creatures.at(i)->getCardUuid());
+    
+    auto enchants = hand.getEnchantements();
+    for(size_t i = 0; i < enchants.size(); i += 1)
+        if(enchants.at(i)->isAffordable(availableMana))
+            result.push_back(enchants.at(i)->getCardUuid());
+    
+    auto sorceries = hand.getSorceries();
+    for(size_t i = 0; i < sorceries.size(); i += 1)
+        if(sorceries.at(i)->isAffordable(availableMana))
+            result.push_back(sorceries.at(i)->getCardUuid());
+
+    auto abilities = getCastableInstantsOrAbilities();
+    result.insert(result.end(), abilities.begin(), abilities.end());
+    return result;
+}
+
+Card* Player::seekCard(uint16_t cardId) {
+    Card* result = hand.seekCard(cardId);
+    if(result != nullptr) return result;
+
+    return battlefield.seekCard(cardId);
+}
+
+std::unique_ptr<Card> Player::playCard(uint16_t cardId) {
+    std::unique_ptr<Card> card = hand.popCard(cardId);
+    if(card != nullptr) 
+        return std::move(card);
+    
+    auto creatures = battlefield.getCreatures();
+    //TODO add attached enchants
+    return nullptr;
 }

@@ -7,8 +7,13 @@
 
 #include "Card.h"
 
-class Sorcery : Card {
+class Sorcery : public Card {
+public : 
+    Sorcery(uint16_t id, const std::string &name, std::map<Color, int> cost);
+    ~Sorcery() override;
 
+    Sorcery(Sorcery const&) = delete;
+    Sorcery& operator=(Sorcery const&) = delete;
 };
 
 

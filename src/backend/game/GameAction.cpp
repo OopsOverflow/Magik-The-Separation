@@ -9,19 +9,25 @@ GameAction& GameAction::getInst() {
     return gameAction;
 }
 
-GameAction::GameAction() : phase(Phase::FIRST_MAIN_PHASE) {
+GameAction::GameAction() : hasPlayedLand(false), somethingPlayed(true), phase(Phase::UNTAP_STEP), turn(1) {
 
 }
 
-GameAction::~GameAction() {
-
-}
+GameAction::~GameAction() = default;
 
 
 Phase GameAction::getPhase() const {
     return phase;
 }
 
-void GameAction::setPhase(Phase const& phase) {
-    this->phase = phase;
+void GameAction::nextPhase() {
+    if(phase == Phase::CLEANUP_STEP) turn += 1;
+
+    phase = (Phase)(((int)phase + 1) % 12);
+    if(turn == 1 && phase == Phase::DRAW_STEP) nextPhase();
+
+}
+
+uint16_t GameAction::getTurn() const{
+    return turn;
 }

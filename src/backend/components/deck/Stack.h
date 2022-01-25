@@ -5,22 +5,27 @@
 #ifndef MAGIK_STACK_H
 #define MAGIK_STACK_H
 
-#include <stack>
+#include <vector>
 
 #include "Deck.h"
+#include "../player/Player.h"
 class Stack : public Deck {
 public : 
     Stack();
     ~Stack();
 
-    std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    Card* getCard(uint8_t cardNum) final;
-    uint8_t getLenght() const final;
-    void add(std::unique_ptr<Card> card);
+    Stack(Stack const&) = delete;
+    Stack& operator=(Stack const&) = delete;
 
-    void solve();
+    uint16_t getLength() const;
+
+    std::pair<std::unique_ptr<Card>, Player*> getTopPair();
+    Player* getTopPlayer();
+    void add(std::pair<std::unique_ptr<Card>, Player*> card);
+
+    void display();
 private :
-    std::stack<std::unique_ptr<Card> > stack;
+    std::vector<std::pair<std::unique_ptr<Card>, Player*> > stack;
 
 };
 

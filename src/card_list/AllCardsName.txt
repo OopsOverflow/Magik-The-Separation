@@ -1,0 +1,120 @@
+Charmed Stray
+Sanctuary Cat
+Soulmender
+Tactical Advantage
+Fencing Ace
+Hallowed Priest
+Impassioned Orator
+Knight's Pledge
+Moorland Inquisitor
+Pacifism
+Shrine Keeper
+Angel of Vitality
+Loxodon Line Breaker
+Leonin Warleader
+Angelic Reward
+Bond of Discipline
+Confront the Assault
+Serra Angel
+Spiritual Guardian
+Angelic Guardian
+Inspiring Commander
+Goring Ceratops
+River's Favor
+Unsummon
+Wall of Runes
+Zephyr Gull
+Coral Merfolk
+Glint
+Sword Guardian
+Waterkin Shaman
+Armored Whirl Turtule
+Cloudkin Seer
+Warden of Evos Isle
+Waterknot
+Winged Words
+Octoprophet
+Sleep
+Air Elemental
+Soulblade Djinn
+Windstorm Drake
+Frilled Sea Serpent
+Riddlemaster Sphinx
+Overflowing Insight
+Windreader Sphinx
+Compound Fracture
+Raise Dead
+Sanitarium Skeleton
+Typhoid Rats
+Cruel Cut
+Eternal Thirst
+Krowikan Scoundrel
+Malakir Cullblade
+Nimble Pilferer
+Unlikely Aid
+Vampire Opportunist
+Mardu Outrider
+Murder
+Savage Gorger
+Scathe Zombies
+Witch's Familiar
+Skeleton Archer
+Sengir Vampire
+Soulhunter Rakshasa
+Bad Deal
+Nightmare
+Demon of Loathing
+Raging Goblin
+Shock
+Storm Strike
+Tin Street Cadet
+Goblin Tunneler
+Maniacal Rage
+Nest Robber
+Bombard
+Burn Bright
+Fearless Halberdier
+Goblin Gathering
+Hurloon Minotaur
+Molten Ravager
+Raid Bombardment
+Goblin Gang Leader
+Goblin Trashmaster
+Ogre Battledriver
+Immortal Phoenix
+Inescapable Blaze
+Volcanic Dragon
+Siege Dragon
+Charging Badger
+Jungle Delver
+Stony Strength
+Feral Roar
+Greenwood Sentinel
+Ilysian Caryatid
+Rabid Bite
+Titanic Growth
+Treetop Warden
+Woodland Mystic
+Colossal Majesty
+Generous Stray
+Wildwood Partol
+Baloth Packhunter
+Prized Unicorn
+Rumbling Baloth
+World Shaper
+Gigantosaurus
+Sentinel Spider
+Epic Proportions
+Rampaging Brontodon
+
+---lands
+Plains
+Island
+Swamp
+Mountain
+Forest
+
+---invoqued creatures
+white Cat
+white Spirit
+red Goblin
