@@ -363,14 +363,14 @@ void Game::solvePhase() {
                     for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
                         Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
                         blockingCard->block(attackingCard);
-                        if(j == opponent->getBattlefield()->getBlockingCreatures().at(i).size() - 1 &&
-                           attackingCard->getTmpStats().second > 0 && 
-                           attackingCard->hasStaticAbility(StaticAbility::TRAMPLE)) {
+                        if(attackingCard->hasStaticAbility(StaticAbility::TRAMPLE) &&
+                            j == opponent->getBattlefield()->getBlockingCreatures().at(i).size() - 1 &&
+                            attackingCard->getTmpStats().second > 0) {
                             opponent->takeDamage(attackingCard->getTmpStats().first);
                             if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK))
                                 playerToPlay->heal(attackingCard->getTmpStats().first);
                            }
-                           
+
                     }
                 }else{
                     opponent->takeDamage(attackingCard->getTmpStats().first);
@@ -378,12 +378,13 @@ void Game::solvePhase() {
                         playerToPlay->heal(attackingCard->getTmpStats().first);
                 }
             }
+
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
                     if(attackingCard->getTmpStats().second <= 0) playerToPlay->killCard(attacking.at(i));
             }
             for(size_t i = 0; i < attacking.size(); i += 1) {
-                for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
+                for(size_t j = 0; j < blocking.at(i).size(); j += 1) {
                     Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
                         if(blockingCard->getTmpStats().second <= 0) opponent->killCard(blocking.at(i).at(j));
                 }

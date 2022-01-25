@@ -3,6 +3,7 @@
 //
 
 #include "Creature.h"
+#include <algorithm>
 
 
 Creature::Creature(uint16_t id, const std::string &name, std::map<Color, int> cost, uint16_t power, uint16_t thougness) 

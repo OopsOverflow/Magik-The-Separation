@@ -6,16 +6,16 @@
 #define MAGIK_ABILITY_H
 #include "string"
 #include "../card/Card.h"
+#include <functional>
 
+class Player;
 class Ability : public Card {
 public :
-    Ability(uint16_t id, std::string name, std::map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
-    std::string getReminderText() const;
-    std::string getFlavorText() const;
+    Ability(uint16_t id, std::string name, std::function<void(Player*, Card*, std::vector<std::pair<Player*, Card*> >) > fct);
 
 private :
-    std::string reminderText;
-    std::string flavorText;
+    //Caster, Casting Card, Targeted Cards + Owners
+    std::function<void(Player*, Card*, std::vector<std::pair<Player*, Card*> >) > fct;
 };
 
 

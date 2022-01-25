@@ -3,6 +3,7 @@
 //
 
 #include "Card.h"
+#include <algorithm>
 
 uint16_t Card::nextCardId = 0;
 

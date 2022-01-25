@@ -5,6 +5,7 @@
 #include "Battlefield.h"
 #include <algorithm>
 #include <iterator>
+#include <set>
 
 
 Battlefield::Battlefield() : Deck() {
@@ -318,34 +319,41 @@ void Battlefield::tapColors(std::map<Color, int> cost) {
     for(auto colorCost : cost) {
         if(colorCost.first != Color::WBBRG) {
             for(int j = 0; j < colorCost.second; j += 1) {
-                auto it = std::find_if(lands.begin(), lands.end(), [&](const auto& x) { return !x->isTapped() && colorCost.first == x->getColor();});
+                auto it = std::find_if(lands.begin(), lands.end(), [&](const std::unique_ptr<Land>& x) { return !x->isTapped() && colorCost.first == x->getColor();});
                 (*it)->tap();
             }
         }else {
             for(int i = 0; i < colorCost.second; i += 1) {
-                std::cout<<"Please select a land. Remaining : " << colorCost.second - i<<std::endl;
+
                 std::vector<Land*> remainingLands;
-                for(auto& land : lands) {
+                std::set<Color> remainingColors;
+                for(auto& land : lands)
                     if(!land.get()->isTapped()) {
                         remainingLands.push_back(land.get());
-                        std::cout << "  "<< remainingLands.size()-1 <<" - "<<remainingLands.back()->getName()<<std::endl;
+                        remainingColors.insert(land.get()->getColor());
                     }
+                if(remainingColors.size() == 1 || remainingLands.size() == (size_t)colorCost.second - i) {
+                    remainingLands.at(0)->tap();
+                }else {
+                    std::cout<<"Please select a land. Remaining : " << colorCost.second - i<<std::endl;
+                    for(size_t j = 0; j < remainingLands.size(); j += 1)
+                        std::cout << "  "<< j <<" - "<<remainingLands.at(j)->getName()<<std::endl;
+                    
+                    int choice = -1;
+                    while (choice < 0 || choice >= (int)remainingLands.size())
+                    {
+                        std::string str;
+                        std::cout<<"Choose land to tap : ";
+                        std::cin>>str;
+                        try {
+                            choice = std::stoi(str);
+                        }
+                        catch (const std::exception) {
+                            std::cout << "Invalid argument : " << str << std::endl;
+                        }
+                    }
+                    remainingLands.at(choice)->tap();
                 }
-
-                int choice = -1;
-                while (choice < 0 || choice >= (int)remainingLands.size())
-                {
-                    std::string str;
-                    std::cout<<"Choose land to tap : ";
-                    std::cin>>str;
-                    try {
-                        choice = std::stoi(str);
-                    }
-                    catch (const std::exception) {
-                        std::cout << "Invalid argument : " << str << std::endl;
-                    }
-                }
-                remainingLands.at(choice)->tap();
             }
 
         }
