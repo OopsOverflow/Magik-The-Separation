@@ -30,6 +30,6 @@ void GameAction::nextPhase() {
 
 }
 
-uint8_t GameAction::getTurn() const{
+uint16_t GameAction::getTurn() const{
     return turn;
 }

@@ -13,11 +13,11 @@ public :
     Hand();
     ~Hand();
 
-    uint8_t getLength() const;
+    uint16_t getLength() const;
 
-    std::unique_ptr<Card> popCard(uint8_t cardId);
+    std::unique_ptr<Card> popCard(uint16_t cardId);
     void add(std::unique_ptr<Card> card);
-    Card* seekCard(uint8_t cardId);
+    Card* seekCard(uint16_t cardId);
 
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();
@@ -25,11 +25,11 @@ public :
     std::vector<Enchantement*> getEnchantements();
     std::vector<Instant*> getInstants();
 
-    std::unique_ptr<Creature> summonCreature(uint8_t id);
-    std::unique_ptr<Land> summonLand(uint8_t id);
-    std::unique_ptr<Sorcery> summonSorcery(uint8_t id);
-    std::unique_ptr<Enchantement> summonEnchantement(uint8_t id);
-    std::unique_ptr<Instant> summonInstant(uint8_t id);
+    std::unique_ptr<Creature> summonCreature(uint16_t id);
+    std::unique_ptr<Land> summonLand(uint16_t id);
+    std::unique_ptr<Sorcery> summonSorcery(uint16_t id);
+    std::unique_ptr<Enchantement> summonEnchantement(uint16_t id);
+    std::unique_ptr<Instant> summonInstant(uint16_t id);
 
 private : 
     std::vector<std::unique_ptr<Creature> > creatures;

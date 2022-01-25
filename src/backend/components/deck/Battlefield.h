@@ -14,20 +14,20 @@ public :
     Battlefield();
     ~Battlefield();
 
-    uint8_t getLength() const;
+    uint16_t getLength() const;
 
     void add(std::unique_ptr<Card> card);
-    std::unique_ptr<Card> popCard(uint8_t cardId);
-    Card* seekCard(uint8_t cardId);
+    std::unique_ptr<Card> popCard(uint16_t cardId);
+    Card* seekCard(uint16_t cardId);
 
     std::vector<Creature*> getCreatures();
     std::vector<Land*> getLands();
 
     void setAttackingCreatures();
-    std::vector<uint8_t> getAttackingCreatures();
+    std::vector<uint16_t> getAttackingCreatures();
 
     void setBlockingCreatures(std::vector<Creature *> attacking);
-    std::vector<std::vector<uint8_t> > getBlockingCreatures();
+    std::vector<std::vector<uint16_t> > getBlockingCreatures();
 
     void tapColors(std::map<Color, int> cost);
 
@@ -37,8 +37,8 @@ private :
     std::vector<std::unique_ptr<Land> > lands;
 
     
-    std::vector<uint8_t> attackingCreatures;
-    std::vector<std::vector<uint8_t> > blockingCreatures;
+    std::vector<uint16_t> attackingCreatures;
+    std::vector<std::vector<uint16_t> > blockingCreatures;
 
 };
 

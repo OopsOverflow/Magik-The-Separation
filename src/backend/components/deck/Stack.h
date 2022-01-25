@@ -17,7 +17,7 @@ public :
     Stack(Stack const&) = delete;
     Stack& operator=(Stack const&) = delete;
 
-    uint8_t getLength() const;
+    uint16_t getLength() const;
 
     std::pair<std::unique_ptr<Card>, Player*> getTopPair();
     Player* getTopPlayer();

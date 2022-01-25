@@ -25,17 +25,17 @@ public :
     void takeDamage(int amount);
     void heal(int amount);
 
-    Card* seekCard(uint8_t cardId);
-    std::unique_ptr<Card> playCard(uint8_t cardId);
+    Card* seekCard(uint16_t cardId);
+    std::unique_ptr<Card> playCard(uint16_t cardId);
 
     Battlefield* getBattlefield();
     Hand* getHand();
     Graveyard* getGraveyard();
     Library* getLibrary();
 
-    void killCard(int cardId);
-    std::vector<uint8_t> getCastableInstantsOrAbilities();
-    std::vector<uint8_t> getPlayableCards(bool hasPlayedLand);
+    void killCard(uint16_t cardId);
+    std::vector<uint16_t> getCastableInstantsOrAbilities();
+    std::vector<uint16_t> getPlayableCards(bool hasPlayedLand);
 
 
 private :

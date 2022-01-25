@@ -4,7 +4,7 @@
 
 #include "Enchantement.h"
 
-Enchantement::Enchantement(uint8_t id, const std::string &name, std::map<Color, int> cost) : Card(id, name, cost) {
+Enchantement::Enchantement(uint16_t id, const std::string &name, std::map<Color, int> cost) : Card(id, name, cost) {
 
 }
 

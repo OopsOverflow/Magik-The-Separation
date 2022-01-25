@@ -10,7 +10,7 @@
 #include <vector>
 
 // Suckless
-typedef uint8_t sint;
+typedef uint16_t sint;
 enum class CardType {CREATURE, ENCHANTEMENT, INSTANT, LAND, SORCERY};
 enum class Color{WHITE, BLUE, BLACK, RED, GREEN, WBBRG};
 enum class StaticAbility{FLY, REACH, VIGILANCE, DEATHTOUCH, DEFENDER, FIRST_STRIKE, DOUBLE_STRIKE, HASTE, CANT_BE_BLOCKED, LIFELINK, INTIMIDATE, TRAMPLE};
@@ -18,7 +18,7 @@ enum class StaticAbility{FLY, REACH, VIGILANCE, DEATHTOUCH, DEFENDER, FIRST_STRI
 
 class Card {
 public:
-    Card(uint8_t id, const std::string &name, std::map<Color, int> cost);
+    Card(uint16_t id, const std::string &name, std::map<Color, int> cost);
 
     virtual const std::string &getName() const;
     virtual const std::map<Color, int> &getCost() const;
@@ -27,8 +27,8 @@ public:
 
     virtual ~Card();
 
-    uint8_t getCardUuid() const;
-    uint8_t getCardId() const;
+    uint16_t getCardUuid() const;
+    uint16_t getCardId() const;
 
     bool isTapped() const; //TODO (only permanent can be tapped)
     void unTap();
@@ -38,10 +38,10 @@ private:
     std::map<Color, int> cost;
 
     bool tapped;
-    uint8_t uuid;
-    uint8_t id;
+    uint16_t uuid;
+    uint16_t id;
 
-    static uint8_t nextCardId;
+    static uint16_t nextCardId;
 
 };
 

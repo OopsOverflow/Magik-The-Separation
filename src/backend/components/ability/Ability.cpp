@@ -4,7 +4,7 @@
 
 #include "Ability.h"
 
-Ability::Ability(uint8_t id, std::string name, std::map<Color, int> cost, std::string reminderText, std::string flavorText) : Card(id, name, cost), 
+Ability::Ability(uint16_t id, std::string name, std::map<Color, int> cost, std::string reminderText, std::string flavorText) : Card(id, name, cost), 
      reminderText(reminderText), flavorText(flavorText) {
 
 }

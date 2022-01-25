@@ -29,8 +29,8 @@ std::unique_ptr<Card> Library::getTopCard() {
     return ptr;
 }
 
-uint8_t Library::getLength() const {
-    return (uint8_t)stack.size();
+uint16_t Library::getLength() const {
+    return (uint16_t)stack.size();
 }
 
 void Library::add(std::unique_ptr<Card> card) {

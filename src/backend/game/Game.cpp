@@ -37,7 +37,7 @@ void Game::chooseCards() {
         std::default_random_engine e1(r());
         std::uniform_int_distribution<int> uniform_dist(0, 20);
         int mean = uniform_dist(e1);
-        auto newCard = std::move(maker.create(mean));
+        auto newCard = std::move(maker.create((uint16_t)mean));
         std::cout<<player1.getName()<<" - ";
         player1.getLibrary()->add(std::move(newCard));
         
@@ -49,7 +49,7 @@ void Game::chooseCards() {
         //     int id;
         //     try {
         //         id = std::stoi(str);
-        //         newCard = std::move(maker.create((uint8_t)id));
+        //         newCard = std::move(maker.create((uint16_t)id));
         //     }
         //     catch (const std::exception & e) {
         //         std::cout << "Invalid argument : " << str << std::endl;
@@ -78,7 +78,7 @@ void Game::chooseCards() {
         std::default_random_engine e1(r());
         std::uniform_int_distribution<int> uniform_dist(0, 20);
         int mean = uniform_dist(e1);
-        auto newCard = std::move(maker.create(mean));
+        auto newCard = std::move(maker.create((uint16_t)mean));
         std::cout<<player2.getName()<<" - ";
         player2.getLibrary()->add(std::move(newCard));
         
@@ -90,7 +90,7 @@ void Game::chooseCards() {
         //     int id;
         //     try {
         //         id = std::stoi(str);
-        //         newCard = std::move(maker.create((uint8_t)id));
+        //         newCard = std::move(maker.create((uint16_t)id));
         //     }
         //     catch (const std::exception & e) {
         //         std::cout << "Invalid argument : " << str << std::endl;
@@ -115,11 +115,11 @@ void Game::chooseCards() {
 
 
 // void Game::resolveEvent(Event event) {
-//     for(uint8_t i = 0; playerToPlay->getBattlefield()->getLength(); i += 1) {
+//     for(uint16_t i = 0; playerToPlay->getBattlefield()->getLength(); i += 1) {
 //         Creature* card =  dynamic_cast<Creature*> (playerToPlay->getBattlefield()->getCard(i));
 //         if(card) {
 //             std::vector<std::function<void(Event)> > abilities = card->getTriggerAbilities();
-//             for(uint8_t j = 0; j < abilities.size(); j += 1) {
+//             for(uint16_t j = 0; j < abilities.size(); j += 1) {
 //                 abilities.at(i)(event); //TODO abilities affect game
 //             }
 //         }
@@ -161,7 +161,7 @@ bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
                     try {
                         choice = std::stoi(str);
                     }
-                    catch (const std::exception & e) {
+                    catch (const std::exception) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -486,7 +486,7 @@ void Game::solvePhase() {
         std::cout<<"Cleanup Step"<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
             std::cout<<"You have to throw cards : " << playerToPlay->getHand()->getLength() - 7<<std::endl;
-            std::vector<uint8_t> cardsId;
+            std::vector<uint16_t> cardsId;
             int idx = 0;
             for(size_t i = 0; i < playerToPlay->getHand()->getCreatures().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getCreatures().at(i)->getCardUuid());
@@ -509,7 +509,7 @@ void Game::solvePhase() {
                 std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
             }
             int choice = -1;
-            while (choice < 0 || choice >= cardsId.size())
+            while (choice < 0 || choice >= (int)cardsId.size())
             {
                 std::string str;
                 std::cout<<"Choose card to throw : ";

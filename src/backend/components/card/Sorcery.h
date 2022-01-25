@@ -9,7 +9,7 @@
 
 class Sorcery : public Card {
 public : 
-    Sorcery(uint8_t id, const std::string &name, std::map<Color, int> cost);
+    Sorcery(uint16_t id, const std::string &name, std::map<Color, int> cost);
     ~Sorcery();
 
     Sorcery(Sorcery const&) = delete;

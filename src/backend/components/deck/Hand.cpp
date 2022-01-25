@@ -11,7 +11,7 @@ Hand::Hand() : lands(){
 Hand::~Hand() {
 }
 
-std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
+std::unique_ptr<Card> Hand::popCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1)
         if(creatures.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(creatures.at(i));
@@ -51,12 +51,12 @@ std::unique_ptr<Card> Hand::popCard(uint8_t cardId) {
 }
 
 
-uint8_t Hand::getLength() const {
-    return (uint8_t)(creatures.size() + sorceries.size() 
+uint16_t Hand::getLength() const {
+    return (uint16_t)(creatures.size() + sorceries.size() 
     + lands.size() + instants.size() + enchantements.size());
 }
 
-Card* Hand::seekCard(uint8_t cardId) {
+Card* Hand::seekCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1)
         if(creatures.at(i)->getCardUuid() == cardId)
             return creatures.at(i).get();
@@ -207,31 +207,31 @@ std::vector<Instant*> Hand::getInstants() {
     return result;
 }
 
-std::unique_ptr<Creature> Hand::summonCreature(uint8_t id) {
+std::unique_ptr<Creature> Hand::summonCreature(uint16_t id) {
     std::unique_ptr<Creature> card = std::move(creatures.at(id));
     creatures.erase(creatures.begin() + id);
     return std::move(card);
 }
 
-std::unique_ptr<Land> Hand::summonLand(uint8_t id) {
+std::unique_ptr<Land> Hand::summonLand(uint16_t id) {
     std::unique_ptr<Land> card = std::move(lands.at(id));
     lands.erase(lands.begin() + id);
     return std::move(card);
 }
 
-std::unique_ptr<Sorcery> Hand::summonSorcery(uint8_t id) {
+std::unique_ptr<Sorcery> Hand::summonSorcery(uint16_t id) {
     std::unique_ptr<Sorcery> card = std::move(sorceries.at(id));
     sorceries.erase(sorceries.begin() + id);
     return std::move(card);
 }
 
-std::unique_ptr<Enchantement> Hand::summonEnchantement(uint8_t id) {
+std::unique_ptr<Enchantement> Hand::summonEnchantement(uint16_t id) {
     std::unique_ptr<Enchantement> card = std::move(enchantements.at(id));
     enchantements.erase(enchantements.begin() + id);
     return std::move(card);
 }
 
-std::unique_ptr<Instant> Hand::summonInstant(uint8_t id) {
+std::unique_ptr<Instant> Hand::summonInstant(uint16_t id) {
     std::unique_ptr<Instant> card = std::move(instants.at(id));
     instants.erase(instants.begin() + id);
     return std::move(card);

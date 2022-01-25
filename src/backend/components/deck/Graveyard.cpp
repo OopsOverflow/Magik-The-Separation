@@ -12,18 +12,18 @@ Graveyard::~Graveyard() {
 
 }
 
-std::unique_ptr<Card> Graveyard::popCard(uint8_t cardNum) {
+std::unique_ptr<Card> Graveyard::popCard(uint16_t cardNum) {
     std::unique_ptr<Card> ptr = std::move(cards.at((int)cardNum));
     cards.erase(cards.begin() + cardNum);
     return ptr;  
 }
 
-Card* Graveyard::getCard(uint8_t cardNum) {
+Card* Graveyard::getCard(uint16_t cardNum) {
     return cards.at((int)cardNum).get();
 }
 
-uint8_t Graveyard::getLength() const {
-    return (uint8_t)cards.size();
+uint16_t Graveyard::getLength() const {
+    return (uint16_t)cards.size();
 }
 
 void Graveyard::add(std::unique_ptr<Card> card) {

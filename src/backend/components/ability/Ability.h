@@ -9,7 +9,7 @@
 
 class Ability : public Card {
 public :
-    Ability(uint8_t id, std::string name, std::map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
+    Ability(uint16_t id, std::string name, std::map<Color, int> cost, std::string reminderText = "", std::string flavorText = "");
     std::string getReminderText() const;
     std::string getFlavorText() const;
 

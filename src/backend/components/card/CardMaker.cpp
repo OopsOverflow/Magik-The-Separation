@@ -19,7 +19,7 @@ int CardMaker::registerCard(Maker m) {
     return (int)(factories.size() - 1);
 }
 
-std::unique_ptr<Card> CardMaker::create(uint8_t id) {
+std::unique_ptr<Card> CardMaker::create(uint16_t id) {
 	
 	if(id >= factories.size()) {
 		std::cout<< "Error - card out of range : " << 0 << " to "<< factories.size() - 1 << std::endl;

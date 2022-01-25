@@ -5,7 +5,7 @@
 #include "Land.h"
 
 
-Land::Land(uint8_t id, const std::string &name, Color color) : Card(id, name, {}), color(color) {
+Land::Land(uint16_t id, const std::string &name, Color color) : Card(id, name, {}), color(color) {
 
 }
 

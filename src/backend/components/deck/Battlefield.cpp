@@ -14,7 +14,7 @@ Battlefield::~Battlefield() {
 
 }
 
-std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
+std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1) {
         if(creatures.at(i).get()->getCardId() == cardId) {
             std::unique_ptr<Card> ptr = std::move(creatures.at(i));
@@ -24,14 +24,14 @@ std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
             if(it != attackingCreatures.end())attackingCreatures.erase(it);
             
             for(auto vec : blockingCreatures) {
-                auto it = std::find(vec.begin(), vec.end(), ptr.get()->getCardUuid());
-                if(it != vec.end())vec.erase(it);
+                auto it2 = std::find(vec.begin(), vec.end(), ptr.get()->getCardUuid());
+                if(it2 != vec.end())vec.erase(it2);
             }
 
             return ptr;
         }
 
-        for(size_t j = 0; i<creatures.at(i)->getAttachedCards().size(); j += 1) {
+        for(size_t j = 0; j <creatures.at(i)->getAttachedCards().size(); j += 1) {
             if(creatures.at(i).get()->getAttachedCards().at(j)->getCardId() == cardId) {
                 std::unique_ptr<Card> ptr(creatures.at(i)->getAttachedCards().at(j));        //TODO Wip DO NOT WORK
                 creatures.at(i)->getAttachedCards().erase(creatures.at(i)->getAttachedCards().begin() + i);
@@ -53,9 +53,10 @@ std::unique_ptr<Card> Battlefield::popCard(uint8_t cardId) {
     return nullptr;  
 }
 
-Card* Battlefield::seekCard(uint8_t cardId) {
+Card* Battlefield::seekCard(uint16_t cardId) {
     for(size_t i = 0; i < lands.size(); i += 1)
-        
+        if(lands.at(i)->getCardUuid() == cardId)
+                return lands.at(i).get();
 
 
     for(size_t i = 0; i < creatures.size(); i += 1) {
@@ -72,8 +73,8 @@ Card* Battlefield::seekCard(uint8_t cardId) {
     return nullptr;
 }
 
-uint8_t Battlefield::getLength() const {
-    return (uint8_t)(creatures.size() + lands.size());
+uint16_t Battlefield::getLength() const {
+    return (uint16_t)(creatures.size() + lands.size());
 }
 
 void Battlefield::add(std::unique_ptr<Card> card) {
@@ -136,7 +137,7 @@ std::vector<Land*> Battlefield::getLands() {
 
 void Battlefield::setAttackingCreatures() {
     attackingCreatures.clear();
-    std::vector<uint8_t> playables;
+    std::vector<uint16_t> playables;
     for(auto creature : getCreatures())
         if(!creature->isTapped() && !creature->isSummoned() && !creature->hasStaticAbility(StaticAbility::DEFENDER)) 
             playables.push_back(creature->getCardUuid());
@@ -160,7 +161,7 @@ void Battlefield::setAttackingCreatures() {
         }
     }
     if(response == 'y') {
-        std::vector<uint8_t> cardsIdx;
+        std::vector<uint16_t> cardsIdx;
         while (cardsIdx.size() < playables.size() && response == 'y')
         {
             int choice = -1;
@@ -182,7 +183,7 @@ void Battlefield::setAttackingCreatures() {
                 }
             }
             
-            cardsIdx.push_back((uint8_t)choice);
+            cardsIdx.push_back((uint16_t)choice);
             response = 0;
             while (response != 'y' && response != 'n' && cardsIdx.size() < playables.size())
             {
@@ -201,7 +202,7 @@ void Battlefield::setAttackingCreatures() {
     }
 }
 
-std::vector<uint8_t> Battlefield::getAttackingCreatures() {
+std::vector<uint16_t> Battlefield::getAttackingCreatures() {
     
     return attackingCreatures;
 }
@@ -209,7 +210,7 @@ std::vector<uint8_t> Battlefield::getAttackingCreatures() {
 
 void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
     blockingCreatures.clear();
-    std::vector<uint8_t> playables;
+    std::vector<uint16_t> playables;
     for(auto creature : getCreatures())
         if(!creature->isTapped()) 
             playables.push_back(creature->getCardUuid());
@@ -229,12 +230,11 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
     }
 
     if(response == 'y') {
-        uint8_t totalBlocking = 0; 
         for(size_t i = 0; i < attacking.size(); i += 1) {
             std::cout<<"Attacking creature : ";
             std::cout<<attacking.at(i)->getName()<<std::endl;
 
-            std::vector<uint8_t> blockable;
+            std::vector<uint16_t> blockable;
             for(auto creature : getCreatures()) {
                 if(attacking.at(i)->hasStaticAbility(StaticAbility::INTIMIDATE)) {
                     bool similarColors = false;
@@ -256,8 +256,8 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
             }
 
             std::cout<<"Available for blocking : "<<blockable.size()<<std::endl;
-            for(size_t i = 0; i < blockable.size(); i += 1)
-                std::cout <<"   "<< i << " - " << seekCard(blockable.at(i))->getName() << std::endl;
+            for(size_t j = 0; j < blockable.size(); j += 1)
+                std::cout <<"   "<< j << " - " << seekCard(blockable.at(j))->getName() << std::endl;
             
             char blockResponse = 0;
             while (blockResponse != 'y' && blockResponse != 'n' && blockable.size() > 0)
@@ -270,7 +270,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
 
             }
 
-            std::vector<uint8_t> cardsIdx;
+            std::vector<uint16_t> cardsIdx;
             while (response == 'y' && cardsIdx.size() < blockable.size())
             {
                 int choice = -1;
@@ -292,7 +292,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
                     }
                 }
                 
-                cardsIdx.push_back((uint8_t)choice);
+                cardsIdx.push_back((uint16_t)choice);
                 response = 0;
                 while (response != 'y' && response != 'n' && cardsIdx.size() < playables.size())
                 {
@@ -310,7 +310,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
 
 }
 
-std::vector<std::vector<uint8_t> > Battlefield::getBlockingCreatures() {
+std::vector<std::vector<uint16_t> > Battlefield::getBlockingCreatures() {
     return blockingCreatures;
 }
 
@@ -322,7 +322,7 @@ void Battlefield::tapColors(std::map<Color, int> cost) {
                 (*it)->tap();
             }
         }else {
-            for(size_t i = 0; i < colorCost.second; i += 1) {
+            for(int i = 0; i < colorCost.second; i += 1) {
                 std::cout<<"Please select a land. Remaining : " << colorCost.second - i<<std::endl;
                 std::vector<Land*> remainingLands;
                 for(auto& land : lands) {
@@ -333,7 +333,7 @@ void Battlefield::tapColors(std::map<Color, int> cost) {
                 }
 
                 int choice = -1;
-                while (choice < 0 || choice >= remainingLands.size())
+                while (choice < 0 || choice >= (int)remainingLands.size())
                 {
                     std::string str;
                     std::cout<<"Choose land to tap : ";

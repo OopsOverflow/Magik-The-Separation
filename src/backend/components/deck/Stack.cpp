@@ -19,8 +19,8 @@ std::pair<std::unique_ptr<Card>, Player*> Stack::getTopPair() {
     return result;
 }
 
-uint8_t Stack::getLength() const {
-    return (uint8_t)stack.size();
+uint16_t Stack::getLength() const {
+    return (uint16_t)stack.size();
 }
 
 void Stack::add(std::pair<std::unique_ptr<Card>, Player*> card) {

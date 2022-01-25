@@ -21,7 +21,7 @@ public:
     
     Phase getPhase() const;
     void nextPhase(); 
-    std::uint8_t getTurn() const;
+    std::uint16_t getTurn() const;
 
     bool hasPlayedLand;
     bool somethingPlayed;
@@ -31,7 +31,7 @@ private:
     ~GameAction();
 
     Phase phase;
-    std::uint8_t turn;
+    std::uint16_t turn;
     
 };
 

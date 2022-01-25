@@ -19,7 +19,7 @@ class Deck {
 public :
     Deck();
 
-    virtual uint8_t getLength() const=0;
+    virtual uint16_t getLength() const=0;
     static CardType getCardType(Card* card);
 
     virtual ~Deck() = default;

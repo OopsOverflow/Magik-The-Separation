@@ -4,9 +4,9 @@
 
 #include "Card.h"
 
-uint8_t Card::nextCardId = 0;
+uint16_t Card::nextCardId = 0;
 
-Card::Card(uint8_t id, const std::string &name, std::map<Color, int> cost) : id(id), name(name), cost(cost), tapped(false), uuid(nextCardId) {
+Card::Card(uint16_t id, const std::string &name, std::map<Color, int> cost) : id(id), name(name), cost(cost), tapped(false), uuid(nextCardId) {
     nextCardId += 1;
 }
 
@@ -34,11 +34,11 @@ void Card::tap() {
     tapped = true;
 }
 
-uint8_t Card::getCardUuid() const {
+uint16_t Card::getCardUuid() const {
     return uuid;
 }
 
-uint8_t Card::getCardId() const {
+uint16_t Card::getCardId() const {
     return id;
 }
 
@@ -53,7 +53,7 @@ bool Card::isAffordable(std::vector<Color> availableMana) {
                     return false;
             }
         }else {
-            return colorCost.second <= availableMana.size();
+            return colorCost.second <= (int)availableMana.size();
         }
     }
     return true;

@@ -123,7 +123,7 @@ void Player::heal(int amount) {
     hp += amount;
 }
 
-void Player::killCard(int cardId) {
+void Player::killCard(uint16_t cardId) {
     std::unique_ptr<Card> card;
     if(hand.seekCard(cardId) != nullptr)
         card = std::move(hand.popCard(cardId));
@@ -132,8 +132,8 @@ void Player::killCard(int cardId) {
     graveyard.add(std::move(card));
 }
 
-std::vector<uint8_t> Player::getCastableInstantsOrAbilities() {
-    std::vector<uint8_t> result;
+std::vector<uint16_t> Player::getCastableInstantsOrAbilities() {
+    std::vector<uint16_t> result;
     std::vector<Color> availableMana;
     auto lands = battlefield.getLands();
     for(size_t i = 0; i < lands.size(); i += 1) {
@@ -158,8 +158,8 @@ std::vector<uint8_t> Player::getCastableInstantsOrAbilities() {
     return result;
 }
 
-std::vector<uint8_t> Player::getPlayableCards(bool hasPlayedLand) {
-    std::vector<uint8_t> result;
+std::vector<uint16_t> Player::getPlayableCards(bool hasPlayedLand) {
+    std::vector<uint16_t> result;
     std::vector<Color> availableMana;
     auto lands = battlefield.getLands();
     for(size_t i = 0; i < lands.size(); i += 1) {
@@ -193,14 +193,14 @@ std::vector<uint8_t> Player::getPlayableCards(bool hasPlayedLand) {
     return result;
 }
 
-Card* Player::seekCard(uint8_t cardId) {
+Card* Player::seekCard(uint16_t cardId) {
     Card* result = hand.seekCard(cardId);
     if(result != nullptr) return result;
 
     return battlefield.seekCard(cardId);
 }
 
-std::unique_ptr<Card> Player::playCard(uint8_t cardId) {
+std::unique_ptr<Card> Player::playCard(uint16_t cardId) {
     std::unique_ptr<Card> card = hand.popCard(cardId);
     if(card != nullptr) 
         return std::move(card);

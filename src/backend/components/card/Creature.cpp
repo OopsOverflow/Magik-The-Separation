@@ -5,7 +5,7 @@
 #include "Creature.h"
 
 
-Creature::Creature(uint8_t id, const std::string &name, std::map<Color, int> cost, uint8_t power, uint8_t thougness) 
+Creature::Creature(uint16_t id, const std::string &name, std::map<Color, int> cost, uint16_t power, uint16_t thougness) 
 : Card(id, name, cost), stats({power, thougness}), summoningSickness(true) {
 
 }
@@ -70,6 +70,11 @@ void Creature::block(Creature* attackingCard) {
             attackingCard->addTmpStat({-attackingCard->getTmpStats().first, -this->getTmpStats().first});
             this->addTmpStat({-this->getTmpStats().first, -attackingCard->getTmpStats().first});
         }
+
+    }else if (this->getTmpStats().second > 0){
+        attackingCard->addTmpStat({0, -this->getTmpStats().first});
+        this->addTmpStat({-this->getTmpStats().first, 0});
+
     }
 
 }
