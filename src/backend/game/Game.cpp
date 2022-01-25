@@ -114,26 +114,17 @@ void Game::chooseCards() {
 }
 
 
-// void Game::resolveEvent(Event event) {
-//     for(uint16_t i = 0; playerToPlay->getBattlefield()->getLength(); i += 1) {
-//         Creature* card =  dynamic_cast<Creature*> (playerToPlay->getBattlefield()->getCard(i));
-//         if(card) {
-//             std::vector<std::function<void(Event)> > abilities = card->getTriggerAbilities();
-//             for(uint16_t j = 0; j < abilities.size(); j += 1) {
-//                 abilities.at(i)(event); //TODO abilities affect game
-//             }
-//         }
-//     }
-// }
-
 bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
         bool hasCasted = false;
         if(castingPlayer->getHand()->getLength() > 0) {
-            std::cout<<castingPlayer->getName()<<std::endl;
+            
             auto playables = playerToPlay->getCastableInstantsOrAbilities();
-            std::cout<<"Playable cards : "<< playables.size() << std::endl;
-            for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<i<<" - "<<castingPlayer->seekCard(playables.at(i))->getName()<<std::endl;
+            if(playables.size() > 0) {
+                std::cout<<castingPlayer->getName()<<std::endl;
+                std::cout<<"Playable cards : "<< playables.size() << std::endl;
+                for(size_t i = 0; i < playables.size(); i += 1) { 
+                    std::cout<<i<<" - "<<castingPlayer->seekCard(playables.at(i))->getName()<<std::endl;
+                }
             }
 
             char response = 0;//TODO autoscrool at this point
@@ -313,6 +304,7 @@ void Game::solvePhase() {
     
     /* COMBAT PHASE */
     case Phase::BEGINNING_OF_COMBAT_STEP:
+        std::cout<<"Beginning of Combat Step"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -322,7 +314,7 @@ void Game::solvePhase() {
         break;
 
     case Phase::DECLARE_ATTACKER_STEP:
-        std::cout<<"Declare Attacker Step"<<std::endl;
+        std::cout<<"Declare Attacker Step"<<std::endl<<std::endl;
         playerToPlay->getBattlefield()->setAttackingCreatures();
         castInstantsOrAbilities(playerToPlay);
         solveStack();
@@ -332,7 +324,7 @@ void Game::solvePhase() {
 
 
     case Phase::DECLARE_BLOCKER_STEP:
-        std::cout<<"Declare Blocker Step"<<std::endl;
+        std::cout<<"Declare Blocker Step"<<std::endl<<std::endl;
         {
             if(playerToPlay->getBattlefield()->getAttackingCreatures().size() > 0) {
                 std::vector<Creature*> attacking;
@@ -353,13 +345,12 @@ void Game::solvePhase() {
     
     case Phase::COMBAT_DAMAGE_STEP:
         {
-            std::cout<<"Combat Damage Step"<<std::endl;
+            std::cout<<"Combat Damage Step"<<std::endl<<std::endl;
             auto attacking = playerToPlay->getBattlefield()->getAttackingCreatures();
             auto blocking = opponent->getBattlefield()->getBlockingCreatures();
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
                 if(blocking.at(i).size() > 0) {
-
                     for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
                         Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
                         blockingCard->block(attackingCard);
@@ -399,7 +390,7 @@ void Game::solvePhase() {
         action.nextPhase();
         break;
     case Phase::END_OF_COMBAT_STEP:
-        std::cout<<"End of Combat Step"<<std::endl;
+        std::cout<<"End of Combat Step"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -410,7 +401,7 @@ void Game::solvePhase() {
 
     /* SECOND MAIN PHASE */
     case Phase::SECOND_MAIN_PHASE:
-        std::cout<<"Second Main Phase"<<std::endl;
+        std::cout<<"Second Main Phase"<<std::endl<<std::endl;
         {    
 
             std::cout<<playerToPlay->getName()<<std::endl;
@@ -474,7 +465,7 @@ void Game::solvePhase() {
 
     /* ENDING PHASE */
     case Phase::END_STEP:
-        std::cout<<"End Step"<<std::endl;
+        std::cout<<"End Step"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -484,7 +475,7 @@ void Game::solvePhase() {
         break;
     
     case Phase::CLEANUP_STEP:
-        std::cout<<"Cleanup Step"<<std::endl;
+        std::cout<<"Cleanup Step"<<std::endl<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
             std::cout<<"You have to throw cards : " << playerToPlay->getHand()->getLength() - 7<<std::endl;
             std::vector<uint16_t> cardsId;

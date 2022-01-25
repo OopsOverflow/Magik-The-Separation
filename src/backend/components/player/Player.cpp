@@ -67,54 +67,6 @@ void Player::unTapAll() {
         battlefield.getLands().at(i)->unTap();
 }
 
-// bool Player::castSpellOrAbility() {
-//     bool hasCastedNow = false;
-//     std::cout<<"Playable cards : "<<std::endl;
-//     int idx = 0;
-//     for(int i = 0 ; i < hand.getInstants().size(); i += 1) 
-//         std::cout<< idx++ << " - " << hand.getInstants().at(i)->getName()<<std::endl;
-//     for(int i = 0; i < battlefield.getCreatures().size(); i += 1) {
-//         if(battlefield.getCreatures().at(i)->getActivatedAbilities().size() > 0) {
-//             std::cout<< idx++ << " - " << battlefield.getCreatures().at(i)->getName() <<  " : " << battlefield.getCreatures().at(i)->getActivatedAbilities().size() <<std::endl;
-//         }
-//     }
-//     //TODO enchantments
-//     char response = 0;
-//         while (response != 'y' && response != 'n')
-//         {
-
-//             std::cout<< name <<" - Do you want to play something ? (y/n) ";
-//             std::string str;
-//             std::cin>>str;
-//             response = str[0];
-//         }
-//     if(response == 'y'){//wantToPlaySmth
-//         int choice = -1;
-//         while (choice < 0 || choice >= idx)
-//         {
-//             std::string str;
-//             std::cout<<"Choose card to play : ";
-//             std::cin>>str;
-//             try {
-//                 choice = std::stoi(str);
-//             }
-//             catch (const std::exception & e) {
-//                 std::cout << "Invalid argument : " << str << std::endl;
-//             }
-//         }
-//         if(choice < hand.getInstants().size()){
-//             auto card = std::move(hand.summonInstant(choice));
-//             stack->add(std::move(card));
-//         }else{
-//             //TODO play ability
-//             //TODO play enchantment
-//         }
-//         hasCastedNow = true;
-//     }
-//     return hasCastedNow;
-
-// }
-
 void Player::takeDamage(int amount) {
     hp -= amount;
 }
@@ -207,12 +159,5 @@ std::unique_ptr<Card> Player::playCard(uint16_t cardId) {
     
     auto creatures = battlefield.getCreatures();
     //TODO add attached enchants
-// for(int i = 0; i < creatures.size(); i += 1) {
-//     for(int j = 0; j < creatures.at(i)->getActivatedAbilities().size(); j += 1) {
-//         if(creatures.at(i)->getActivatedAbilities().at(j).getCardUuid() == id)
-//             return creatures.at(i)->getName() + "( ability " + std::to_string(j+1) + " )";
-//     }
-// }
-    
     return nullptr;
 }

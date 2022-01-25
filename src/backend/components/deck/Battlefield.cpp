@@ -306,6 +306,13 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
             }
             blockingCreatures.push_back(cardsIdx);
         }
+    } else {
+        for(size_t i = 0; i<attacking.size(); i += 1)
+        {
+            std::vector<uint16_t> cardsIdx;
+            blockingCreatures.push_back(cardsIdx);
+        }
+        
     }
 
 
