@@ -1,0 +1,32 @@
+extends ../layout
+
+block body
+  div#mainframe
+    h1 Welcome to the Lobby #{SESSION.username}
+    br
+    br
+    a.btn.btn-default(href='/deck-builder') Deck Builder
+    br
+    br
+    a.btn.btn-warning(href='/playground/debug') Game Debug
+    br
+    br
+    h3 Current Games :
+    div.well
+      ul#game_list
+    div
+      a.btn.btn-danger(href='#host_game_modal', data-toggle='modal') Host Game
+    div#host_game_modal.modal.fade
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            h3 Host a Game
+          div.modal-body
+            input#host_game_name.form-control(type='text')
+          div.modal-footer
+            button.btn(type='button', data-dismiss='modal', aria-hidden='true') Close
+            button.btn.btn-info(type='button', id='host_game') Start
+
+block contextual_js
+  script(type="text/javascript", src="/js/src/generic/realtime.js")
+  script(type="text/javascript", src="/js/src/simple/lobby.js")

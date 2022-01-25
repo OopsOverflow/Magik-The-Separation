@@ -3,7 +3,7 @@ set(PROJECT_NAME "MAGIK")
 project(${PROJECT_NAME})
 # Set the C++ standard to C++11
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
 # Enable all compiler warnings
