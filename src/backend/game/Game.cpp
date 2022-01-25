@@ -491,23 +491,23 @@ void Game::solvePhase() {
             int idx = 0;
             for(size_t i = 0; i < playerToPlay->getHand()->getCreatures().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getCreatures().at(i)->getCardUuid());
-                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+                std::cout<<"    "<<idx++<<" - "<<playerToPlay->getHand()->getCreatures().at(i)->getName()<<std::endl;
             }
             for(size_t i = 0; i < playerToPlay->getHand()->getLands().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getLands().at(i)->getCardUuid());
-                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+                std::cout<<"    "<<idx++<<" - "<<playerToPlay->getHand()->getLands().at(i)->getName()<<std::endl;
             }
             for(size_t i = 0; i < playerToPlay->getHand()->getInstants().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getInstants().at(i)->getCardUuid());
-                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+                std::cout<<"    "<<idx++<<" - "<<playerToPlay->getHand()->getInstants().at(i)->getName()<<std::endl;
             }
             for(size_t i = 0; i < playerToPlay->getHand()->getEnchantements().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getEnchantements().at(i)->getCardUuid());
-                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+                std::cout<<"    "<<idx++<<" - "<<playerToPlay->getHand()->getEnchantements().at(i)->getName()<<std::endl;
             }
             for(size_t i = 0; i < playerToPlay->getHand()->getSorceries().size(); i +=1) {
                 cardsId.push_back(playerToPlay->getHand()->getSorceries().at(i)->getCardUuid());
-                std::cout<<"    "<<idx++<<" - "<<cardsId.back()<<std::endl;
+                std::cout<<"    "<<idx++<<" - "<<playerToPlay->getHand()->getSorceries().at(i)->getName()<<std::endl;
             }
             int choice = -1;
             while (choice < 0 || choice >= (int)cardsId.size())
