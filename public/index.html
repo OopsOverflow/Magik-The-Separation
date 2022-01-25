@@ -4,43 +4,8 @@
 		<title>Test Socket</title>
 		<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 		<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
-		<script type="text/javascript">
-
-			var socket = io.connect("ws://127.0.0.1:3030");
-			io.set('origins', '*:*');
-
-			socket.on('data', function(data)
-			{
-				//Extract the message type
-				var messageData = JSON.parse(data);
-				var messageType = messageData['__MESSAGE__'];
-				delete messageData['__MESSAGE__'];
-
-				//If any handlers have been registered for the message type, invoke them
-				if (socket.messageHandlers[messageType] !== undefined)
-				{
-					for (index in socket.messageHandlers[messageType]) {
-						socket.messageHandlers[messageType][index](messageData);
-					}
-				}
-			});
-
-			socket.on('connect', function() {
-				log("socket is connected!");
-			});
-
-			socket.on("aServerEvent", function(data)
-			{
-				document.getElementById("message").innerHTML = ("<hr/>" +
-						data['message'] + document.getElementById("message").innerHTML);
-			});
-
-			function sendMessage()
-			{
-				var msg = document.getElementById("message").value;
-				socket.emit("aClientEvent", { message : msg});
-			}
-		</script>
+		<script src="simplewebsocket.min.js"></script>
+		<script src="index.js"></script>
 
 	</head>
 	

@@ -7,6 +7,8 @@
  * For more information on using Sails with Sockets, check out:
  * http://sailsjs.org/#documentation
  */
+const {SocketWrapper} = require('../config/sock');
+var socket = new SocketWrapper("ws://127.0.0.1:3030");
 
 module.exports.sockets = {
 
@@ -96,7 +98,12 @@ module.exports.sockets = {
   // you can pass along a ?cookie query parameter to the upgrade url, 
   // which Sails will use in the absense of a proper cookie
   // e.g. (when connection from the client):
-  // io.connect('http://localhost:1337?cookie=smokeybear')
+
+
+  // Experimental
+  onConnect: function (){
+    socket.send("message", {"g": 1});
+  },
   //
   // (Un)fortunately, the user's cookie is (should!) not accessible in client-side js.
   // Using HTTP-only cookies is crucial for your app's security.

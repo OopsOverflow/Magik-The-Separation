@@ -1,5 +1,5 @@
 {
-  "name": "Magik : The Seperation",
+  "name": "magik-the-seperation",
   "author": "Mahmoud, Surer",
   "private": true,
   "version": "1.0.0",
@@ -16,7 +16,6 @@
     "debug": "node debug app.js"
   },
   "main": "app.js",
-
   "dependencies": {
     "connect": "^3.7.0",
     "cookie": "^0.4.1",
@@ -40,6 +39,7 @@
     "rc": "0.3.3",
     "sails": "0.10.0-rc4",
     "sails-disk": "0.10.0-rc4",
-    "sails-memory": "0.10.0-rc1"
+    "sails-memory": "0.10.0-rc1",
+    "simple-websocket": "^9.1.0"
   }
 }
