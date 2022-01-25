@@ -19,7 +19,7 @@ Player::~Player() {
 }
 
 std::string Player::getName() const {
-    return name;
+    return name + "(" + std::to_string(hp) + ")";
 }
 
 uint64_t Player::getId() const {

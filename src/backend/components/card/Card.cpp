@@ -14,8 +14,23 @@ Card::Card(uint16_t id, const std::string &name, std::map<Color, int> cost) : id
 Card::~Card() {
 
 }
+std::string Card::getColorStr() {
+    std::string resultName;
+    if(cost.size() > 0) {
+        std::string toStr[5] = {"W", "B", "B", "R", "G"};
+        for(auto color : cost) {
+            if(color.first != Color::WBBRG) {
+                for(int j = 0 ; j < color.second; j += 1)
+                    resultName += "{" + toStr[(int)color.first] + "}";
+            }else{
+                resultName += "{" + std::to_string(color.second) + "}";
+            }
+        }
+    }
+    return resultName;
+}
 
-const std::string &Card::getName() const {
+std::string Card::getName() {
     return name;
 }
 

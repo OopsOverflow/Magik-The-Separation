@@ -146,7 +146,7 @@ void Battlefield::setAttackingCreatures() {
     //TODO can be optimised but don't need to (graphic)
     std::cout<<"Playable creatures : "<<std::endl;
     for(size_t i = 0; i < playables.size(); i += 1)
-        std::cout <<"   "<< i << " - " << seekCard(playables.at(i))->getName() << std::endl;    
+        std::cout <<"   "<< i << " - " << seekCard(playables.at(i))->getName() << dynamic_cast<Creature*>(seekCard(playables.at(i)))->getTmpStats() << std::endl;    
 
     char response = 0;//TODO autoscrool at this point
     while (response != 'y' && response != 'n' && playables.size() > 0)
@@ -233,7 +233,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
     if(response == 'y') {
         for(size_t i = 0; i < attacking.size(); i += 1) {
             std::cout<<"Attacking creature : ";
-            std::cout<<attacking.at(i)->getName()<<std::endl;
+            std::cout<<attacking.at(i)->getName()<<attacking.at(i)->getTmpStats()<<std::endl;
 
             std::vector<uint16_t> blockable;
             for(auto creature : getCreatures()) {
@@ -258,7 +258,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
 
             std::cout<<"Available for blocking : "<<blockable.size()<<std::endl;
             for(size_t j = 0; j < blockable.size(); j += 1)
-                std::cout <<"   "<< j << " - " << seekCard(blockable.at(j))->getName() << std::endl;
+                std::cout <<"   "<< j << " - " << seekCard(blockable.at(j))->getName() << dynamic_cast<Creature*>(seekCard(blockable.at(j)))->getTmpStats() << std::endl;
             
             char blockResponse = 0;
             while (blockResponse != 'y' && blockResponse != 'n' && blockable.size() > 0)
@@ -293,7 +293,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
                     }
                 }
                 
-                cardsIdx.push_back((uint16_t)choice);
+                cardsIdx.push_back(blockable.at((uint16_t)choice));
                 response = 0;
                 while (response != 'y' && response != 'n' && cardsIdx.size() < playables.size())
                 {

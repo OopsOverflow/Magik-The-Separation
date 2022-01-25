@@ -246,7 +246,7 @@ void Game::solvePhase() {
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
             std::cout<<"Playable cards : "<< playables.size() << std::endl;
             for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
             }
 
             //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
@@ -409,7 +409,7 @@ void Game::solvePhase() {
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
             std::cout<<"Playable cards : "<< playables.size() << std::endl;
             for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
             }
 
             //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities

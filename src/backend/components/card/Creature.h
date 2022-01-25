@@ -16,6 +16,15 @@
 
 enum class SUBTYPE{ANGEL};
 
+template <typename T, typename S>
+std::ostream& operator<<(std::ostream& os, const std::pair<T, S>& v)
+{
+    os << "(";
+    os << v.first << ", " 
+       << v.second << ")";
+    return os;
+}
+
 class Creature : public Card {
 public :
     Creature(uint16_t id, const std::string &name, std::map<Color, int> cost, uint16_t power, uint16_t thougness);

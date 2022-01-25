@@ -20,7 +20,8 @@ class Card {
 public:
     Card(uint16_t id, const std::string &name, std::map<Color, int> cost);
 
-    virtual const std::string &getName() const;
+    std::string getName();
+    std::string getColorStr();
     virtual const std::map<Color, int> &getCost() const;
 
     bool isAffordable(std::vector<Color> availableMana);
