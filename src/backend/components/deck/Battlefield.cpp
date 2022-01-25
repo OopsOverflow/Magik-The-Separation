@@ -11,9 +11,7 @@
 Battlefield::Battlefield() : Deck() {
 }
 
-Battlefield::~Battlefield() {
-
-}
+Battlefield::~Battlefield() = default;
 
 std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1) {
@@ -21,11 +19,11 @@ std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
             std::unique_ptr<Card> ptr = std::move(creatures.at(i));
             creatures.erase(creatures.begin() + i);
             
-            auto it = std::find(attackingCreatures.begin(), attackingCreatures.end(), ptr.get()->getCardUuid());
+            auto it = std::find(attackingCreatures.begin(), attackingCreatures.end(), ptr->getCardUuid());
             if(it != attackingCreatures.end())attackingCreatures.erase(it);
             
             for(auto vec : blockingCreatures) {
-                auto it2 = std::find(vec.begin(), vec.end(), ptr.get()->getCardUuid());
+                auto it2 = std::find(vec.begin(), vec.end(), ptr->getCardUuid());
                 if(it2 != vec.end())vec.erase(it2);
             }
 
@@ -322,7 +320,7 @@ std::vector<std::vector<uint16_t> > Battlefield::getBlockingCreatures() {
     return blockingCreatures;
 }
 
-void Battlefield::tapColors(std::map<Color, int> cost) {
+void Battlefield::tapColors(const std::map<Color, int>& cost) {
     for(auto colorCost : cost) {
         if(colorCost.first != Color::WBBRG) {
             for(int j = 0; j < colorCost.second; j += 1) {
@@ -335,7 +333,7 @@ void Battlefield::tapColors(std::map<Color, int> cost) {
                 std::vector<Land*> remainingLands;
                 std::set<Color> remainingColors;
                 for(auto& land : lands)
-                    if(!land.get()->isTapped()) {
+                    if(!land->isTapped()) {
                         remainingLands.push_back(land.get());
                         remainingColors.insert(land.get()->getColor());
                     }

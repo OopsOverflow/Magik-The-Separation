@@ -4,16 +4,15 @@
 
 #include "Card.h"
 #include <algorithm>
+#include <utility>
 
 uint16_t Card::nextCardId = 0;
 
-Card::Card(uint16_t id, const std::string &name, std::map<Color, int> cost) : id(id), name(name), cost(cost), tapped(false), uuid(nextCardId) {
+Card::Card(uint16_t id, std::string name, std::map<Color, int> cost) : name(std::move(name)), cost(std::move(cost)), tapped(false), uuid(nextCardId), id(id) {
     nextCardId += 1;
 }
 
-Card::~Card() {
-
-}
+Card::~Card() = default;
 
 const std::string &Card::getName() const {
     return name;

@@ -9,9 +9,7 @@ Land::Land(uint16_t id, const std::string &name, Color color) : Card(id, name, {
 
 }
 
-Land::~Land() {
-    
-}
+Land::~Land() = default;
 
 Color Land::getColor() const {
     return color;

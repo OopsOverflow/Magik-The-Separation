@@ -29,7 +29,7 @@ public :
     void setBlockingCreatures(std::vector<Creature *> attacking);
     std::vector<std::vector<uint16_t> > getBlockingCreatures();
 
-    void tapColors(std::map<Color, int> cost);
+    void tapColors(const std::map<Color, int>& cost);
 
 
 private : 

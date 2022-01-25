@@ -22,7 +22,7 @@ public:
     
     static CardMaker& getInst();
 
-    int registerCard(Maker m);    
+    int registerCard(const Maker& m);
     std::unique_ptr<Card> create(uint16_t id);
     
 private:

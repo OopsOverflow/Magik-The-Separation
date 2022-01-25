@@ -525,3 +525,11 @@ void Game::solvePhase() {
     }
 
 }
+
+Player *Game::getPlayer1() {
+    return &player1;
+}
+
+Player *Game::getPlayer2() {
+    return &player2;
+}

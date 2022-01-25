@@ -14,7 +14,6 @@
 #include <memory>
 #include <vector>
 
-enum class SUBTYPE{ANGEL};
 
 class Creature : public Card {
 public :

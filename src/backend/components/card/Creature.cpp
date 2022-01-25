@@ -4,16 +4,15 @@
 
 #include "Creature.h"
 #include <algorithm>
+#include <utility>
 
 
 Creature::Creature(uint16_t id, const std::string &name, std::map<Color, int> cost, uint16_t power, uint16_t thougness) 
-: Card(id, name, cost), stats({power, thougness}), summoningSickness(true) {
+: Card(id, name, std::move(cost)), summoningSickness(true), stats({power, thougness}) {
 
 }
 
-Creature::~Creature() {
-
-}
+Creature::~Creature() = default;
 
 std::pair<int, int> Creature::getBaseStats() const {
     return stats;

@@ -21,8 +21,8 @@ public :
     Enchantement& operator=(Enchantement const&) = delete;
 
     void addStaticAbility(StaticAbility ability);
-    void addActivatedAbility(std::function<void()> ability);
-    void addTriggeredAbility(std::function<void(Event)> ability);
+    void addActivatedAbility(const std::function<void()>& ability);
+    void addTriggeredAbility(const std::function<void(Event)>& ability);
 
     std::vector<std::function<void(Event)> > getTriggerAbilities() const;
 

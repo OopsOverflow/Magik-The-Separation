@@ -4,7 +4,9 @@
 
 #include "Ability.h"
 
-Ability::Ability(uint16_t id, std::string name, std::function<void(Player*, Card*, std::vector<std::pair<Player*, Card*> >) > fct) : Card(id, name, {}), fct(fct) {
+Ability::Ability(uint16_t id, std::string name,
+                 std::function<void(Player*, Card*, std::vector<std::pair<Player*, Card*> >) > fct) :
+                 Card(id, name, {}), fct(fct) {
 
 }
 
