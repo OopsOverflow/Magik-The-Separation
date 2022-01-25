@@ -7,8 +7,6 @@
  * For more information on using Sails with Sockets, check out:
  * http://sailsjs.org/#documentation
  */
-const {SocketWrapper} = require('../config/sock');
-var socket = new SocketWrapper("ws://127.0.0.1:3030");
 
 module.exports.sockets = {
 
@@ -101,9 +99,6 @@ module.exports.sockets = {
 
 
   // Experimental
-  onConnect: function (){
-    socket.send("message", {"g": 1});
-  },
   //
   // (Un)fortunately, the user's cookie is (should!) not accessible in client-side js.
   // Using HTTP-only cookies is crucial for your app's security.

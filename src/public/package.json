@@ -12,7 +12,7 @@
     "magik"
   ],
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon node app.js",
     "debug": "node debug app.js"
   },
   "main": "app.js",
@@ -41,5 +41,8 @@
     "sails-disk": "0.10.0-rc4",
     "sails-memory": "0.10.0-rc1",
     "simple-websocket": "^9.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
