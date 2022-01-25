@@ -14,7 +14,7 @@ CardMaker& CardMaker::getInst() {
     return inst;
 }
 
-int CardMaker::registerCard(Maker m) {
+int CardMaker::registerCard(const Maker& m) {
     factories.push_back(m);
     return (int)(factories.size() - 1);
 }
@@ -73,7 +73,7 @@ std::unique_ptr<Card> createSoulmender() {
 	std::map<Color, int> cost =  {{Color::WHITE, 1}};
 	std::unique_ptr<Creature> card (new Creature(7, "Soulmender", cost, 1, 1));
 	//TODO event when tapped
-	return std::move(card);;
+	return std::move(card);
 }
 
 // std::unique_ptr<Card> createTacticalAdvantage() {

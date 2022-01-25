@@ -4,24 +4,24 @@
 
 #include "Enchantement.h"
 
-Enchantement::Enchantement(uint16_t id, const std::string &name, std::map<Color, int> cost) : Card(id, name, cost) {
+#include <utility>
+
+Enchantement::Enchantement(uint16_t id, const std::string &name, std::map<Color, int> cost) : Card(id, name, std::move(cost)) {
 
 }
 
-Enchantement::~Enchantement() {
-    
-}
+Enchantement::~Enchantement() = default;
 
 
 void Enchantement::addStaticAbility(StaticAbility ability) {
     staticAbilities.push_back(ability);
 }
 
-void Enchantement::addActivatedAbility(std::function<void()> ability) {
+void Enchantement::addActivatedAbility(const std::function<void()>& ability) {
     activatedAbilities.push_back(ability);
 }
 
-void Enchantement::addTriggeredAbility(std::function<void(Event)> ability) {
+void Enchantement::addTriggeredAbility(const std::function<void(Event)>& ability) {
     triggeredAbilities.push_back(ability);
 }
 

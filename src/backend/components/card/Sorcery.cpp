@@ -8,6 +8,4 @@ Sorcery::Sorcery(uint16_t id, const std::string &name, std::map<Color, int> cost
 
 }
 
-Sorcery::~Sorcery() {
-    
-}
+Sorcery::~Sorcery() = default;

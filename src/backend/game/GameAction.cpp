@@ -9,13 +9,11 @@ GameAction& GameAction::getInst() {
     return gameAction;
 }
 
-GameAction::GameAction() : phase(Phase::UNTAP_STEP), turn(1), hasPlayedLand(false), somethingPlayed(true) {
+GameAction::GameAction() : hasPlayedLand(false), somethingPlayed(true), phase(Phase::UNTAP_STEP), turn(1) {
 
 }
 
-GameAction::~GameAction() {
-
-}
+GameAction::~GameAction() = default;
 
 
 Phase GameAction::getPhase() const {

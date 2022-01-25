@@ -18,7 +18,7 @@ enum class StaticAbility{FLY, REACH, VIGILANCE, DEATHTOUCH, DEFENDER, FIRST_STRI
 
 class Card {
 public:
-    Card(uint16_t id, const std::string &name, std::map<Color, int> cost);
+    Card(uint16_t id, std::string name, std::map<Color, int> cost);
 
     std::string getName();
     std::string getColorStr();

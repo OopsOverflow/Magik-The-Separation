@@ -14,7 +14,6 @@
 #include <memory>
 #include <vector>
 
-enum class SUBTYPE{ANGEL};
 
 template <typename T, typename S>
 std::ostream& operator<<(std::ostream& os, const std::pair<T, S>& v)

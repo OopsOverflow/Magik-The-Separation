@@ -25,10 +25,10 @@ int main(int argc, char* argv[])
     std::cout<<"---Initialising Game"<<std::endl;  
     game.initGame();
 
-    std::cout<<"---Launching Battle"<<std::endl;  
+    std::cout<<"---Launching Battle"<<std::endl;
     while(true){
         game.solvePhase();
-        
+
     }
         return 0;
     //Create the event loop for the main thread, and the WebSocket server

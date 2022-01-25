@@ -8,6 +8,4 @@ Instant::Instant(uint16_t id, const std::string &name, std::map<Color, int> cost
 
 }
 
-Instant::~Instant() {
-    
-}
+Instant::~Instant() = default;
