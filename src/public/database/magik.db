@@ -173,14 +173,14 @@
     ],
     "user": [
       {
-        "username": "hm",
+        "username": "Player1",
         "password": "test",
         "createdAt": "2022-01-13T02:06:08.861Z",
         "updatedAt": "2022-01-13T02:06:08.861Z",
         "id": 1
       },
       {
-        "username": "marcel",
+        "username": "Player2",
         "password": "test",
         "createdAt": "2022-01-13T11:58:26.375Z",
         "updatedAt": "2022-01-13T11:58:26.375Z",
