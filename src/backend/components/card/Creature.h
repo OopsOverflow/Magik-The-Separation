@@ -35,9 +35,9 @@ public :
 
     std::string displayStaticAbilitites();
 
-    std::pair<int, int> getBaseStats() const;
-    std::pair<int, int> getTotalStats();
-    std::pair<int, int> getTmpStats();
+    std::pair<int, int> getBaseStats() const; //Creature flat stats
+    std::pair<int, int> getTotalStats(); //Creature permanent buffed stats
+    std::pair<int, int> getTmpStats(); //Creature temp stats (stats during the turn)
 
     void addTmpStat(std::pair<int,int> stat);
     void block(Creature* attackingCard);
@@ -60,8 +60,8 @@ public :
 private :
 
     bool summoningSickness;
-    std::pair<int, int> stats;
-    std::vector<std::pair<int, int> >modifiers;
+    std::pair<int, int> stats; 
+    std::vector<std::pair<int, int> >modifiers; 
     std::vector<std::pair<int,int> > tmpModifiers;
 
     std::vector<StaticAbility> staticAbilities;

@@ -34,7 +34,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
             if(creatures.at(i).get()->getAttachedCards().at(j)->getCardUuid() == cardId) {
                 std::unique_ptr<Card> ptr(creatures.at(i)->getAttachedCards().at(j));        //TODO Wip DO NOT WORK
                 creatures.at(i)->getAttachedCards().erase(creatures.at(i)->getAttachedCards().begin() + i);
-            return ptr;
+                return ptr;
             }
 
         }
@@ -61,6 +61,7 @@ Card* Battlefield::seekCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1) {
         if(creatures.at(i)->getCardUuid() == cardId)
             return creatures.at(i).get();
+
         for(size_t j = 0; j < creatures.at(i)->getActivatedAbilities().size(); j += 1) {
             if(creatures.at(i)->getActivatedAbilities().at(j).getCardUuid() == cardId)
                 return creatures.at(i).get();//TODO activatedAbilities
@@ -132,7 +133,6 @@ std::vector<Land*> Battlefield::getLands() {
         result.push_back(lands.at(i).get());
     return result;
 }
-
 
 void Battlefield::setAttackingCreatures() {
     attackingCreatures.clear();
@@ -346,7 +346,7 @@ void Battlefield::tapColors(const std::map<Color, int>& cost) {
                 if(remainingColors.size() == 1 || remainingLands.size() == (size_t)colorCost.second - i) {
                     remainingLands.at(0)->tap();
                 }else {
-                    std::cout<<"Please select a land. Remaining : " << colorCost.second - i<<std::endl;
+                    std::cout<<"Please select a land to tap. Remaining : " << colorCost.second - i<<std::endl;
                     for(size_t j = 0; j < remainingLands.size(); j += 1)
                         std::cout << "  "<< j <<" - "<<remainingLands.at(j)->getName()<<std::endl;
                     

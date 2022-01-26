@@ -48,6 +48,7 @@ Library* Player::getLibrary() {
 
 void Player::draw() {
     if(library.getLength() <= 1){
+        //kill player if nothing to draw
         hp = 0;
     }else {
         auto card = std::move(library.getTopCard());

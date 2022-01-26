@@ -31,6 +31,8 @@ void Game::chooseCards() {
     auto& maker = CardMaker::getInst();
     while(player1.getLibrary()->getLength() < 60) {
 
+        //This part select random cards
+
         // std::random_device r;
     
         // // Choose a random mean between 1 and 29
@@ -41,7 +43,7 @@ void Game::chooseCards() {
         // std::cout<<player1.getName()<<" - ";
         // player1.getLibrary()->add(std::move(newCard));
         
-        
+        //This part select preselected cards
         uint16_t setCards1[40] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 8, 8, 8, 8, 16, 16, 16, 16, 6, 6, 6, 6, 21, 21, 21, 21, 22, 22, 22, 22};
         for(auto id : setCards1) {
             auto newCard = std::move(maker.create(id));
@@ -50,7 +52,7 @@ void Game::chooseCards() {
         }
         break;
         
-            
+        //This part allows you to choose your cards
         /*
         std::unique_ptr<Card> newCard = nullptr;
         while(newCard == nullptr) {
@@ -88,6 +90,8 @@ void Game::chooseCards() {
     }
     while(player2.getLibrary()->getLength() < 60) {
 
+        //This part select random cards
+
         // std::random_device r;
     
         // // Choose a random mean between 1 and 29
@@ -98,7 +102,7 @@ void Game::chooseCards() {
         // std::cout<<player2.getName()<<" - ";
         // player2.getLibrary()->add(std::move(newCard));
         
-        
+        //This part select preselected cards
         uint16_t setCards2[40] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 13, 13, 13, 13, 14, 14, 14, 14, 26, 26, 26, 26, 27, 27, 27, 27, 22, 22, 22, 22};
         for(auto id : setCards2) {
             auto newCard = std::move(maker.create(id));
@@ -107,7 +111,7 @@ void Game::chooseCards() {
         }
         break;
         
-            
+        //This part allows you to choose your cards    
         /*
         std::unique_ptr<Card> newCard = nullptr;
         while(newCard == nullptr) {
@@ -329,6 +333,7 @@ void Game::solvePhase() {
                 std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
                 std::cout<<"Played "<<playedCard.get()->getName()<<std::endl<<std::endl;
                 Land* landCard = dynamic_cast<Land*>(playedCard.get());
+                
                 if(landCard != nullptr) { //is a land
                     playerToPlay->getBattlefield()->add(std::move(playedCard));
                     action.hasPlayedLand = true;

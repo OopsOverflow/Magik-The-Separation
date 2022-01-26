@@ -16,35 +16,35 @@ std::unique_ptr<Card> Hand::popCard(uint16_t cardId) {
         if(creatures.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(creatures.at(i));
             creatures.erase(creatures.begin() + i);
-            return card; // TODO CHECK MOVE HERE
+            return card; // TODO check std::move here
         }
             
     for(size_t i = 0; i < lands.size(); i += 1)
         if(lands.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(lands.at(i));
             lands.erase(lands.begin() + i);
-            return card; // TODO CHECK MOVE HERE
+            return card; // TODO check std::move here
         }
 
     for(size_t i = 0; i < instants.size(); i += 1)
         if(instants.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(instants.at(i));
             instants.erase(instants.begin() + i);
-            return card; // TODO CHECK MOVE HERE
+            return card; // TODO check std::move here
         }
         
     for(size_t i = 0; i < enchantements.size(); i += 1)
         if(enchantements.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(enchantements.at(i));
             enchantements.erase(enchantements.begin() + i);
-            return card; // TODO CHECK MOVE HERE
+            return card; // TODO check std::move here
         }
     
     for(size_t i = 0; i < sorceries.size(); i += 1)
         if(sorceries.at(i)->getCardUuid() == cardId) {
             std::unique_ptr<Card> card = std::move(sorceries.at(i));
             sorceries.erase(sorceries.begin() + i);
-            return card; // TODO CHECK MOVE HERE
+            return card; // TODO check std::move here
         }
 
     return nullptr;
@@ -210,29 +210,29 @@ std::vector<Instant*> Hand::getInstants() {
 std::unique_ptr<Creature> Hand::summonCreature(uint16_t id) {
     std::unique_ptr<Creature> card = std::move(creatures.at(id));
     creatures.erase(creatures.begin() + id);
-    return card; // TODO CHECK MOVE HERE
+    return card; // TODO check std::move here
 }
 
 std::unique_ptr<Land> Hand::summonLand(uint16_t id) {
     std::unique_ptr<Land> card = std::move(lands.at(id));
     lands.erase(lands.begin() + id);
-    return card; // TODO CHECK MOVE HERE
+    return card; // TODO check std::move here
 }
 
 std::unique_ptr<Sorcery> Hand::summonSorcery(uint16_t id) {
     std::unique_ptr<Sorcery> card = std::move(sorceries.at(id));
     sorceries.erase(sorceries.begin() + id);
-    return card; // TODO CHECK MOVE HERE
+    return card; // TODO check std::move here
 }
 
 std::unique_ptr<Enchantement> Hand::summonEnchantement(uint16_t id) {
     std::unique_ptr<Enchantement> card = std::move(enchantements.at(id));
     enchantements.erase(enchantements.begin() + id);
-    return card; // TODO CHECK MOVE HERE
+    return card; // TODO check std::move here
 }
 
 std::unique_ptr<Instant> Hand::summonInstant(uint16_t id) {
     std::unique_ptr<Instant> card = std::move(instants.at(id));
     instants.erase(instants.begin() + id);
-    return card; // TODO CHECK MOVE HERE
+    return card; // TODO check std::move here
 }

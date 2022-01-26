@@ -25,7 +25,7 @@ public:
 
     bool hasPlayedLand;
     bool somethingPlayed;
-    int rdStart;
+    int rdStart; //choose random player start
 
 private:
     GameAction();

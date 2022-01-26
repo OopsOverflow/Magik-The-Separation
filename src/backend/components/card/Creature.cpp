@@ -52,17 +52,20 @@ void Creature::block(Creature* attackingCard) {
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
             auto atk = attackingCard->getTmpStats();
             auto def = this->getTmpStats();
-            attackingCard->addTmpStat({-1, 0});
+            if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
+                attackingCard->addTmpStat({-1, 0});
             this->addTmpStat({0, -def.second});
         }else if(attackingCard->getTmpStats().first >= this->getTmpStats().second) {
             auto atk = attackingCard->getTmpStats();
             auto def = this->getTmpStats();
-            attackingCard->addTmpStat({-def.second, 0});
+            if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
+                attackingCard->addTmpStat({-def.second, 0});
             this->addTmpStat({0, -def.second});
         } else {
             auto atk = attackingCard->getTmpStats();
             auto def = this->getTmpStats();
-            attackingCard->addTmpStat({-atk.first, 0});
+            if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
+                attackingCard->addTmpStat({-atk.first, 0});
             this->addTmpStat({0, -atk.first});
         }
     }
