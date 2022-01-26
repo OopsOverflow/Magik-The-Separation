@@ -6,29 +6,69 @@
 #define MAGIK_CREATURE_H
 
 #include "Card.h"
+#include "../ability/ActivatedAbility.h"
+#include "../ability/TriggeredAbility.h"
+#include "Enchantement.h"
 
-enum class SUBTYPE{ANGEL};
+#include <functional>
+#include <memory>
+#include <vector>
+#include <iostream>
+
+
+template <typename T, typename S>
+std::ostream& operator<<(std::ostream& os, const std::pair<T, S>& v)
+{
+    os << "(";
+    os << v.first << ", " 
+       << v.second << ")";
+    return os;
+}
 
 class Creature : public Card {
 public :
-    Creature(const std::string &name, std::unordered_map<std::string, int> cost, uint8_t power, uint8_t thougness);
+    Creature(uint16_t id, const std::string &name, std::map<Color, int> cost, uint16_t power, uint16_t thougness);
     ~Creature();
 
-    uint8_t getPower() const;
-    uint8_t getThougness() const;
-    
+    Creature(Creature const&) = delete;
+    Creature& operator=(Creature const&) = delete;
 
-    void block(Creature* attacker);
-    void takeDamage(uint8_t damages);
+    std::string displayStaticAbilitites();
 
-    int8_t getTempThougness() const;
+    std::pair<int, int> getBaseStats() const;
+    std::pair<int, int> getTotalStats();
+    std::pair<int, int> getTmpStats();
+
+    void addTmpStat(std::pair<int,int> stat);
+    void block(Creature* attackingCard);
+
+    void addStaticAbility(StaticAbility ability);
+    // void addActivatedAbility(std::function<void()> ability);
+    // void addTriggeredAbility(std::function<void(Event)> ability);
+
+    std::vector<TriggeredAbility > getTriggerAbilities() const;
+    std::vector<ActivatedAbility > getActivatedAbilities() const;
+
+    std::vector<Enchantement*> getAttachedCards();
+    void attachCard(std::unique_ptr<Enchantement> card);
+
+    bool hasStaticAbility(StaticAbility ability);
+
+    bool isSummoned();
+    void newTurn();
 
 private :
-    uint8_t power;
-    uint8_t thougness;
 
-    int8_t tempThougness;
+    bool summoningSickness;
+    std::pair<int, int> stats;
+    std::vector<std::pair<int, int> >modifiers;
+    std::vector<std::pair<int,int> > tmpModifiers;
 
+    std::vector<StaticAbility> staticAbilities;
+    std::vector<ActivatedAbility > activatedAbilities;
+    std::vector<TriggeredAbility > triggeredAbilities;
+
+    std::vector<std::unique_ptr<Enchantement> > attachedEnchantments;
 };
 
 

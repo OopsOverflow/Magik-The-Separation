@@ -7,7 +7,13 @@
 
 #include "Card.h"
 
-class Instant : Card {
+class Instant : public Card {
+public : 
+    Instant(uint16_t id, const std::string &name, std::map<Color, int> cost);
+    ~Instant() override;
+
+    Instant(Instant const&) = delete;
+    Instant& operator=(Instant const&) = delete;
 
 };
 

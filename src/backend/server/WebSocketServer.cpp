@@ -43,7 +43,7 @@ WebsocketServer::WebsocketServer()
 void WebsocketServer::run(int port)
 {
     //Listen on the specified port number and start accepting connections
-    this->endpoint.listen(port);
+    this->endpoint.listen((uint16_t)port);
     std::cout << "Listening on port " << port << std::endl;
     this->endpoint.start_accept();
     std::cout << "http://localhost:" << port << std::endl;

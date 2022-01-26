@@ -6,32 +6,36 @@
 #include <stdlib.h>
 
 Stack::Stack() {
-
+    std::cout<<"Stack created"<<std::endl;
 }
 
 Stack::~Stack() {
 
 }
 
-std::unique_ptr<Card> Stack::getTopCard() {
-    std::unique_ptr<Card> ptr = std::move(stack.top());
-    stack.pop();
-    return ptr;
+std::pair<std::unique_ptr<Card>, Player*> Stack::getTopPair() {
+    std::pair<std::unique_ptr<Card>, Player*> result = {std::move(stack.at(stack.size() - 1).first), stack.at(stack.size() - 1).second};
+    stack.pop_back();
+    return result;
 }
 
-
-Card* Stack::getCard(uint8_t cardNum) {
-    return stack.top().get();
+uint16_t Stack::getLength() const {
+    return (uint16_t)stack.size();
 }
 
-uint8_t Stack::getLenght() const {
-    return (uint8_t)stack.size();
+void Stack::add(std::pair<std::unique_ptr<Card>, Player*> card) {
+    stack.push_back({std::move(card.first), card.second});
 }
 
-void Stack::add(std::unique_ptr<Card> card) {
-    stack.push(std::move(card));
+void Stack::display() {
+    std::cout<<"---Stack "<<std::endl;
+    for(int i = 0; i< getLength(); i += 1) {
+        std::cout<< stack.at(i).second->getName() << " - " << stack.at(i).first.get()->getName()<< std::endl;
+    }
 }
 
-void Stack::solve() {
-    
+Player* Stack::getTopPlayer() {
+    if(stack.size() > 0)
+        return stack.at(stack.size() - 1).second;
+    return nullptr;
 }

@@ -14,17 +14,32 @@ public :
     Battlefield();
     ~Battlefield();
 
-    std::unique_ptr<Card> popCard(uint8_t cardNum);
-    Card* getCard(uint8_t cardNum) final;
-    uint8_t getLenght() const final;
-    int8_t getCardIndex(Card* card);
+    uint16_t getLength() const;
 
-    void unTap(uint8_t cardNum);  
+    void add(std::unique_ptr<Card> card);
+    std::unique_ptr<Card> popCard(uint16_t cardId);
+    Card* seekCard(uint16_t cardId);
 
-    void add(std::unique_ptr<Card> card) final;
+    std::vector<Creature*> getCreatures();
+    std::vector<Land*> getLands();
+
+    void setAttackingCreatures();
+    std::vector<uint16_t> getAttackingCreatures();
+
+    void setBlockingCreatures(std::vector<Creature *> attacking);
+    std::vector<std::vector<uint16_t> > getBlockingCreatures();
+
+    void tapColors(const std::map<Color, int>& cost);
+
 
 private : 
-    std::vector<std::unique_ptr<Card> > cards;
+    std::vector<std::unique_ptr<Creature> > creatures;
+    std::vector<std::unique_ptr<Land> > lands;
+
+    
+    std::vector<uint16_t> attackingCreatures;
+    std::vector<std::vector<uint16_t> > blockingCreatures;
+
 };
 
 

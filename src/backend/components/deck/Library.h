@@ -5,23 +5,27 @@
 #ifndef MAGIK_LIBRARY_H
 #define MAGIK_LIBRARY_H
 
-#include <stack>
 #include <vector>
 #include "Deck.h"
 
 class Library : public Deck {
 public : 
-    Library(std::vector<std::unique_ptr<Card>> &cards);
+    Library();
     ~Library();
 
+    Library(Library const&) = delete;
+    Library& operator=(Library const&) = delete;
+
+    uint16_t getLength() const;
+    std::vector<Card*> getCards();
+
     void shuffle();
-    std::unique_ptr<Card> getTopCard(); //Non const bc remove top stack
-    Card* getCard(uint8_t cardNum) final;
-    uint8_t getLenght() const final;
+    std::unique_ptr<Card> getTopCard();
+    void add(std::unique_ptr<Card> card);
 
 private :
-    std::stack<std::unique_ptr<Card> > stack;
 
+    std::vector<std::unique_ptr<Card> > stack;
 };
 
 

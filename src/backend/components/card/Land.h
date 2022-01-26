@@ -7,8 +7,17 @@
 
 #include "Card.h"
 
-class Land : Card {
+class Land : public Card {
+public : 
+    Land(uint16_t id, const std::string &name, Color color);
+    ~Land();
 
+    Land(Land const&) = delete;
+    Land& operator=(Land const&) = delete;
+
+    Color getColor() const;
+private : 
+    Color color;
 };
 
 

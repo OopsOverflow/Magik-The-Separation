@@ -13,13 +13,16 @@ public :
     Graveyard();
     ~Graveyard();
 
-    void add(std::unique_ptr<Card> card);
+    uint16_t getLength() const;
 
-    std::unique_ptr<Card> popCard(uint8_t cardNum);
-    Card* getCard(uint8_t cardNum);
-    uint8_t getLenght() const;
+    void add(std::unique_ptr<Card> card);
+    std::unique_ptr<Card> popCard(uint16_t cardId);
+    Card* getCard(uint16_t cardId);
+    
+
 private : 
     std::vector<std::unique_ptr<Card> > cards;
+
 };
 
 

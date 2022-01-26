@@ -6,7 +6,14 @@
 #define MAGIK_TRIGGERED_ABILITY_H
 #include "Ability.h"
 
-class TriggeredAbility : Ability {
+
+
+enum class Event{ATTACK, BLOCKING, SPAWN,
+CREATURE_DIES,
+BEGINNING_OF_UPKEEP_STEP, END_OF_UPKEEP_STEP};
+
+
+class TriggeredAbility : public Ability {
 public :
 
 private :

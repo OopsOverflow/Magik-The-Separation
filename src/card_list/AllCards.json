@@ -1,0 +1,770 @@
+{
+    "Air Elemental": {
+        "type": "Creature",
+        "subtype": "Elemental",
+        "manaCost": "{3}{U}{U}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Flying"
+    },
+    "Angel of Vitality": {
+        "type": "Creature",
+        "subtype": "Angel",
+        "manaCost": "{2}{W}",
+        "power": "2",
+        "toughness": "2",
+        "text": "Flying\nIf you would gain life, you gain that much life plus 1 instead.\nAngel of Vitality gets +2/+2 as long as you have 25 or more life."
+    },
+    "Angelic Guardian": {
+        "type": "Creature",
+        "subtype": "Angel",
+        "manaCost": "{4}{W}{W}",
+        "power": "5",
+        "toughness": "5",
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever one or more creatures you control attack, they gain indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy them.)"
+    },
+    "Angelic Reward": {
+        "type": "Enchantment",
+        "manaCost": "{3}{W}{W}",
+        "text": "Enchant creature\nEnchanted creature gets +3/+3 and has flying."
+    },
+    "Armored Whirl Turtle": {
+        "type": "Creature",
+        "subtype": "Turtle",
+        "manaCost": "{2}{U}",
+        "power": "0",
+        "toughness": "5"
+    },
+    "Bad Deal": {
+        "type": "Sorcery",
+        "manaCost": "{4}{B}{B}",
+        "text": "You draw two cards and each opponent discards two cards. Each player loses 2 life."
+    },
+    "Baloth Packhunter": {
+        "type": "Creature",
+        "subtype": "Beast",
+        "manaCost": "{3}{G}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Trample\nWhen Baloth Packhunter enters the battlefield, put two +1/+1 counters on each other creature you control named Baloth Packhunter."
+    },
+    "Bombard": {
+        "type": "Instant",
+        "manaCost": "{2}{R}",
+        "text": "Bombard deals 4 damage to target creature."
+    },
+    "Bond of Discipline": {
+        "type": "Sorcery",
+        "manaCost": "{4}{W}",
+        "text": "Tap all creatures your opponents control. Creatures you control gain lifelink until end of turn."
+    },
+    "Burn Bright": {
+        "type": "Instant",
+        "manaCost": "{2}{R}",
+        "text": "Creatures you control get +2/+0 until end of turn."
+    },
+    "Charging Badger": {
+        "type": "Creature",
+        "subtype": "Badger",
+        "manaCost": "{G}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Trample"
+    },
+    "Charmed Stray": {
+        "type": "Creature",
+        "subtype": "Cat",
+        "manaCost": "{W}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Lifelink\nWhen Charmed Stray enters the battlefield, put a +1/+1 counter on each other creature you control named Charmed Stray."
+    },
+    "Cloudkin Seer": {
+        "type": "Creature",
+        "subtype": "Elemental",
+        "manaCost": "{2}{U}",
+        "power": "2",
+        "toughness": "1",
+        "text": "Flying\nWhen Cloudkin Seer enters the battlefield, draw a card."
+    },
+    "Colossal Majesty": {
+        "type": "Enchantment",
+        "manaCost": "{2}{G}",
+        "text": "At the beginning of your upkeep, if you control a creature with power 4 or greater, draw a card."
+    },
+    "Compound Fracture": {
+        "type": "Instant",
+        "manaCost": "{B}",
+        "text": "Target creature gets -1/-1 until end of turn. It gets an additional -1/-1 until end of turn for each card named Compound Fracture in your graveyard."
+    },
+    "Confront the Assault": {
+        "type": "Instant",
+        "manaCost": "{4}{W}",
+        "text": "Cast this spell only if a creature is attacking you.\nCreate three 1/1 white Spirit creature tokens with flying."
+    },
+    "Coral Merfolk": {
+        "type": "Creature",
+        "subtype": "Merfolk",
+        "manaCost": "{1}{U}",
+        "power": "2",
+        "toughness": "1"
+    },
+    "Cruel Cut": {
+        "type": "Instant",
+        "manaCost": "{1}{B}",
+        "text": "Destroy target creature with power 2 or less."
+    },
+    "Demon of Loathing": {
+        "type": "Creature",
+        "subtype": "Demon",
+        "manaCost": "{5}{B}{B}",
+        "power": "7",
+        "toughness": "7",
+        "text": "Flying, trample\nWhenever Demon of Loathing deals combat damage to a player, that player sacrifices a creature."
+    },
+    "Epic Proportions": {
+        "type": "Enchantment",
+        "manaCost": "{4}{G}{G}",
+        "text": "Flash\nEnchant creature\nEnchanted creature gets +5/+5 and has trample."
+    },
+    "Eternal Thirst": {
+        "type": "Enchantment",
+        "manaCost": "{1}{B}",
+        "text": "Enchant creature\nEnchanted creature has lifelink and \"Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature.\" (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)"
+    },
+    "Fearless Halberdier": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{2}{R}",
+        "power": "3",
+        "toughness": "2"
+    },
+    "Fencing Ace": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{W}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Double strike"
+    },
+    "Feral Roar": {
+        "type": "Sorcery",
+        "manaCost": "{1}{G}",
+        "text": "Target creature gets +4/+4 until end of turn."
+    },
+    "Forest": {
+        "type": "Land",
+        "text": "({T}: Add {G}.)"
+    },
+    "Frilled Sea Serpent": {
+        "type": "Creature",
+        "subtype": "Serpent",
+        "manaCost": "{4}{U}{U}",
+        "power": "4",
+        "toughness": "6",
+        "text": "{5}{U}{U}: Frilled Sea Serpent can't be blocked this turn."
+    },
+    "Generous Stray": {
+        "type": "Creature",
+        "subtype": "Cat",
+        "manaCost": "{2}{G}",
+        "power": "1",
+        "toughness": "2",
+        "text": "When Generous Stray enters the battlefield, draw a card."
+    },
+    "Gigantosaurus": {
+        "type": "Creature",
+        "subtype": "Dinosaur",
+        "manaCost": "{G}{G}{G}{G}{G}",
+        "power": "10",
+        "toughness": "10"
+    },
+    "Glint": {
+        "type": "Instant",
+        "manaCost": "{1}{U}",
+        "text": "Target creature you control gets +0/+3 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)"
+    },
+    "Goblin Gang Leader": {
+        "type": "Creature",
+        "subtype": "Goblin",
+        "manaCost": "{2}{R}{R}",
+        "power": "2",
+        "toughness": "2",
+        "text": "When Goblin Gang Leader enters the battlefield, create two 1/1 red Goblin creature tokens."
+    },
+    "Goblin Gathering": {
+        "type": "Sorcery",
+        "manaCost": "{2}{R}",
+        "text": "Create a number of 1/1 red Goblin creature tokens equal to two plus the number of cards named Goblin Gathering in your graveyard."
+    },
+    "Goblin Trashmaster": {
+        "type": "Creature",
+        "subtype": "Goblin",
+        "manaCost": "{2}{R}{R}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Other Goblins you control get +1/+1.\nSacrifice a Goblin: Destroy target artifact."
+    },
+    "Goblin Tunneler": {
+        "type": "Creature",
+        "subtype": "Goblin",
+        "manaCost": "{1}{R}",
+        "power": "1",
+        "toughness": "1",
+        "text": "{T}: Target creature with power 2 or less can't be blocked this turn."
+    },
+    "Goring Ceratops": {
+        "type": "Creature",
+        "subtype": "Dinosaur",
+        "manaCost": "{5}{W}{W}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Double strike\nWhenever Goring Ceratops attacks, other creatures you control gain double strike until end of turn."
+    },
+    "Greenwood Sentinel": {
+        "type": "Creature",
+        "subtype": "Elf",
+        "manaCost": "{1}{G}",
+        "power": "2",
+        "toughness": "2",
+        "text": "Vigilance (Attacking doesn't cause this creature to tap.)"
+    },
+    "Hallowed Priest": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{W}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Whenever you gain life, put a +1/+1 counter on Hallowed Priest."
+    },
+    "Hurloon Minotaur": {
+        "type": "Creature",
+        "subtype": "Minotaur",
+        "manaCost": "{1}{R}{R}",
+        "power": "2",
+        "toughness": "3"
+    },
+    "Ilysian Caryatid": {
+        "type": "Creature",
+        "subtype": "Plant",
+        "manaCost": "{1}{G}",
+        "power": "1",
+        "toughness": "1",
+        "text": "{T}: Add one mana of any color. If you control a creature with power 4 or greater, add two mana of any one color instead."
+    },
+    "Immortal Phoenix": {
+        "type": "Creature",
+        "subtype": "Phoenix",
+        "manaCost": "{4}{R}{R}",
+        "power": "5",
+        "toughness": "3",
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Immortal Phoenix dies, return it to its owner's hand."
+    },
+    "Impassioned Orator": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{W}",
+        "power": "2",
+        "toughness": "2",
+        "text": "Whenever another creature enters the battlefield under your control, you gain 1 life."
+    },
+    "Inescapable Blaze": {
+        "type": "Instant",
+        "manaCost": "{4}{R}{R}",
+        "text": "This spell can't be countered.\nInescapable Blaze deals 6 damage to any target."
+    },
+    "Inspiring Commander": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{4}{W}{W}",
+        "power": "1",
+        "toughness": "4",
+        "text": "Whenever another creature with power 2 or less enters the battlefield under your control, you gain 1 life and draw a card."
+    },
+    "Island": {
+        "type": "Land",
+        "text": "({T}: Add {U}.)"
+    },
+    "Jungle Delver": {
+        "type": "Creature",
+        "subtype": "Merfolk",
+        "manaCost": "{G}",
+        "power": "1",
+        "toughness": "1",
+        "text": "{3}{G}: Put a +1/+1 counter on Jungle Delver."
+    },
+    "Knight's Pledge": {
+        "type": "Enchantment",
+        "manaCost": "{1}{W}",
+        "text": "Enchant creature\nEnchanted creature gets +2/+2."
+    },
+    "Krovikan Scoundrel": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{B}",
+        "power": "2",
+        "toughness": "1"
+    },
+    "Leonin Warleader": {
+        "type": "Creature",
+        "subtype": "Cat",
+        "manaCost": "{2}{W}{W}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Whenever Leonin Warleader attacks, create two 1/1 white Cat creature tokens with lifelink that are tapped and attacking."
+    },
+    "Loxodon Line Breaker": {
+        "type": "Creature",
+        "subtype": "Elephant",
+        "manaCost": "{2}{W}",
+        "power": "3",
+        "toughness": "2"
+    },
+    "Malakir Cullblade": {
+        "type": "Creature",
+        "subtype": "Vampire",
+        "manaCost": "{1}{B}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Whenever a creature an opponent controls dies, put a +1/+1 counter on Malakir Cullblade."
+    },
+    "Maniacal Rage": {
+        "type": "Enchantment",
+        "manaCost": "{1}{R}",
+        "text": "Enchant creature\nEnchanted creature gets +2/+2 and can't block."
+    },
+    "Mardu Outrider": {
+        "type": "Creature",
+        "subtype": "Orc",
+        "manaCost": "{1}{B}{B}",
+        "power": "5",
+        "toughness": "5",
+        "text": "As an additional cost to cast this spell, discard a card."
+    },
+    "Molten Ravager": {
+        "type": "Creature",
+        "subtype": "Elemental",
+        "manaCost": "{2}{R}",
+        "power": "0",
+        "toughness": "4",
+        "text": "{R}: Molten Ravager gets +1/+0 until end of turn."
+    },
+    "Moorland Inquisitor": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{W}",
+        "power": "2",
+        "toughness": "2",
+        "text": "{2}{W}: Moorland Inquisitor gains first strike until end of turn. (It deals combat damage before creatures without first strike.)"
+    },
+    "Mountain": {
+        "type": "Land",
+        "text": "({T}: Add {R}.)"
+    },
+    "Murder": {
+        "type": "Instant",
+        "manaCost": "{1}{B}{B}",
+        "text": "Destroy target creature."
+    },
+    "Nest Robber": {
+        "type": "Creature",
+        "subtype": "Dinosaur",
+        "manaCost": "{1}{R}",
+        "power": "2",
+        "toughness": "1",
+        "text": "Haste"
+    },
+    "Nightmare": {
+        "type": "Creature",
+        "subtype": "Nightmare",
+        "manaCost": "{5}{B}",
+        "power": "*",
+        "toughness": "*",
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\nNightmare's power and toughness are each equal to the number of Swamps you control."
+    },
+    "Nimble Pilferer": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{1}{B}",
+        "power": "2",
+        "toughness": "1",
+        "text": "Flash"
+    },
+    "Octoprophet": {
+        "type": "Creature",
+        "subtype": "Octopus",
+        "manaCost": "{3}{U}",
+        "power": "3",
+        "toughness": "3",
+        "text": "When Octoprophet enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)"
+    },
+    "Ogre Battledriver": {
+        "type": "Creature",
+        "subtype": "Ogre",
+        "manaCost": "{2}{R}{R}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn. (It can attack and {T} this turn.)"
+    },
+    "Overflowing Insight": {
+        "type": "Sorcery",
+        "manaCost": "{4}{U}{U}{U}",
+        "text": "Target player draws seven cards."
+    },
+    "Pacifism": {
+        "type": "Enchantment",
+        "manaCost": "{1}{W}",
+        "text": "Enchant creature\nEnchanted creature can't attack or block."
+    },
+    "Plains": {
+        "type": "Land",
+        "text": "({T}: Add {W}.)"
+    },
+    "Prized Unicorn": {
+        "type": "Creature",
+        "subtype": "Unicorn",
+        "manaCost": "{3}{G}",
+        "power": "2",
+        "toughness": "2",
+        "text": "All creatures able to block Prized Unicorn do so."
+    },
+    "Rabid Bite": {
+        "type": "Sorcery",
+        "manaCost": "{1}{G}",
+        "text": "Target creature you control deals damage equal to its power to target creature you don't control."
+    },
+    "Raging Goblin": {
+        "type": "Creature",
+        "subtype": "Goblin",
+        "manaCost": "{R}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Haste (This creature can attack and {T} as soon as it comes under your control.)"
+    },
+    "Raid Bombardment": {
+        "type": "Enchantment",
+        "manaCost": "{2}{R}",
+        "text": "Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to the player or planeswalker that creature is attacking."
+    },
+    "Raise Dead": {
+        "type": "Sorcery",
+        "manaCost": "{B}",
+        "text": "Return target creature card from your graveyard to your hand."
+    },
+    "Rampaging Brontodon": {
+        "type": "Creature",
+        "subtype": "Dinosaur",
+        "manaCost": "{5}{G}{G}",
+        "power": "7",
+        "toughness": "7",
+        "text": "Trample\nWhenever Rampaging Brontodon attacks, it gets +1/+1 until end of turn for each land you control."
+    },
+    "Riddlemaster Sphinx": {
+        "type": "Creature",
+        "subtype": "Sphinx",
+        "manaCost": "{4}{U}{U}",
+        "power": "5",
+        "toughness": "5",
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Riddlemaster Sphinx enters the battlefield, you may return target creature an opponent controls to its owner's hand."
+    },
+    "River's Favor": {
+        "type": "Enchantment",
+        "manaCost": "{U}",
+        "text": "Enchant creature\nEnchanted creature gets +1/+1."
+    },
+    "Rumbling Baloth": {
+        "type": "Creature",
+        "subtype": "Beast",
+        "manaCost": "{2}{G}{G}",
+        "power": "4",
+        "toughness": "4"
+    },
+    "Sanctuary Cat": {
+        "type": "Creature",
+        "subtype": "Cat",
+        "manaCost": "{W}",
+        "power": "1",
+        "toughness": "2"
+    },
+    "Sanitarium Skeleton": {
+        "type": "Creature",
+        "subtype": "Skeleton",
+        "manaCost": "{B}",
+        "power": "1",
+        "toughness": "2",
+        "text": "{2}{B}: Return Sanitarium Skeleton from your graveyard to your hand."
+    },
+    "Savage Gorger": {
+        "type": "Creature",
+        "subtype": "Vampire",
+        "manaCost": "{1}{B}{B}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying\nAt the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on Savage Gorger. (Damage causes loss of life.)"
+    },
+    "Scathe Zombies": {
+        "type": "Creature",
+        "subtype": "Zombie",
+        "manaCost": "{2}{B}",
+        "power": "2",
+        "toughness": "2"
+    },
+    "Sengir Vampire": {
+        "type": "Creature",
+        "subtype": "Vampire",
+        "manaCost": "{3}{B}{B}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire."
+    },
+    "Sentinel Spider": {
+        "type": "Creature",
+        "subtype": "Spider",
+        "manaCost": "{3}{G}{G}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Vigilance, reach"
+    },
+    "Serra Angel": {
+        "type": "Creature",
+        "subtype": "Angel",
+        "manaCost": "{3}{W}{W}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Flying, vigilance"
+    },
+    "Shock": {
+        "type": "Instant",
+        "manaCost": "{R}",
+        "text": "Shock deals 2 damage to any target."
+    },
+    "Shrine Keeper": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{W}{W}",
+        "power": "2",
+        "toughness": "2"
+    },
+    "Siege Dragon": {
+        "type": "Creature",
+        "subtype": "Dragon",
+        "manaCost": "{5}{R}{R}",
+        "power": "5",
+        "toughness": "5",
+        "text": "Flying\nWhen Siege Dragon enters the battlefield, destroy all Walls your opponents control.\nWhenever Siege Dragon attacks, if defending player controls no Walls, it deals 2 damage to each creature without flying that player controls."
+    },
+    "Skeleton Archer": {
+        "type": "Creature",
+        "subtype": "Skeleton",
+        "manaCost": "{3}{B}",
+        "power": "3",
+        "toughness": "3",
+        "text": "When Skeleton Archer enters the battlefield, it deals 1 damage to any target."
+    },
+    "Sleep": {
+        "type": "Sorcery",
+        "manaCost": "{2}{U}{U}",
+        "text": "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step."
+    },
+    "Soulblade Djinn": {
+        "type": "Creature",
+        "subtype": "Djinn",
+        "manaCost": "{3}{U}{U}",
+        "power": "4",
+        "toughness": "3",
+        "text": "Flying\nWhenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn."
+    },
+    "Soulhunter Rakshasa": {
+        "type": "Creature",
+        "subtype": "Cat",
+        "manaCost": "{3}{B}{B}",
+        "power": "5",
+        "toughness": "5",
+        "text": "Soulhunter Rakshasa can't block.\nWhen Soulhunter Rakshasa enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control."
+    },
+    "Soulmender": {
+        "type": "Creature",
+        "subtype": "Human",
+        "manaCost": "{W}",
+        "power": "1",
+        "toughness": "1",
+        "text": "{T}: You gain 1 life."
+    },
+    "Spiritual Guardian": {
+        "type": "Creature",
+        "subtype": "Spirit",
+        "manaCost": "{3}{W}{W}",
+        "power": "3",
+        "toughness": "4",
+        "text": "When Spiritual Guardian enters the battlefield, you gain 4 life."
+    },
+    "Stony Strength": {
+        "type": "Instant",
+        "manaCost": "{G}",
+        "text": "Put a +1/+1 counter on target creature you control. Untap that creature."
+    },
+    "Storm Strike": {
+        "type": "Instant",
+        "manaCost": "{R}",
+        "text": "Target creature gets +1/+0 and gains first strike until end of turn. Scry 1."
+    },
+    "Swamp": {
+        "type": "Land",
+        "text": "({T}: Add {B}.)"
+    },
+    "Sworn Guardian": {
+        "type": "Creature",
+        "subtype": "Merfolk",
+        "manaCost": "{1}{U}",
+        "power": "1",
+        "toughness": "3"
+    },
+    "Tactical Advantage": {
+        "type": "Instant",
+        "manaCost": "{W}",
+        "text": "Target blocking or blocked creature you control gets +2/+2 until end of turn."
+    },
+    "Tin Street Cadet": {
+        "type": "Creature",
+        "subtype": "Goblin",
+        "manaCost": "{R}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Whenever Tin Street Cadet becomes blocked, create a 1/1 red Goblin creature token."
+    },
+    "Titanic Growth": {
+        "type": "Instant",
+        "manaCost": "{1}{G}",
+        "text": "Target creature gets +4/+4 until end of turn."
+    },
+    "Treetop Warden": {
+        "type": "Creature",
+        "subtype": "Elf",
+        "manaCost": "{1}{G}",
+        "power": "2",
+        "toughness": "2"
+    },
+    "Typhoid Rats": {
+        "type": "Creature",
+        "subtype": "Rat",
+        "manaCost": "{B}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)"
+    },
+    "Unlikely Aid": {
+        "type": "Instant",
+        "manaCost": "{1}{B}",
+        "text": "Target creature gets +2/+0 and gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)"
+    },
+    "Unsummon": {
+        "type": "Instant",
+        "manaCost": "{U}",
+        "text": "Return target creature to its owner's hand."
+    },
+    "Vampire Opportunist": {
+        "type": "Creature",
+        "subtype": "Vampire",
+        "manaCost": "{1}{B}",
+        "power": "2",
+        "toughness": "1",
+        "text": "{6}{B}: Each opponent loses 2 life and you gain 2 life."
+    },
+    "Volcanic Dragon": {
+        "type": "Creature",
+        "subtype": "Dragon",
+        "manaCost": "{4}{R}{R}",
+        "power": "4",
+        "toughness": "4",
+        "text": "Flying, haste"
+    },
+    "Wall of Runes": {
+        "type": "Creature",
+        "subtype": "Wall",
+        "manaCost": "{U}",
+        "power": "0",
+        "toughness": "4",
+        "text": "Defender (This creature can't attack.)\nWhen Wall of Runes enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)"
+    },
+    "Warden of Evos Isle": {
+        "type": "Creature",
+        "subtype": "Bird",
+        "manaCost": "{2}{U}",
+        "power": "2",
+        "toughness": "2",
+        "text": "Flying\nCreature spells with flying you cast cost {1} less to cast."
+    },
+    "Waterkin Shaman": {
+        "type": "Creature",
+        "subtype": "Elemental",
+        "manaCost": "{1}{U}",
+        "power": "2",
+        "toughness": "1",
+        "text": "Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn."
+    },
+    "Waterknot": {
+        "type": "Enchantment",
+        "manaCost": "{1}{U}{U}",
+        "text": "Enchant creature\nWhen Waterknot enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step."
+    },
+    "Wildwood Patrol": {
+        "type": "Creature",
+        "subtype": "Centaur",
+        "manaCost": "{2}{G}",
+        "power": "4",
+        "toughness": "2",
+        "text": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)"
+    },
+    "Windreader Sphinx": {
+        "type": "Creature",
+        "subtype": "Sphinx",
+        "manaCost": "{5}{U}{U}",
+        "power": "3",
+        "toughness": "7",
+        "text": "Flying\nWhenever a creature with flying attacks, you may draw a card."
+    },
+    "Windstorm Drake": {
+        "type": "Creature",
+        "subtype": "Drake",
+        "manaCost": "{4}{U}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Flying\nOther creatures you control with flying get +1/+0."
+    },
+    "Winged Words": {
+        "type": "Sorcery",
+        "manaCost": "{2}{U}",
+        "text": "This spell costs {1} less to cast if you control a creature with flying.\nDraw two cards."
+    },
+    "Witch's Familiar": {
+        "type": "Creature",
+        "subtype": "Frog",
+        "manaCost": "{2}{B}",
+        "power": "2",
+        "toughness": "3"
+    },
+    "Woodland Mystic": {
+        "type": "Creature",
+        "subtype": "Elf",
+        "manaCost": "{1}{G}",
+        "power": "1",
+        "toughness": "1",
+        "text": "{T}: Add {G}."
+    },
+    "World Shaper": {
+        "type": "Creature",
+        "subtype": "Merfolk",
+        "manaCost": "{3}{G}",
+        "power": "3",
+        "toughness": "3",
+        "text": "Whenever World Shaper attacks, you may mill three cards.\nWhen World Shaper dies, return all land cards from your graveyard to the battlefield tapped."
+    },
+    "Zephyr Gull": {
+        "type": "Creature",
+        "subtype": "Bird",
+        "manaCost": "{U}",
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying"
+    }
+}
