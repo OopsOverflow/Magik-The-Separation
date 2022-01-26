@@ -34,7 +34,7 @@ Then run the following commands to install some global packages through npm (roo
 
     $ npm install -g grunt-cli grunt bower
 
-The rest of the frontend dependencies are in the `package.json` and `bower.json` in `src/public`. Cd there and run the following command:
+The rest of the frontend dependencies are in the `package.json` and `bower.json` files in `src/public`. Cd there and run the following commands:
 
     $ npm install
     $ bower install
@@ -60,7 +60,7 @@ For the frontend all you have to do is run the `app.js` in `src/public` director
     $ cd src/public
     $ node app
 
-This should open the access to port 3000 (if not obviously something didn't work, open an issue or something.)
+This should open the access to port 3000 (if not, obviously something didn't work, open an issue or something.)
 
 ***
 
