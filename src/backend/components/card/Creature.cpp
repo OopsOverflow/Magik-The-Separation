@@ -46,24 +46,20 @@ void Creature::addStaticAbility(StaticAbility ability) {
 }
 
 void Creature::block(Creature* attackingCard) {
+    auto atk = attackingCard->getTmpStats();
+    auto def = this->getTmpStats();
     if(attackingCard->hasStaticAbility(StaticAbility::FIRST_STRIKE) || attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
     {
         std::cout<<attackingCard->getName()<<" attacks "<<this->getName()<<std::endl;
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
                 attackingCard->addTmpStat({-1, 0});
             this->addTmpStat({0, -def.second});
         }else if(attackingCard->getTmpStats().first >= this->getTmpStats().second) {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
                 attackingCard->addTmpStat({-def.second, 0});
             this->addTmpStat({0, -def.second});
         } else {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             if(!attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
                 attackingCard->addTmpStat({-atk.first, 0});
             this->addTmpStat({0, -atk.first});
@@ -73,18 +69,12 @@ void Creature::block(Creature* attackingCard) {
         std::cout<<"Duel between "<<attackingCard->getName()<<" and "<<this->getName()<<std::endl;
         
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             attackingCard->addTmpStat({-1, -def.first});
             this->addTmpStat({-def.first, -def.second});
         }else if(attackingCard->getTmpStats().first >= this->getTmpStats().second) {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             attackingCard->addTmpStat({-def.second, -def.first});
             this->addTmpStat({-def.first, -def.second});
         } else {
-            auto atk = attackingCard->getTmpStats();
-            auto def = this->getTmpStats();
             attackingCard->addTmpStat({-atk.first, -def.first});
             this->addTmpStat({-def.first, -atk.first});
         }
