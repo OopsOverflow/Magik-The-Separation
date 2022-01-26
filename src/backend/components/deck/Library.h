@@ -17,6 +17,7 @@ public :
     Library& operator=(Library const&) = delete;
 
     uint16_t getLength() const;
+    std::vector<Card*> getCards();
 
     void shuffle();
     std::unique_ptr<Card> getTopCard();

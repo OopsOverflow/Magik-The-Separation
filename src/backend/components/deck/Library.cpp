@@ -38,9 +38,9 @@ void Library::add(std::unique_ptr<Card> card) {
     stack.push_back(std::move(card));
 }
 
-// std::vector<Card*> Library::getCards() {
-//     std::vector<Card*> result;
-//     for(auto& card : stack)
-//         result.push_back(card.get());
-//     return result;
-// }
+std::vector<Card*> Library::getCards() {
+    std::vector<Card*> result;
+    for(auto& card : stack)
+        result.push_back(card.get());
+    return result;
+}

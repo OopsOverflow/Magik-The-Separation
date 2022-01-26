@@ -31,85 +31,116 @@ void Game::chooseCards() {
     auto& maker = CardMaker::getInst();
     while(player1.getLibrary()->getLength() < 60) {
 
-        std::random_device r;
+        // std::random_device r;
     
-        // Choose a random mean between 1 and 6
-        std::default_random_engine e1(r());
-        std::uniform_int_distribution<int> uniform_dist(0, 20);
-        int mean = uniform_dist(e1);
-        auto newCard = std::move(maker.create((uint16_t)mean));
-        std::cout<<player1.getName()<<" - ";
-        player1.getLibrary()->add(std::move(newCard));
+        // // Choose a random mean between 1 and 29
+        // std::default_random_engine e1(r());
+        // std::uniform_int_distribution<int> uniform_dist(0, 29);
+        // int mean = uniform_dist(e1);
+        // auto newCard = std::move(maker.create((uint16_t)mean));
+        // std::cout<<player1.getName()<<" - ";
+        // player1.getLibrary()->add(std::move(newCard));
         
-        // std::unique_ptr<Card> newCard = nullptr;
-        // while(newCard == nullptr) {
-        //     std::string str;
-        //     std::cout<<"Enter card id to add : ";
-        //     std::cin>>str;
-        //     int id;
-        //     try {
-        //         id = std::stoi(str);
-        //         newCard = std::move(maker.create((uint16_t)id));
-        //     }
-        //     catch (const std::exception & e) {
-        //         std::cout << "Invalid argument : " << str << std::endl;
-        //     }
+        
+        uint16_t setCards1[40] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 8, 8, 8, 8, 16, 16, 16, 16, 6, 6, 6, 6, 21, 21, 21, 21, 22, 22, 22, 22};
+        for(auto id : setCards1) {
+            auto newCard = std::move(maker.create(id));
+            std::cout<<player1.getName()<<" - ";
+            player1.getLibrary()->add(std::move(newCard));
+        }
+        break;
+        
             
-        // } 
-        // auto cards = player1.getLibrary()->getCards();
-        // int freq = std::count_if(cards.begin(), cards.end(),
-        //     [&](Card* i) {
-        //         return (i->getCardId() == newCard.get()->getCardId());
-        //     });
+        /*
+        std::unique_ptr<Card> newCard = nullptr;
+        while(newCard == nullptr) {
+            std::string str;
+            std::cout<<"Enter card id to add : ";
+            std::cin>>str;
+            int id;
+            try {
+                id = std::stoi(str);
+                if(id >= 0 || id <= 29)
+                    newCard = std::move(maker.create((uint16_t)id));
+                else {
+                    std::cout << "CardId must be between 0 and 29 " << std::endl;
+                }
+            }
+            catch (const std::exception & e) {
+                std::cout << "Invalid argument : " << str << std::endl;
+            }
+            
+        } 
+        auto cards = player1.getLibrary()->getCards();
+        int freq = std::count_if(cards.begin(), cards.end(),
+            [&](Card* i) {
+                return (i->getCardId() == newCard.get()->getCardId());
+            });
         
-        // if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
-        //     std::cout<< "Error - already 4 occurence of this card in your deck"<<std::endl;
-        // }else {
-        //     std::cout<<"Added " <<newCard.get()->getName()<< " to player 1"<<std::endl;
-        //     player1.getLibrary()->add(std::move(newCard));
-        // }
+        if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
+            std::cout<< "Error - already 4 occurences of this card in your deck"<<std::endl;
+        }else {
+            std::cout<<player1.getName()<<" - ";
+            player1.getLibrary()->add(std::move(newCard));
+        }
+        */
 
     }
     while(player2.getLibrary()->getLength() < 60) {
 
-        std::random_device r;
+        // std::random_device r;
     
-        // Choose a random mean between 1 and 6
-        std::default_random_engine e1(r());
-        std::uniform_int_distribution<int> uniform_dist(0, 20);
-        int mean = uniform_dist(e1);
-        auto newCard = std::move(maker.create((uint16_t)mean));
-        std::cout<<player2.getName()<<" - ";
-        player2.getLibrary()->add(std::move(newCard));
+        // // Choose a random mean between 1 and 29
+        // std::default_random_engine e1(r());
+        // std::uniform_int_distribution<int> uniform_dist(0, 29);
+        // int mean = uniform_dist(e1);
+        // auto newCard = std::move(maker.create((uint16_t)mean));
+        // std::cout<<player2.getName()<<" - ";
+        // player2.getLibrary()->add(std::move(newCard));
         
-        // std::unique_ptr<Card> newCard = nullptr;
-        // while(newCard == nullptr) {
-        //     std::string str;
-        //     std::cout<<"Enter card id to add : ";
-        //     std::cin>>str;
-        //     int id;
-        //     try {
-        //         id = std::stoi(str);
-        //         newCard = std::move(maker.create((uint16_t)id));
-        //     }
-        //     catch (const std::exception & e) {
-        //         std::cout << "Invalid argument : " << str << std::endl;
-        //     }
+        
+        uint16_t setCards2[40] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 13, 13, 13, 13, 14, 14, 14, 14, 26, 26, 26, 26, 27, 27, 27, 27, 22, 22, 22, 22};
+        for(auto id : setCards2) {
+            auto newCard = std::move(maker.create(id));
+            std::cout<<player2.getName()<<" - ";
+            player2.getLibrary()->add(std::move(newCard));
+        }
+        break;
+        
             
-        // } 
-        // auto cards = player2.getLibrary()->getCards();
-        // int freq = std::count_if(cards.begin(), cards.end(),
-        //     [&](Card* i) {
-        //         return (i->getCardId() == newCard.get()->getCardId());
-        //     });
+        /*
+        std::unique_ptr<Card> newCard = nullptr;
+        while(newCard == nullptr) {
+            std::string str;
+            std::cout<<"Enter card id to add : ";
+            std::cin>>str;
+            int id;
+            try {
+                id = std::stoi(str);
+                if(id >= 0 || id <= 29)
+                    newCard = std::move(maker.create((uint16_t)id));
+                else {
+                    std::cout << "CardId must be between 0 and 29 " << std::endl;
+                }
+            }
+            catch (const std::exception & e) {
+                std::cout << "Invalid argument : " << str << std::endl;
+            }
+            
+        } 
+        auto cards = player2.getLibrary()->getCards();
+        int freq = std::count_if(cards.begin(), cards.end(),
+            [&](Card* i) {
+                return (i->getCardId() == newCard.get()->getCardId());
+            });
         
-        // if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
-        //     std::cout<< "Error - already 4 occurence of this card in your deck"<<std::endl;
-        // }else {
-        //     std::cout<<"Added " <<newCard.get()->getName()<< " to player 2"<<std::endl;
-        //     player2.getLibrary()->add(std::move(newCard));
-        // }
-
+        if(freq >= 4 && Deck::getCardType(newCard.get()) != CardType::LAND) {
+            std::cout<< "Error - already 4 occurences of this card in your deck"<<std::endl;
+        }else {
+            std::cout<<player2.getName()<<" - ";
+            player2.getLibrary()->add(std::move(newCard));
+        }
+        */
     }
 }
 
@@ -192,15 +223,17 @@ void Game::solvePhase() {
     {
     /* BEGINNING PHASE */
     case Phase::UNTAP_STEP:
-        std::cout<<"///Untap Step///"<<std::endl<<std::endl;
-        //Choose player to play
-        if(action.getTurn() % 2 == 1) {
+        if(action.getTurn() % 2 == action.rdStart) {
             playerToPlay = &player1;
             opponent = &player2;
         }else{
             playerToPlay = &player2;
             opponent = &player1;
         }
+        std::cout<<std::endl<<std::endl<<"-----NEW TURN----- "<< playerToPlay->getName() <<std::endl<<std::endl;
+        std::cout<<"///Untap Step///"<<std::endl<<std::endl;
+        //Choose player to play
+        
         action.hasPlayedLand = false;
 
         //You untap all your tapped permanents
@@ -241,13 +274,27 @@ void Game::solvePhase() {
         std::cout<<"///First Main Phase///"<<std::endl<<std::endl;
         {    
 
-            std::cout<<playerToPlay->getName()<<std::endl;
+            std::cout<<playerToPlay->getName()<<" - Cards : " << std::endl;
+            for(size_t i = 0; i < playerToPlay->getHand()->getCreatures().size(); i += 1) {
+                auto card = playerToPlay->getHand()->getCreatures().at(i);
+                std::cout << "-"<< card->getColorStr() << card->getName() << card->getTotalStats() << " - " << card->displayStaticAbilitites() << std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getLands().size(); i += 1) {
+                auto card = playerToPlay->getHand()->getLands().at(i);
+                std::cout << "-" << card->getName() << std::endl;
+            }
  
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
-            std::cout<<"Playable cards : "<< playables.size() << std::endl;
+            std::cout<<std::endl<<"Playable cards : "<< playables.size() << std::endl;
             for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+                std::cout<<"    "<<i<<" - ";
+                auto creature = dynamic_cast<Creature*>(playerToPlay->seekCard(playables.at(i)));
+                if(creature != nullptr)
+                    std::cout << creature->getColorStr() << creature->getName() << creature->getTotalStats() << " - " << creature->displayStaticAbilitites() << std::endl;
+                else
+                    std::cout << playerToPlay->seekCard(playables.at(i))->getName() << std::endl;
             }
+            
 
             //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
             char response = 0;
@@ -280,7 +327,7 @@ void Game::solvePhase() {
                     }
                 }
                 std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
-                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
+                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl<<std::endl;
                 Land* landCard = dynamic_cast<Land*>(playedCard.get());
                 if(landCard != nullptr) { //is a land
                     playerToPlay->getBattlefield()->add(std::move(playedCard));
@@ -304,7 +351,7 @@ void Game::solvePhase() {
     
     /* COMBAT PHASE */
     case Phase::BEGINNING_OF_COMBAT_STEP:
-        std::cout<<"Beginning of Combat Step"<<std::endl<<std::endl;
+        std::cout<<"///Beginning of Combat Step///"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -314,7 +361,7 @@ void Game::solvePhase() {
         break;
 
     case Phase::DECLARE_ATTACKER_STEP:
-        std::cout<<"Declare Attacker Step"<<std::endl<<std::endl;
+        std::cout<<"///Declare Attacker Step///"<<std::endl<<std::endl;
         playerToPlay->getBattlefield()->setAttackingCreatures();
         castInstantsOrAbilities(playerToPlay);
         solveStack();
@@ -324,7 +371,7 @@ void Game::solvePhase() {
 
 
     case Phase::DECLARE_BLOCKER_STEP:
-        std::cout<<"Declare Blocker Step"<<std::endl<<std::endl;
+        std::cout<<"///Declare Blocker Step///"<<std::endl<<std::endl;
         {
             if(playerToPlay->getBattlefield()->getAttackingCreatures().size() > 0) {
                 std::vector<Creature*> attacking;
@@ -345,39 +392,62 @@ void Game::solvePhase() {
     
     case Phase::COMBAT_DAMAGE_STEP:
         {
-            std::cout<<"Combat Damage Step"<<std::endl<<std::endl;
+            std::cout<<"///Combat Damage Step///"<<std::endl<<std::endl;
             auto attacking = playerToPlay->getBattlefield()->getAttackingCreatures();
             auto blocking = opponent->getBattlefield()->getBlockingCreatures();
+
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
                 if(blocking.at(i).size() > 0) {
                     for(size_t j = 0; j < opponent->getBattlefield()->getBlockingCreatures().at(i).size(); j += 1) {
                         Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
                         blockingCard->block(attackingCard);
+
                         if(attackingCard->hasStaticAbility(StaticAbility::TRAMPLE) &&
                             j == opponent->getBattlefield()->getBlockingCreatures().at(i).size() - 1 &&
                             attackingCard->getTmpStats().second > 0) {
+
+                            std::cout<<opponent->getName()<< " prend " << attackingCard->getTmpStats().first << " degats de "<< attackingCard->getName()<<std::endl;
                             opponent->takeDamage(attackingCard->getTmpStats().first);
-                            if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK))
+
+                            if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK)) {
+                                std::cout<<playerToPlay->getName()<< " se regenere " << attackingCard->getTmpStats().first << " points de vie" <<std::endl;
                                 playerToPlay->heal(attackingCard->getTmpStats().first);
-                           }
+                            }
+                                
+
+                            attackingCard->addTmpStat({-attackingCard->getTmpStats().first, 0});
+                        }
 
                     }
                 }else{
+                    std::cout<<opponent->getName()<< " prend " << attackingCard->getTmpStats().first << " degats de "<< attackingCard->getName()<<std::endl;
                     opponent->takeDamage(attackingCard->getTmpStats().first);
-                    if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK))
+
+                    if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK)){
+                        std::cout<<playerToPlay->getName()<< " se regenere " << attackingCard->getTmpStats().first << " points de vie" <<std::endl;
                         playerToPlay->heal(attackingCard->getTmpStats().first);
+                    }
+                    
+                    attackingCard->addTmpStat({-attackingCard->getTmpStats().first, 0});
                 }
+                std::cout<<std::endl;
             }
 
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
-                    if(attackingCard->getTmpStats().second <= 0) playerToPlay->killCard(attacking.at(i));
+                if(attackingCard->getTmpStats().second <= 0) {
+                    std::cout<<attackingCard->getName()<<" meurt"<<std::endl;
+                    playerToPlay->killCard(attacking.at(i));
+                }
             }
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 for(size_t j = 0; j < blocking.at(i).size(); j += 1) {
                     Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
-                        if(blockingCard->getTmpStats().second <= 0) opponent->killCard(blocking.at(i).at(j));
+                    if(blockingCard->getTmpStats().second <= 0) {
+                        std::cout<<blockingCard->getName()<<" meurt"<<std::endl;
+                        opponent->killCard(blocking.at(i).at(j));
+                    } 
                 }
             }
 
@@ -390,7 +460,7 @@ void Game::solvePhase() {
         action.nextPhase();
         break;
     case Phase::END_OF_COMBAT_STEP:
-        std::cout<<"End of Combat Step"<<std::endl<<std::endl;
+        std::cout<<"///End of Combat Step///"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -401,16 +471,30 @@ void Game::solvePhase() {
 
     /* SECOND MAIN PHASE */
     case Phase::SECOND_MAIN_PHASE:
-        std::cout<<"Second Main Phase"<<std::endl<<std::endl;
+        std::cout<<"///Second Main Phase///"<<std::endl<<std::endl;
         {    
 
-            std::cout<<playerToPlay->getName()<<std::endl;
+            std::cout<<playerToPlay->getName()<<" - Cards : " << std::endl;
+            for(size_t i = 0; i < playerToPlay->getHand()->getCreatures().size(); i += 1) {
+                auto card = playerToPlay->getHand()->getCreatures().at(i);
+                std::cout << "-"<< card->getColorStr() << card->getName() << card->getTotalStats() << " - " << card->displayStaticAbilitites() << std::endl;
+            }
+            for(size_t i = 0; i < playerToPlay->getHand()->getLands().size(); i += 1) {
+                auto card = playerToPlay->getHand()->getLands().at(i);
+                std::cout << "-" << card->getName() << std::endl;
+            }
  
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
-            std::cout<<"Playable cards : "<< playables.size() << std::endl;
+            std::cout<<std::endl<<"Playable cards : "<< playables.size() << std::endl;
             for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
+                std::cout<<"    "<<i<<" - ";
+                auto creature = dynamic_cast<Creature*>(playerToPlay->seekCard(playables.at(i)));
+                if(creature != nullptr)
+                    std::cout << creature->getColorStr() << creature->getName() << creature->getTotalStats() << " - " << creature->displayStaticAbilitites() << std::endl;
+                else
+                    std::cout << playerToPlay->seekCard(playables.at(i))->getName() << std::endl;
             }
+            
 
             //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
             char response = 0;
@@ -443,7 +527,7 @@ void Game::solvePhase() {
                     }
                 }
                 std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
-                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
+                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl<<std::endl;
                 Land* landCard = dynamic_cast<Land*>(playedCard.get());
                 if(landCard != nullptr) { //is a land
                     playerToPlay->getBattlefield()->add(std::move(playedCard));
@@ -465,7 +549,7 @@ void Game::solvePhase() {
 
     /* ENDING PHASE */
     case Phase::END_STEP:
-        std::cout<<"End Step"<<std::endl<<std::endl;
+        std::cout<<"///End Step///"<<std::endl<<std::endl;
         if(action.somethingPlayed) {
             castInstantsOrAbilities(playerToPlay);
             solveStack();
@@ -475,7 +559,7 @@ void Game::solvePhase() {
         break;
     
     case Phase::CLEANUP_STEP:
-        std::cout<<"Cleanup Step"<<std::endl<<std::endl;
+        std::cout<<"///Cleanup Step///"<<std::endl<<std::endl;
         while(playerToPlay->getHand()->getLength() > 7) {
             std::cout<<"You have to throw cards : " << playerToPlay->getHand()->getLength() - 7<<std::endl;
             std::vector<uint16_t> cardsId;
@@ -516,6 +600,8 @@ void Game::solvePhase() {
             playerToPlay->killCard(cardsId.at(choice));
 
         }
+        playerToPlay->resetTmp();
+        opponent->resetTmp();
         action.nextPhase();
         break;
 

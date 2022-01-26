@@ -25,6 +25,7 @@ public:
 
     bool hasPlayedLand;
     bool somethingPlayed;
+    int rdStart;
 
 private:
     GameAction();

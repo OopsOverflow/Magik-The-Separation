@@ -3,6 +3,7 @@
 //
 
 #include "GameAction.h"
+#include <random>
 
 GameAction& GameAction::getInst() {
     static GameAction gameAction;
@@ -10,7 +11,12 @@ GameAction& GameAction::getInst() {
 }
 
 GameAction::GameAction() : hasPlayedLand(false), somethingPlayed(true), phase(Phase::UNTAP_STEP), turn(1) {
-
+     std::random_device r;
+    
+    // Choose a random mean between 0 and 1
+    std::default_random_engine e1(r());
+    std::uniform_int_distribution<int> uniform_dist(0, 1);
+    rdStart = uniform_dist(e1);
 }
 
 GameAction::~GameAction() = default;

@@ -59,12 +59,16 @@ void Player::draw() {
 void Player::unTapAll() {
     for(size_t i = 0; i < battlefield.getCreatures().size(); i += 1) {
         battlefield.getCreatures().at(i)->unTap();
-        battlefield.getCreatures().at(i)->newTurn();
     }
 
     
     for(size_t i = 0; i < battlefield.getLands().size(); i += 1)
         battlefield.getLands().at(i)->unTap();
+}
+
+void Player::resetTmp() {
+    for(size_t i = 0; i < battlefield.getCreatures().size(); i += 1)
+        battlefield.getCreatures().at(i)->newTurn();
 }
 
 void Player::takeDamage(int amount) {

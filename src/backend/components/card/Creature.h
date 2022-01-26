@@ -33,6 +33,8 @@ public :
     Creature(Creature const&) = delete;
     Creature& operator=(Creature const&) = delete;
 
+    std::string displayStaticAbilitites();
+
     std::pair<int, int> getBaseStats() const;
     std::pair<int, int> getTotalStats();
     std::pair<int, int> getTmpStats();

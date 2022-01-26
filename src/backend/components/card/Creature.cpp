@@ -48,30 +48,46 @@ void Creature::addStaticAbility(StaticAbility ability) {
 void Creature::block(Creature* attackingCard) {
     if(attackingCard->hasStaticAbility(StaticAbility::FIRST_STRIKE) || attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
     {
+        std::cout<<attackingCard->getName()<<" attaque "<<this->getName()<<std::endl;
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
             attackingCard->addTmpStat({-1, 0});
-            this->addTmpStat({0, -this->getTmpStats().second});
+            this->addTmpStat({0, -def.second});
         }else if(attackingCard->getTmpStats().first >= this->getTmpStats().second) {
-            attackingCard->addTmpStat({-this->getTmpStats().second, 0});
-            this->addTmpStat({0, -this->getTmpStats().second});
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
+            attackingCard->addTmpStat({-def.second, 0});
+            this->addTmpStat({0, -def.second});
         } else {
-            attackingCard->addTmpStat({-attackingCard->getTmpStats().first, 0});
-            this->addTmpStat({0, -attackingCard->getTmpStats().first});
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
+            attackingCard->addTmpStat({-atk.first, 0});
+            this->addTmpStat({0, -atk.first});
         }
     }
     if(!attackingCard->hasStaticAbility(StaticAbility::FIRST_STRIKE) && this->getTmpStats().second > 0) {
+        std::cout<<"Duel entre "<<attackingCard->getName()<<" et "<<this->getName()<<std::endl;
+        
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
-            attackingCard->addTmpStat({-1, -this->getTmpStats().first});
-            this->addTmpStat({-this->getTmpStats().first, -this->getTmpStats().second});
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
+            attackingCard->addTmpStat({-1, -def.first});
+            this->addTmpStat({-def.first, -def.second});
         }else if(attackingCard->getTmpStats().first >= this->getTmpStats().second) {
-            attackingCard->addTmpStat({-this->getTmpStats().second, -this->getTmpStats().first});
-            this->addTmpStat({-this->getTmpStats().first, -this->getTmpStats().second});
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
+            attackingCard->addTmpStat({-def.second, -def.first});
+            this->addTmpStat({-def.first, -def.second});
         } else {
-            attackingCard->addTmpStat({-attackingCard->getTmpStats().first, -this->getTmpStats().first});
-            this->addTmpStat({-this->getTmpStats().first, -attackingCard->getTmpStats().first});
+            auto atk = attackingCard->getTmpStats();
+            auto def = this->getTmpStats();
+            attackingCard->addTmpStat({-atk.first, -def.first});
+            this->addTmpStat({-def.first, -atk.first});
         }
 
     }else if (this->getTmpStats().second > 0){
+        std::cout<<attackingCard->getName()<<" bloque "<<this->getName()<<std::endl;
         attackingCard->addTmpStat({0, -this->getTmpStats().first});
         this->addTmpStat({-this->getTmpStats().first, 0});
 
@@ -119,4 +135,15 @@ bool Creature::isSummoned() {
 void Creature::newTurn() {
     summoningSickness = false;
     tmpModifiers.clear();
+}
+
+std::string Creature::displayStaticAbilitites() {
+    std::string displayTable[12] = {"FLY", "REACH", "VIGILANCE", "DEATHTOUCH", "DEFENDER", "FIRST_STRIKE", "DOUBLE_STRIKE", "HASTE", "CANT_BE_BLOCKED", "LIFELINK", "INTIMIDATE", "TRAMPLE"};
+    std::string result = "(";
+    for(size_t i = 0; i<staticAbilities.size(); i += 1) {
+        result += displayTable[(int)staticAbilities.at(i)];
+        if(i != staticAbilities.size()-1)result += ", ";
+    }
+    result += ")";
+    return result;
 }

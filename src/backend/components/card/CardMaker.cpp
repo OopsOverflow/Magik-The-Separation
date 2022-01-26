@@ -698,49 +698,49 @@ std::unique_ptr<Card> createGoblin() {
 
 CardMaker::CardMaker() {
 	//lands
-	registerCard(createPlains);
-    registerCard(createIsland);
-	registerCard(createSwamp);
-    registerCard(createMountain);
-	registerCard(createForest);
+	registerCard(createPlains); //0
+    registerCard(createIsland); //1
+	registerCard(createSwamp); //2
+    registerCard(createMountain); //3
+	registerCard(createForest); //4
 	
     //cards
-    registerCard(createCharmedStray);
-    registerCard(createSanctuaryCat);
-    registerCard(createSoulmender);
+    registerCard(createCharmedStray); //5
+    registerCard(createSanctuaryCat); //6
+    registerCard(createSoulmender); //7
     // registerCard(createTacticalAdvantage);
-    registerCard(createFencingAce);
-    registerCard(createHallowedPriest);
-    registerCard(createImpassionedOrator);
+    registerCard(createFencingAce); //8
+    registerCard(createHallowedPriest); //9
+    registerCard(createImpassionedOrator); //10
     // registerCard(createKnightsPledge);
-    registerCard(createMoorlandInquisitor);
+    registerCard(createMoorlandInquisitor); //11
     // registerCard(createPacifism);
-    registerCard(createShrineKeeper);
-    registerCard(createAngelofVitality);
-    registerCard(createLoxodonLineBreaker);
-    registerCard(createLeoninWarleader);
+    registerCard(createShrineKeeper); //12
+    registerCard(createAngelofVitality); //13
+    registerCard(createLoxodonLineBreaker); //14
+    registerCard(createLeoninWarleader); //15
     // registerCard(createAngelicReward);
     // registerCard(createBondofDiscipline);
     // registerCard(createConfronttheAssault);
-    registerCard(createSerraAngel);
-    registerCard(createSpiritualGuardian);
-    registerCard(createAngelicGuardian);
-    registerCard(createInspiringCommander);
-    registerCard(createGoringCeratops);
+    registerCard(createSerraAngel); //16
+    registerCard(createSpiritualGuardian); //17
+    registerCard(createAngelicGuardian); //18
+    registerCard(createInspiringCommander); //19
+    registerCard(createGoringCeratops); //20
     // registerCard(createRiversFavor);
     // registerCard(createUnsummon);
-    registerCard(createWallofRunes);
-    registerCard(createZephyrGull);
-    registerCard(createCoralMerfolk);
+    registerCard(createWallofRunes); //21
+    registerCard(createZephyrGull); //22
+    registerCard(createCoralMerfolk); //23
     // registerCard(createGlint);
-    registerCard(createSwornGuardian);
-    registerCard(createWaterkinShaman);
-    registerCard(createArmoredWhirlTurtle);
-    registerCard(createCloudkinSeer);
-    registerCard(createWardenofEvosIsle);
+    registerCard(createSwornGuardian); //24
+    registerCard(createWaterkinShaman); //25
+    registerCard(createArmoredWhirlTurtle); //26
+    registerCard(createCloudkinSeer); //27
+    registerCard(createWardenofEvosIsle); //28
     // registerCard(createWaterknot);
     // registerCard(createWingedWords);
-    registerCard(createOctoprophet);
+    registerCard(createOctoprophet); //29
     // registerCard(createSleep);
     // registerCard(createAirElemental);
     // registerCard(createSoulbladeDjinn);

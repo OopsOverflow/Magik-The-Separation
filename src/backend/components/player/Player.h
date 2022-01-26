@@ -22,6 +22,7 @@ public :
     //actions
     void draw();
     void unTapAll();
+    void resetTmp();
     void takeDamage(int amount);
     void heal(int amount);
 
