@@ -152,7 +152,7 @@ bool Game::castInstantsOrAbilities(Player* castingPlayer, bool lastHasPlayed) {
                     try {
                         choice = std::stoi(str);
                     }
-                    catch (const std::exception) {
+                    catch (const std::exception &_) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -275,7 +275,7 @@ void Game::solvePhase() {
                     try {
                         choice = std::stoi(str);
                     }
-                    catch (const std::exception) {
+                    catch (const std::exception &_) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -438,7 +438,7 @@ void Game::solvePhase() {
                     try {
                         choice = std::stoi(str);
                     }
-                    catch (const std::exception) {
+                    catch (const std::exception &_) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -509,7 +509,7 @@ void Game::solvePhase() {
                 try {
                     choice = std::stoi(str);
                 }
-                catch (const std::exception) {
+                catch (const std::exception &_) {
                     std::cout << "Invalid argument : " << str << std::endl;
                 }
             }

@@ -6,9 +6,9 @@
 
 uint64_t Player::newId = 0;
 
-Player::Player(std::string name)
+Player::Player(const std::string& name)
 :   name(name), id(newId), hp(20),
-    library(), graveyard(), hand(), battlefield() {
+    battlefield(), hand(), graveyard(), library() {
     newId += 1;
     std::cout<<"Player "<<name<<" created"<<std::endl;
 }
@@ -155,7 +155,7 @@ Card* Player::seekCard(uint16_t cardId) {
 std::unique_ptr<Card> Player::playCard(uint16_t cardId) {
     std::unique_ptr<Card> card = hand.popCard(cardId);
     if(card != nullptr) 
-        return std::move(card);
+        return card; // TODO : CHECK MOVE HERE
     
     auto creatures = battlefield.getCreatures();
     //TODO add attached enchants
