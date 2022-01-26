@@ -102,10 +102,18 @@ int main(int argc, char* argv[])
     game.initGame();
 
     std::cout<<"---Launching Battle"<<std::endl;
-    while(true){
+    while(game.getPlayer1()->getHp() > 0 && game.getPlayer2()->getHp() > 0){
         game.solvePhase();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
+    }
+
+    if(game.getPlayer1()->getHp() <= 0 && game.getPlayer2()->getHp() <= 0) {
+        std::cout<<"Draw"<<std::endl;
+    }else if(game.getPlayer1()->getHp() <= 0) {
+        std::cout<<game.getPlayer2()->getName()<<" wins"<<std::endl;
+    }else{
+        std::cout<<game.getPlayer1()->getName()<<" wins"<<std::endl;
     }
         return 0;
 }

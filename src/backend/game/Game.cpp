@@ -407,11 +407,11 @@ void Game::solvePhase() {
                             j == opponent->getBattlefield()->getBlockingCreatures().at(i).size() - 1 &&
                             attackingCard->getTmpStats().second > 0) {
 
-                            std::cout<<opponent->getName()<< " prend " << attackingCard->getTmpStats().first << " degats de "<< attackingCard->getName()<<std::endl;
+                            std::cout<<opponent->getName()<< " takes " << attackingCard->getTmpStats().first << " damages from "<< attackingCard->getName()<<std::endl;
                             opponent->takeDamage(attackingCard->getTmpStats().first);
 
                             if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK)) {
-                                std::cout<<playerToPlay->getName()<< " se regenere " << attackingCard->getTmpStats().first << " points de vie" <<std::endl;
+                                std::cout<<playerToPlay->getName()<< " regens " << attackingCard->getTmpStats().first << " hp" <<std::endl;
                                 playerToPlay->heal(attackingCard->getTmpStats().first);
                             }
                                 
@@ -421,11 +421,11 @@ void Game::solvePhase() {
 
                     }
                 }else{
-                    std::cout<<opponent->getName()<< " prend " << attackingCard->getTmpStats().first << " degats de "<< attackingCard->getName()<<std::endl;
+                    std::cout<<opponent->getName()<< " takes " << attackingCard->getTmpStats().first << " damages from "<< attackingCard->getName()<<std::endl;
                     opponent->takeDamage(attackingCard->getTmpStats().first);
 
                     if(attackingCard->hasStaticAbility(StaticAbility::LIFELINK)){
-                        std::cout<<playerToPlay->getName()<< " se regenere " << attackingCard->getTmpStats().first << " points de vie" <<std::endl;
+                        std::cout<<playerToPlay->getName()<< " regens " << attackingCard->getTmpStats().first << " hp" <<std::endl;
                         playerToPlay->heal(attackingCard->getTmpStats().first);
                     }
                     
@@ -437,7 +437,7 @@ void Game::solvePhase() {
             for(size_t i = 0; i < attacking.size(); i += 1) {
                 Creature* attackingCard = dynamic_cast<Creature*> (playerToPlay->seekCard(attacking.at(i)));
                 if(attackingCard->getTmpStats().second <= 0) {
-                    std::cout<<attackingCard->getName()<<" meurt"<<std::endl;
+                    std::cout<<attackingCard->getName()<<" dies"<<std::endl;
                     playerToPlay->killCard(attacking.at(i));
                 }
             }
@@ -445,7 +445,7 @@ void Game::solvePhase() {
                 for(size_t j = 0; j < blocking.at(i).size(); j += 1) {
                     Creature* blockingCard = dynamic_cast<Creature*> (opponent->seekCard(blocking.at(i).at(j)));
                     if(blockingCard->getTmpStats().second <= 0) {
-                        std::cout<<blockingCard->getName()<<" meurt"<<std::endl;
+                        std::cout<<blockingCard->getName()<<" dies"<<std::endl;
                         opponent->killCard(blocking.at(i).at(j));
                     } 
                 }

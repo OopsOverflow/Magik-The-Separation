@@ -15,7 +15,7 @@ Battlefield::~Battlefield() = default;
 
 std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1) {
-        if(creatures.at(i).get()->getCardId() == cardId) {
+        if(creatures.at(i).get()->getCardUuid() == cardId) {
             std::unique_ptr<Card> ptr = std::move(creatures.at(i));
             creatures.erase(creatures.begin() + i);
             
@@ -31,7 +31,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
         }
 
         for(size_t j = 0; j <creatures.at(i)->getAttachedCards().size(); j += 1) {
-            if(creatures.at(i).get()->getAttachedCards().at(j)->getCardId() == cardId) {
+            if(creatures.at(i).get()->getAttachedCards().at(j)->getCardUuid() == cardId) {
                 std::unique_ptr<Card> ptr(creatures.at(i)->getAttachedCards().at(j));        //TODO Wip DO NOT WORK
                 creatures.at(i)->getAttachedCards().erase(creatures.at(i)->getAttachedCards().begin() + i);
             return ptr;
@@ -41,7 +41,7 @@ std::unique_ptr<Card> Battlefield::popCard(uint16_t cardId) {
     }
         
     for(size_t i = 0; i < lands.size(); i += 1) {
-        if(lands.at(i).get()->getCardId() == cardId) {
+        if(lands.at(i).get()->getCardUuid() == cardId) {
             std::unique_ptr<Card> ptr = std::move(lands.at(cardId));
             lands.erase(lands.begin() + i);
             return ptr;
@@ -248,7 +248,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
                 }
                 bool isAlreadyBlocking = false;
                 for(auto vect : blockingCreatures)
-                    if(std::find(vect.begin(), vect.end(), creature->getCardId()) != vect.end()) isAlreadyBlocking = true;
+                    if(std::find(vect.begin(), vect.end(), creature->getCardUuid()) != vect.end()) isAlreadyBlocking = true;
                 
                 if(!isAlreadyBlocking && 
                    !creature->isTapped() &&

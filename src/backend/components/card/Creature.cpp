@@ -21,8 +21,8 @@ std::pair<int, int> Creature::getBaseStats() const {
 std::pair<int, int> Creature::getTotalStats() {
     std::pair<int, int> result = stats;
     for(auto modifier : modifiers) {
-        stats.first += modifier.first;
-        stats.second += modifier.second;
+        result.first += modifier.first;
+        result.second += modifier.second;
     }
     return result;
         
@@ -31,8 +31,8 @@ std::pair<int, int> Creature::getTotalStats() {
 std::pair<int, int> Creature::getTmpStats() {
     std::pair<int, int> result = getTotalStats();
     for(auto modifier : tmpModifiers) {
-        stats.first += modifier.first;
-        stats.second += modifier.second;
+        result.first += modifier.first;
+        result.second += modifier.second;
     }
     return result;
 }
@@ -48,7 +48,7 @@ void Creature::addStaticAbility(StaticAbility ability) {
 void Creature::block(Creature* attackingCard) {
     if(attackingCard->hasStaticAbility(StaticAbility::FIRST_STRIKE) || attackingCard->hasStaticAbility(StaticAbility::DOUBLE_STRIKE))
     {
-        std::cout<<attackingCard->getName()<<" attaque "<<this->getName()<<std::endl;
+        std::cout<<attackingCard->getName()<<" attacks "<<this->getName()<<std::endl;
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
             auto atk = attackingCard->getTmpStats();
             auto def = this->getTmpStats();
@@ -67,7 +67,7 @@ void Creature::block(Creature* attackingCard) {
         }
     }
     if(!attackingCard->hasStaticAbility(StaticAbility::FIRST_STRIKE) && this->getTmpStats().second > 0) {
-        std::cout<<"Duel entre "<<attackingCard->getName()<<" et "<<this->getName()<<std::endl;
+        std::cout<<"Duel between "<<attackingCard->getName()<<" and "<<this->getName()<<std::endl;
         
         if(attackingCard->hasStaticAbility(StaticAbility::DEATHTOUCH) && attackingCard->getTmpStats().first > 0) {
             auto atk = attackingCard->getTmpStats();
@@ -85,9 +85,10 @@ void Creature::block(Creature* attackingCard) {
             attackingCard->addTmpStat({-atk.first, -def.first});
             this->addTmpStat({-def.first, -atk.first});
         }
+        
 
     }else if (this->getTmpStats().second > 0){
-        std::cout<<attackingCard->getName()<<" bloque "<<this->getName()<<std::endl;
+        std::cout<<attackingCard->getName()<<" blocks "<<this->getName()<<std::endl;
         attackingCard->addTmpStat({0, -this->getTmpStats().first});
         this->addTmpStat({-this->getTmpStats().first, 0});
 
