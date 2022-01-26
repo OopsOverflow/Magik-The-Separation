@@ -46,7 +46,7 @@
           context = {
             id_prefix: this.prefix,
             number: index,
-            multiverseid: card.multiverseid,
+            multiverseid:  (card !== undefined && card.multiverseid !== undefined) ? card.multiverseid : null,
             src: _driver(card),
             side: this.prefix,
             name: card.name,

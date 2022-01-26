@@ -13,7 +13,7 @@
     // Formatting card return array
     cardsToMultiverseIdArray: function(cards) {
       return cards.map(function(card){
-        return card.multiverseid;
+        return (card.multiverseid !== undefined)? card.multiverseid : null;
       });
     },
 
