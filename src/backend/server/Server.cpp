@@ -17,7 +17,7 @@
 //The port number the WebSocket server listens on
 #define PORT_NUMBER 3030
 
-int main(int argc, char* argv[])
+int main()
 {
     
     /*

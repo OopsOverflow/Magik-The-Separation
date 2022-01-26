@@ -180,7 +180,7 @@ void Battlefield::setAttackingCreatures() {
                     }
                         
                 }
-                catch (const std::exception &_) {
+                catch (const std::exception &) {
                     std::cout << "Invalid argument : " << str << std::endl;
                 }
             }
@@ -292,7 +292,7 @@ void Battlefield::setBlockingCreatures(std::vector<Creature *> attacking) {
                         }
                             
                     }
-                    catch (const std::exception &_) {
+                    catch (const std::exception &) {
                         std::cout << "Invalid argument : " << str << std::endl;
                     }
                 }
@@ -359,7 +359,7 @@ void Battlefield::tapColors(const std::map<Color, int>& cost) {
                         try {
                             choice = std::stoi(str);
                         }
-                        catch (const std::exception &_) {
+                        catch (const std::exception &) {
                             std::cout << "Invalid argument : " << str << std::endl;
                         }
                     }
