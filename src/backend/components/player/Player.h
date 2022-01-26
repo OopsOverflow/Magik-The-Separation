@@ -12,7 +12,7 @@
 
 class Player {
 public :
-    Player(std::string name);
+    Player(const std::string& name);
     ~Player();
 
     std::string getName() const;
