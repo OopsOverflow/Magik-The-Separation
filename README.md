@@ -1,6 +1,6 @@
-<img src = "https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white"> 
-<img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 
 
@@ -63,22 +63,21 @@ For the frontend all you have to do is run the `app.js` in `src/public` director
 This should open the access to port 3000 (if not obviously something didn't work, open an issue or something.)
 
 
-## Platform Compatibility
-
-This project is platform independent (which is not easy because of C++ networking drama). It should run flawlessly on Linux, Windows and MacOS.
-
-**It was only tested on Windows and Linux however**.
-##### Arch btw
-
-<p align="right">
-<img src=" 	https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white">
-<img src=" 	https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
-</p>
-
-
 ## Gallery
 <p align="center">
 <img src="screenshots/gui.png">
 <img src="screenshots/server.png">
 </p>
 
+## Platform Compatibility
+
+This project is platform independent (which is not easy because of C++ networking drama). It should run flawlessly on Linux, Windows and MacOS.
+
+**It was only tested on Windows and Linux however**.
+
+
+<h6>ArCh bTw</h6>
+
+
+![Arch](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
+![Win](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
