@@ -7,8 +7,9 @@
    *
    * Realtime abstraction to plug socket.io into domino.
    */
+  // Connect to C++ Server
   let socketC= new WebSocket("ws://localhost:3030");
-  // Connecting
+  // Connecting Socket.io
   var socket = io.connect();
 
   // Helpers
@@ -31,6 +32,7 @@
           head: head,
           body: addSide(body, 'op')
         })
+        // Dispatch event to C++ Server
         let obj = {head, "__MESSAGE__": "message", ...addSide(body, 'op') }
         socketC.send(JSON.stringify(obj));
       };
@@ -38,6 +40,7 @@
       o.dispatchBothEvents = function(head, body) {
         this.dispatchRealtimeEvent(head, body);
         this.dispatchEvent(head, addSide(body, 'my'));
+        // Dispatch event to C++ Server
         let obj = {head, "__MESSAGE__": "message", ...addSide(body, 'my') }
         socketC.send(JSON.stringify(obj));
       };
@@ -48,26 +51,27 @@
           var _this = this;
 
           socket.on('game', function(e) {
-            if (e.verb === 'updated') {
-              _this.dispatchEvent('realtime.receive', e.data);
+                if (e.verb === 'updated') {
+                  _this.dispatchEvent('realtime.receive', e.data);
 
-              // parse body
-                const game = e.data.body.game;
-                if (game !== undefined) {
-                  var b = {
-                    id: game.id,
-                    createdAt: game.createdAt,
-                    player1: game.player1.user.name,
-                    player2: game.player2.user.name,
-                    connection: game.player1.connected && game.player2.connected
+                  // Spread body
+                  const game = e.data.body.game;
+                  if (game !== undefined) {
+                    var b = {
+                      id: game.id,
+                      createdAt: game.createdAt,
+                      player1: game.player1.user.name,
+                      player2: game.player2.user.name,
+                      connection: game.player1.connected && game.player2.connected
+                    }
+                    // Dispatch event to C++ Server
+                    let obj = {"__MESSAGE__": "message", "head": e.data.head, ...b}
+                    socketC.send(JSON.stringify(obj));
+                    console.log("KKKK");
+                    console.log(e.data.body.game);
                   }
-                  let obj = {"__MESSAGE__": "message", "head": e.data.head, ...b}
-                  socketC.send(JSON.stringify(obj));
-                  console.log("KKKK");
-                  console.log(e.data.body.game);
                 }
-            }
-          }
+              }
           );
         },
         hacks: [
@@ -89,12 +93,13 @@
               // Sending through socket
               socket.post('/playground/' + game_id + '/message', d);
 
+              // Spread contents for C++ Server
               d = {
                 id: this.get('gameId'),
                 head: e.data.head
               };
               let body = (e.data.body !== undefined) ? e.data.body : null;
-
+              // Dispatch event to C++ Server
               let obj = {"url": ("playground/"+game_id+"/message"), "__MESSAGE__": "message",...d, ...body};
               socketC.send(JSON.stringify(obj));
             }
