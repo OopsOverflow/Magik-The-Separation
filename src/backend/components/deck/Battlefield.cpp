@@ -76,6 +76,22 @@ uint16_t Battlefield::getLength() const {
     return (uint16_t)(creatures.size() + lands.size());
 }
 
+std::string Battlefield::toJson() {
+    std::string result;
+    result += "{ \"lands\" : [";
+    for(size_t i = 0; i < lands.size(); i += 1) {
+        result += std::to_string(lands.at(i).get()->getCardUuid());
+        if(i != lands.size()-1)result += ", ";
+    }
+    result += "], \"creatures\" : [";
+    for(size_t i = 0; i < creatures.size(); i += 1) {
+        result += std::to_string(creatures.at(i).get()->getCardUuid());
+        if(i != creatures.size()-1)result += ", ";
+    }
+    result += "]}";
+    return result;
+}
+
 void Battlefield::add(std::unique_ptr<Card> card) {
     Card* cardToAdd = card.get();
     CardType type = getCardType(cardToAdd);

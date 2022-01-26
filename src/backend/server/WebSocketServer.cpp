@@ -152,3 +152,5 @@ void WebsocketServer::onMessage(ClientConnection conn, WebsocketEndpoint::messag
     }
 }
 
+int WebsocketServer::waitResponse(const string& messageType);
+

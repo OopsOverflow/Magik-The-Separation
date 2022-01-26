@@ -72,6 +72,8 @@ public:
     //(Note: the data transmission will take place on the thread that called WebsocketServer::run())
     void broadcastMessage(const string& messageType, const Json::Value& arguments);
 
+    int waitResponse(const string& messageType);
+
 protected:
     static Json::Value parseJson(const string& json);
     static string stringifyJson(const Json::Value& val);

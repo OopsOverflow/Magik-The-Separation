@@ -26,6 +26,16 @@ uint64_t Player::getId() const {
     return id;
 }
 
+std::string Player::toJson() {
+    std::string result;
+    result += "{\"" + std::to_string(id) + "\" : ";
+    result += "{\"hand\" : " + hand.toJson();
+    result += ", {\"battlefield\" : " + battlefield.toJson();
+    result += "}";
+    return result;
+    
+}
+
 int Player::getHp() const {
     return hp;
 }

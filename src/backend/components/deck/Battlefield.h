@@ -15,6 +15,7 @@ public :
     ~Battlefield();
 
     uint16_t getLength() const;
+    std::string toJson();
 
     void add(std::unique_ptr<Card> card);
     std::unique_ptr<Card> popCard(uint16_t cardId);

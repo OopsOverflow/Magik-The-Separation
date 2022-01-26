@@ -14,6 +14,7 @@ public :
     ~Hand();
 
     uint16_t getLength() const;
+    std::string toJson();
 
     std::unique_ptr<Card> popCard(uint16_t cardId);
     void add(std::unique_ptr<Card> card);

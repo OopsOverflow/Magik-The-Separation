@@ -8,13 +8,21 @@
 #include <vector>
 
 #include "GameAction.h"
+#include "server/WebSocketServer.h"
 #include "../components/player/Player.h"
 #include "../components/deck/Stack.h"
 #include "../components/card/Card.h"
 
+Json::Value& operator<<(Json::Value& val, const std::string& str)
+{
+    Json::Reader reader;
+    if(!reader.parse(str, val, false)) std::runtime_error("Parse Error : " + str);
+    return val;
+}
+
 class Game{
 public : 
-    Game();
+    Game(WebsocketServer* server);
     ~Game();
 
     Player* getPlayer1();
@@ -39,7 +47,7 @@ private :
     Player player1;
     Player player2;
 
-
+    WebsocketServer* server;
 
     Player* playerToPlay;
     Player* opponent;

@@ -1,4 +1,4 @@
-#include "WebSocketServer.h"
+#include "server/WebSocketServer.h"
 
 #include <iostream>
 #include <thread>
@@ -16,26 +16,9 @@
 
 int main(int argc, char* argv[])
 {
-    std::cout<<"---Launching"<<std::endl;
-    srand((unsigned int)time(nullptr));
-    Game game;
-
-    std::cout<<"---Choosing Cards"<<std::endl;    
-    game.chooseCards();
-    std::cout<<"---Initialising Game"<<std::endl;  
-    game.initGame();
-
-    std::cout<<"---Launching Battle"<<std::endl;
-    while(true){
-        game.solvePhase();
-
-    }
-        return 0;
     //Create the event loop for the main thread, and the WebSocket server
     asio::io_service mainEventLoop;
     WebsocketServer server;
-
-
 
     //Register our network callbacks, ensuring the logic is run on the main thread's event loop
     server.connect([&mainEventLoop, &server](ClientConnection conn){
@@ -54,6 +37,7 @@ int main(int argc, char* argv[])
          std::clog << "There are now " << server.numConnections() << " open connections." << std::endl;
       });
     });
+    
     server.message("message", [&mainEventLoop, &server](ClientConnection conn, const Json::Value& args){
         mainEventLoop.post([conn, args, &server](){
            std::clog << "message handler on the main thread" << std::endl;
@@ -73,25 +57,22 @@ int main(int argc, char* argv[])
     });
 
     //Start a keyboard input thread that reads from stdin
-    std::thread inputThread([&server, &mainEventLoop](){
-        string input;
-        while (1){
-            //Read user input from stdin
-            std::getline(std::cin, input);
+    std::thread gameLoop([&server, &mainEventLoop](){
+        std::cout<<"---Launching"<<std::endl;
+        srand((unsigned int)time(nullptr));
+        Game game(&server);
 
-            //Broadcast the input to all connected clients (is sent on the network thread)
-            Json::Value payload;
-            payload["input"] = input;
-            server.broadcastMessage("userInput", payload);
+        std::cout<<"---Choosing Cards"<<std::endl;    
+        game.chooseCards();
+        std::cout<<"---Initialising Game"<<std::endl;  
+        game.initGame();
 
-            //Debug output on the main thread
-            mainEventLoop.post([]() {
-                std::clog << "User input debug output on the main thread" << std::endl;
-            });
+        std::cout<<"---Launching Battle"<<std::endl;
+
+        while(game.getPlayer1()->getHp() > 20 && game.getPlayer2()->getHp() > 20) {
+
         }
     });
-
-
 
 
     //Start the event loop for the main thread

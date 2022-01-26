@@ -56,6 +56,22 @@ uint16_t Hand::getLength() const {
     + lands.size() + instants.size() + enchantements.size());
 }
 
+std::string Hand::toJson() {
+    std::string result;
+    result += "{ \"lands\" : [";
+    for(size_t i = 0; i < lands.size(); i += 1) {
+        result += std::to_string(lands.at(i).get()->getCardUuid());
+        if(i != lands.size()-1)result += ", ";
+    }
+    result += "], \"creatures\" : [";
+    for(size_t i = 0; i < creatures.size(); i += 1) {
+        result += std::to_string(creatures.at(i).get()->getCardUuid());
+        if(i != creatures.size()-1)result += ", ";
+    }
+    result += "]}";
+    return result;
+}
+
 Card* Hand::seekCard(uint16_t cardId) {
     for(size_t i = 0; i < creatures.size(); i += 1)
         if(creatures.at(i)->getCardUuid() == cardId)

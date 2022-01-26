@@ -10,6 +10,7 @@
 #include "../ability/TriggeredAbility.h"
 #include "Enchantement.h"
 
+#include <iostream>
 #include <functional>
 #include <memory>
 #include <vector>

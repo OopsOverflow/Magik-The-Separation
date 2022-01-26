@@ -17,6 +17,7 @@ public :
 
     std::string getName() const;
     uint64_t getId() const;
+    std::string toJson();
     int getHp() const;   
     
     //actions

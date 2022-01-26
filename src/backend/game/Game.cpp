@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-Game::Game() : stack(new Stack()), player1("Bob"), player2("Henri"), playerToPlay(&player1), opponent(&player2) {
+Game::Game(WebsocketServer* server) : server(server), stack(new Stack()), player1("Bob"), player2("Henri"), playerToPlay(&player1), opponent(&player2) {
     std::cout<<"Game instance created"<<std::endl;
 }
 
@@ -24,6 +24,8 @@ void Game::initGame() {
         std::cout<<player2.getName()<<" - ";
         player2.draw();
     }
+
+    server->broadcastMessage("const string& messageType", "const Json::Value& arguments");
 }
 
 #include <random>
@@ -188,6 +190,8 @@ void Game::solveStack() {
 
 void Game::solvePhase() {
     GameAction& action = GameAction::getInst();
+    Json::Value json;
+
     switch (action.getPhase())
     {
     /* BEGINNING PHASE */
@@ -205,7 +209,8 @@ void Game::solvePhase() {
 
         //You untap all your tapped permanents
         playerToPlay->unTapAll();
-        
+        json << playerToPlay->toJson();
+        server->broadcastMessage("state", json);
         action.nextPhase();
         break;
 
@@ -214,11 +219,11 @@ void Game::solvePhase() {
         //TODO trigger beginnig of unkeep step
 
         //Players can cast instants and activate abilities
-        if(action.somethingPlayed) {
-            castInstantsOrAbilities(playerToPlay);
-            solveStack();
-            action.somethingPlayed = false;
-        }
+// if(action.somethingPlayed) {
+//     castInstantsOrAbilities(playerToPlay);
+//     solveStack();
+//     action.somethingPlayed = false;
+// }
         
         action.nextPhase();
         break;
@@ -228,13 +233,14 @@ void Game::solvePhase() {
 
        //Player must draw a card from his library        
         playerToPlay->draw();
-        castInstantsOrAbilities(playerToPlay);
-        solveStack();
-        action.somethingPlayed = false;
+        json << playerToPlay->toJson();
+        server->broadcastMessage("state", json);
+// castInstantsOrAbilities(playerToPlay);
+// solveStack();
+// action.somethingPlayed = false;
         
         action.nextPhase();
         break;
-
 
     /* FIRST MAIN PHASE */  
     case Phase::FIRST_MAIN_PHASE:
@@ -244,56 +250,46 @@ void Game::solvePhase() {
             std::cout<<playerToPlay->getName()<<std::endl;
  
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
-            std::cout<<"Playable cards : "<< playables.size() << std::endl;
-            for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
-            }
 
-            //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
-            char response = 0;
-            while (response != 'y' && response != 'n' && playables.size() > 0)
-            {
-
-                std::cout<<"Do you want to play something ? (y/n) ";
-                std::string str;
-                std::cin>>str;
-                response = str[0];
-                if(response == 'y' && playables.size() == 0) {
-                    std::cout<<"You can't play anything this turn, you should say \"no\""<<std::endl;
-                    response = 0;
-                }
-                    
+            std::string strToJson = "{\"" + std::to_string(playerToPlay->getId()) + "\" : ";
+            strToJson += "{ \"lands\" : [";
+            for(size_t i = 0; i < playables.size(); i += 1) {
+                strToJson += std::to_string(playables.at(i));
+                if(i != playables.size() - 1)strToJson += ", ";
             }
-            
-            if(response == 'y' && playables.size() > 0) {//wantToPlaySmth
-                size_t choice = playables.size();
-                while (choice < 0 || choice >= playables.size())
+            strToJson += "]}";
+
+            json << strToJson;
+            server->broadcastMessage("hand-choice", playerToPlay->getBattlefield());
+            if(playables.size() > 0) {
+                int choice = -2; 
+                while (choice != -1 && std::find(playables.begin(), playables.end(), choice) == playables.end())
                 {
-                    std::string str;
-                    std::cout<<"Choose card to play : ";
-                    std::cin>>str;
-                    try {
-                        choice = std::stoi(str);
-                    }
-                    catch (const std::exception) {
-                        std::cout << "Invalid argument : " << str << std::endl;
-                    }
+                    choice = server->waitResponse("hand-choice");
                 }
-                std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
-                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
-                Land* landCard = dynamic_cast<Land*>(playedCard.get());
-                if(landCard != nullptr) { //is a land
-                    playerToPlay->getBattlefield()->add(std::move(playedCard));
-                    action.hasPlayedLand = true;
-                    action.somethingPlayed = true;
-                }else {
-                    playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
-                    stack->add({std::move(playedCard), playerToPlay});
-                    castInstantsOrAbilities(opponent);
-                    solveStack();
-                    action.somethingPlayed = false;
+                
+                if(choice != -1) {
+
+                    std::unique_ptr<Card> playedCard = playerToPlay->playCard(choice);
+                    std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
+                    Land* landCard = dynamic_cast<Land*>(playedCard.get());
+                    if(landCard != nullptr) { //is a land
+                        playerToPlay->getBattlefield()->add(std::move(playedCard));
+                        action.hasPlayedLand = true;
+                        action.somethingPlayed = true;
+                    }else {
+                        playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
+                        playerToPlay->getBattlefield()->add(std::move(playedCard));
+// stack->add({std::move(playedCard), playerToPlay});
+// castInstantsOrAbilities(opponent);
+// solveStack();
+                        action.somethingPlayed = false;
+                    }
+                    json << playerToPlay->toJson();
+                    server->broadcastMessage("state", json);
+                } else{
+                    action.nextPhase();
                 }
-            
             }else{
                 action.nextPhase();
             }
@@ -305,19 +301,20 @@ void Game::solvePhase() {
     /* COMBAT PHASE */
     case Phase::BEGINNING_OF_COMBAT_STEP:
         std::cout<<"Beginning of Combat Step"<<std::endl<<std::endl;
-        if(action.somethingPlayed) {
-            castInstantsOrAbilities(playerToPlay);
-            solveStack();
-            action.somethingPlayed = false;
-        }
+// if(action.somethingPlayed) {
+//     castInstantsOrAbilities(playerToPlay);
+//     solveStack();
+//     action.somethingPlayed = false;
+// }
         action.nextPhase();
         break;
 
     case Phase::DECLARE_ATTACKER_STEP:
         std::cout<<"Declare Attacker Step"<<std::endl<<std::endl;
         playerToPlay->getBattlefield()->setAttackingCreatures();
-        castInstantsOrAbilities(playerToPlay);
-        solveStack();
+        
+// castInstantsOrAbilities(playerToPlay);
+// solveStack();
         action.somethingPlayed = false;
         action.nextPhase();
         break;
@@ -402,65 +399,56 @@ void Game::solvePhase() {
     /* SECOND MAIN PHASE */
     case Phase::SECOND_MAIN_PHASE:
         std::cout<<"Second Main Phase"<<std::endl<<std::endl;
-        {    
+                {    
 
             std::cout<<playerToPlay->getName()<<std::endl;
  
             auto playables = playerToPlay->getPlayableCards(action.hasPlayedLand);
-            std::cout<<"Playable cards : "<< playables.size() << std::endl;
-            for(size_t i = 0; i < playables.size(); i += 1) { 
-                std::cout<<"    "<<i<<" - "<<playerToPlay->seekCard(playables.at(i))->getColorStr()<<playerToPlay->seekCard(playables.at(i))->getName()<<std::endl;
-            }
 
-            //You can cast any number of sorceries, instants, creatures, artifacts, enchantments, and planeswalkers, and you can activate abilities
-            char response = 0;
-            while (response != 'y' && response != 'n' && playables.size() > 0)
-            {
-
-                std::cout<<"Do you want to play something ? (y/n) ";
-                std::string str;
-                std::cin>>str;
-                response = str[0];
-                if(response == 'y' && playables.size() == 0) {
-                    std::cout<<"You can't play anything this turn, you should say \"no\""<<std::endl;
-                    response = 0;
-                }
-                    
+            std::string strToJson = "{\"" + std::to_string(playerToPlay->getId()) + "\" : ";
+            strToJson += "{ \"lands\" : [";
+            for(size_t i = 0; i < playables.size(); i += 1) {
+                strToJson += std::to_string(playables.at(i));
+                if(i != playables.size() - 1)strToJson += ", ";
             }
-            
-            if(response == 'y' && playables.size() > 0) {//wantToPlaySmth
-                size_t choice = playables.size();
-                while (choice < 0 || choice >= playables.size())
+            strToJson += "]}";
+
+            json << strToJson;
+            server->broadcastMessage("hand-choice", playerToPlay->getBattlefield());
+            if(playables.size() > 0) {
+                int choice = -2; 
+                while (choice != -1 && std::find(playables.begin(), playables.end(), choice) == playables.end())
                 {
-                    std::string str;
-                    std::cout<<"Choose card to play : ";
-                    std::cin>>str;
-                    try {
-                        choice = std::stoi(str);
-                    }
-                    catch (const std::exception) {
-                        std::cout << "Invalid argument : " << str << std::endl;
-                    }
+                    choice = server->waitResponse("hand-choice");
                 }
-                std::unique_ptr<Card> playedCard = playerToPlay->playCard(playables.at(choice));
-                std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
-                Land* landCard = dynamic_cast<Land*>(playedCard.get());
-                if(landCard != nullptr) { //is a land
-                    playerToPlay->getBattlefield()->add(std::move(playedCard));
-                    action.hasPlayedLand = true;
-                    action.somethingPlayed = true;
-                }else {
-                    playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
-                    stack->add({std::move(playedCard), playerToPlay});
-                    castInstantsOrAbilities(opponent);
-                    solveStack();
-                    action.somethingPlayed = false;
+                
+                if(choice != -1) {
+
+                    std::unique_ptr<Card> playedCard = playerToPlay->playCard(choice);
+                    std::cout<<"Played "<<playedCard.get()->getName()<<std::endl;
+                    Land* landCard = dynamic_cast<Land*>(playedCard.get());
+                    if(landCard != nullptr) { //is a land
+                        playerToPlay->getBattlefield()->add(std::move(playedCard));
+                        action.hasPlayedLand = true;
+                        action.somethingPlayed = true;
+                    }else {
+                        playerToPlay->getBattlefield()->tapColors(playedCard.get()->getCost());
+                        playerToPlay->getBattlefield()->add(std::move(playedCard));
+// stack->add({std::move(playedCard), playerToPlay});
+// castInstantsOrAbilities(opponent);
+// solveStack();
+                        action.somethingPlayed = false;
+                    }
+                    json << playerToPlay->toJson();
+                    server->broadcastMessage("state", json);
+                } else{
+                    action.nextPhase();
                 }
-            
             }else{
                 action.nextPhase();
             }
         };
+
         break;
 
     /* ENDING PHASE */
